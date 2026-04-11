@@ -2,12 +2,11 @@ cd ~/sat_finder_webapp
 
 cat > satellites_full_database.js << 'EOF'
 // ============================================================
-// قاعدة بيانات الأقمار الصناعية الكاملة
-// Sat Finder Pro AI - الإصدار النهائي الشامل
+// قاعدة بيانات الأقمار الصناعية والأعطال - الإصدار النهائي الشامل
+// Sat Finder Pro AI - Version 4.0.0 Final
 // ============================================================
 
 const SATELLITES_DATABASE = {
-    // الأقمار العربية
     arabic: [
         {
             id: 'nilesat_7w',
@@ -103,7 +102,7 @@ const SATELLITES_DATABASE = {
                 { name: 'اون تايم سبورت 2', freq: 11861, pol: 'V', sr: 27500, fec: '5/6', category: 'رياضة', encrypted: false },
                 { name: 'اون تايم سبورت 3', freq: 11861, pol: 'V', sr: 27500, fec: '5/6', category: 'رياضة', encrypted: false },
                 { name: 'قناة الأهلي', freq: 12341, pol: 'H', sr: 27500, fec: '3/4', category: 'رياضة', encrypted: false },
-                { name: 'قناة الزمالك', freq: 12341, pol: 'H', sr: 27500, fec: '3/4', category: 'رياضة', encrypted: false },
+                { name: 'قناة الزمالك', freq: 12341, pol: 'H', sr: 27500, fec: '3/4', category: 'رياضة', encrypted: false }
             ]
         },
         {
@@ -210,1041 +209,713 @@ const SATELLITES_DATABASE = {
                 { name: 'فلسطين اليوم', freq: 11861, pol: 'H', sr: 27500, fec: '5/6', category: 'أخبار', encrypted: false },
                 { name: 'الأقصى', freq: 11861, pol: 'H', sr: 27500, fec: '5/6', category: 'منوعات', encrypted: false },
                 { name: 'القدس', freq: 11861, pol: 'H', sr: 27500, fec: '5/6', category: 'منوعات', encrypted: false },
-                { name: 'معاً', freq: 11861, pol: 'H', sr: 27500, fec: '5/6', category: 'أخبار', encrypted: false },
+                { name: 'معاً', freq: 11861, pol: 'H', sr: 27500, fec: '5/6', category: 'أخبار', encrypted: false }
             ]
-        },
-        {
-            id: 'esra_52e',
-            name: 'إسراء',
-            nameEn: 'Esra',
-            position: '52.5°E',
-            longitude: 52.5,
-            direction: 'E',
-            coverage: 'الشرق الأوسط',
-            operator: 'إسراء',
-            frequencies: []
-        },
-        {
-            id: 'yahsat_52e',
-            name: 'ياه سات',
-            nameEn: 'Yahsat',
-            position: '52.5°E',
-            longitude: 52.5,
-            direction: 'E',
-            coverage: 'الشرق الأوسط وأفريقيا وآسيا',
-            operator: 'الياه للاتصالات الفضائية',
-            launchYear: 2011,
-            satellites: ['Yahsat 1A', 'Yahsat 1B', 'Al Yah 2', 'Al Yah 3'],
-            frequencies: [
-                { name: 'قناة أبوظبي', freq: 11958, pol: 'V', sr: 27500, fec: '5/6', category: 'حكومية', encrypted: false },
-                { name: 'الإمارات', freq: 11958, pol: 'V', sr: 27500, fec: '5/6', category: 'حكومية', encrypted: false },
-                { name: 'بينونة', freq: 11958, pol: 'V', sr: 27500, fec: '5/6', category: 'منوعات', encrypted: false },
-                { name: 'ناشيونال جيوغرافيك أبوظبي HD', freq: 11958, pol: 'V', sr: 27500, fec: '5/6', category: 'وثائقي', encrypted: false },
-                { name: 'فوكس موفيز HD', freq: 11958, pol: 'V', sr: 27500, fec: '5/6', category: 'أفلام', encrypted: true },
-                { name: 'ستار موفيز HD', freq: 11958, pol: 'V', sr: 27500, fec: '5/6', category: 'أفلام', encrypted: true },
-                { name: 'OSN', freq: 11958, pol: 'V', sr: 27500, fec: '5/6', category: 'باقة', encrypted: true },
-            ]
-        },
-        {
-            id: 'badr_26e',
-            name: 'بدر',
-            nameEn: 'Badr',
-            position: '26.0°E',
-            longitude: 26.0,
-            direction: 'E',
-            coverage: 'الشرق الأوسط',
-            operator: 'عرب سات',
-            satellites: ['Badr 4', 'Badr 5', 'Badr 6', 'Badr 7', 'Badr 8'],
-            frequencies: []
-        }
-    ],
-    
-    // الأقمار الأوروبية
-    european: [
-        {
-            id: 'hotbird_13e',
-            name: 'هوت بيرد',
-            nameEn: 'Hotbird',
-            position: '13.0°E',
-            longitude: 13.0,
-            direction: 'E',
-            coverage: 'أوروبا والشرق الأوسط وشمال أفريقيا',
-            operator: 'يوتل سات',
-            launchYear: 1995,
-            satellites: ['Hotbird 13B', 'Hotbird 13C', 'Hotbird 13E', 'Hotbird 13F', 'Hotbird 13G'],
-            frequencies: [
-                { name: 'فرانس 24 عربي', freq: 11681, pol: 'H', sr: 27500, fec: '3/4', category: 'أخبار', encrypted: false },
-                { name: 'فرانس 24 إنجليزي', freq: 11681, pol: 'H', sr: 27500, fec: '3/4', category: 'أخبار', encrypted: false },
-                { name: 'فرانس 24 فرنسي', freq: 11681, pol: 'H', sr: 27500, fec: '3/4', category: 'أخبار', encrypted: false },
-                { name: 'DW عربية', freq: 11054, pol: 'H', sr: 27500, fec: '5/6', category: 'أخبار', encrypted: false },
-                { name: 'DW إنجليزي', freq: 11054, pol: 'H', sr: 27500, fec: '5/6', category: 'أخبار', encrypted: false },
-                { name: 'BBC World News', freq: 11054, pol: 'H', sr: 27500, fec: '5/6', category: 'أخبار', encrypted: false },
-                { name: 'CNN International', freq: 11054, pol: 'H', sr: 27500, fec: '5/6', category: 'أخبار', encrypted: false },
-                { name: 'Sky News', freq: 11054, pol: 'H', sr: 27500, fec: '5/6', category: 'أخبار', encrypted: false },
-                { name: 'Euronews', freq: 11054, pol: 'H', sr: 27500, fec: '5/6', category: 'أخبار', encrypted: false },
-                { name: 'Al Jazeera English', freq: 11054, pol: 'H', sr: 27500, fec: '5/6', category: 'أخبار', encrypted: false },
-                { name: 'TRT World', freq: 11054, pol: 'H', sr: 27500, fec: '5/6', category: 'أخبار', encrypted: false },
-                { name: 'RAI Italia', freq: 10992, pol: 'V', sr: 27500, fec: '2/3', category: 'إيطالي', encrypted: false },
-                { name: 'RAI 1', freq: 10992, pol: 'V', sr: 27500, fec: '2/3', category: 'إيطالي', encrypted: false },
-                { name: 'RAI 2', freq: 10992, pol: 'V', sr: 27500, fec: '2/3', category: 'إيطالي', encrypted: false },
-                { name: 'RAI 3', freq: 10992, pol: 'V', sr: 27500, fec: '2/3', category: 'إيطالي', encrypted: false },
-                { name: 'RAI News 24', freq: 10992, pol: 'V', sr: 27500, fec: '2/3', category: 'أخبار', encrypted: false },
-                { name: 'Mediaset Italia', freq: 11432, pol: 'V', sr: 27500, fec: '3/4', category: 'إيطالي', encrypted: true },
-                { name: 'Canale 5', freq: 11432, pol: 'V', sr: 27500, fec: '3/4', category: 'إيطالي', encrypted: true },
-                { name: 'Italia 1', freq: 11432, pol: 'V', sr: 27500, fec: '3/4', category: 'إيطالي', encrypted: true },
-                { name: 'Rete 4', freq: 11432, pol: 'V', sr: 27500, fec: '3/4', category: 'إيطالي', encrypted: true },
-                { name: 'TF1', freq: 10834, pol: 'V', sr: 27500, fec: '3/4', category: 'فرنسي', encrypted: true },
-                { name: 'France 2', freq: 10834, pol: 'V', sr: 27500, fec: '3/4', category: 'فرنسي', encrypted: false },
-                { name: 'France 3', freq: 10834, pol: 'V', sr: 27500, fec: '3/4', category: 'فرنسي', encrypted: false },
-                { name: 'France 5', freq: 10834, pol: 'V', sr: 27500, fec: '3/4', category: 'فرنسي', encrypted: false },
-                { name: 'M6', freq: 10834, pol: 'V', sr: 27500, fec: '3/4', category: 'فرنسي', encrypted: true },
-                { name: 'Arte', freq: 10834, pol: 'V', sr: 27500, fec: '3/4', category: 'ثقافي', encrypted: false },
-                { name: 'TV5 Monde', freq: 10834, pol: 'V', sr: 27500, fec: '3/4', category: 'فرنسي', encrypted: false },
-                { name: 'RTL', freq: 12111, pol: 'V', sr: 27500, fec: '3/4', category: 'ألماني', encrypted: false },
-                { name: 'Sat.1', freq: 12111, pol: 'V', sr: 27500, fec: '3/4', category: 'ألماني', encrypted: false },
-                { name: 'ProSieben', freq: 12111, pol: 'V', sr: 27500, fec: '3/4', category: 'ألماني', encrypted: false },
-                { name: 'Vox', freq: 12111, pol: 'V', sr: 27500, fec: '3/4', category: 'ألماني', encrypted: false },
-                { name: 'RTL II', freq: 12111, pol: 'V', sr: 27500, fec: '3/4', category: 'ألماني', encrypted: false },
-                { name: 'Kabel 1', freq: 12111, pol: 'V', sr: 27500, fec: '3/4', category: 'ألماني', encrypted: false },
-                { name: 'ZDF', freq: 11054, pol: 'H', sr: 27500, fec: '5/6', category: 'ألماني', encrypted: false },
-                { name: 'ARD', freq: 11054, pol: 'H', sr: 27500, fec: '5/6', category: 'ألماني', encrypted: false },
-                { name: '3sat', freq: 11054, pol: 'H', sr: 27500, fec: '5/6', category: 'ألماني', encrypted: false },
-                { name: 'Phoenix', freq: 11054, pol: 'H', sr: 27500, fec: '5/6', category: 'وثائقي', encrypted: false },
-                { name: 'TVE Internacional', freq: 11727, pol: 'V', sr: 27500, fec: '3/4', category: 'إسباني', encrypted: false },
-                { name: 'Canal 24 Horas', freq: 11727, pol: 'V', sr: 27500, fec: '3/4', category: 'أخبار', encrypted: false },
-                { name: 'Antena 3', freq: 11727, pol: 'V', sr: 27500, fec: '3/4', category: 'إسباني', encrypted: true },
-                { name: 'Telecinco', freq: 11727, pol: 'V', sr: 27500, fec: '3/4', category: 'إسباني', encrypted: true },
-                { name: 'RTP Internacional', freq: 10758, pol: 'V', sr: 27500, fec: '5/6', category: 'برتغالي', encrypted: false },
-                { name: 'TRT 1', freq: 11096, pol: 'H', sr: 30000, fec: '5/6', category: 'تركي', encrypted: false },
-                { name: 'TRT Haber', freq: 11096, pol: 'H', sr: 30000, fec: '5/6', category: 'أخبار', encrypted: false },
-                { name: 'TRT Spor', freq: 11096, pol: 'H', sr: 30000, fec: '5/6', category: 'رياضة', encrypted: false },
-                { name: 'TRT Belgesel', freq: 11096, pol: 'H', sr: 30000, fec: '5/6', category: 'وثائقي', encrypted: false },
-                { name: 'TRT Çocuk', freq: 11096, pol: 'H', sr: 30000, fec: '5/6', category: 'أطفال', encrypted: false },
-                { name: 'TRT Müzik', freq: 11096, pol: 'H', sr: 30000, fec: '5/6', category: 'موسيقى', encrypted: false },
-                { name: 'TRT Kurdî', freq: 11096, pol: 'H', sr: 30000, fec: '5/6', category: 'كردي', encrypted: false },
-                { name: 'TRT Arabi', freq: 11096, pol: 'H', sr: 30000, fec: '5/6', category: 'عربي', encrypted: false },
-                { name: 'Bloomberg', freq: 11642, pol: 'H', sr: 27500, fec: '3/4', category: 'اقتصاد', encrypted: false },
-                { name: 'CNBC Europe', freq: 11642, pol: 'H', sr: 27500, fec: '3/4', category: 'اقتصاد', encrypted: false },
-                { name: 'Fashion TV', freq: 11642, pol: 'H', sr: 27500, fec: '3/4', category: 'موضة', encrypted: false },
-                { name: 'Travel Channel', freq: 11642, pol: 'H', sr: 27500, fec: '3/4', category: 'سفر', encrypted: true },
-                { name: 'Food Network', freq: 11642, pol: 'H', sr: 27500, fec: '3/4', category: 'طبخ', encrypted: true },
-                { name: 'E! Entertainment', freq: 11642, pol: 'H', sr: 27500, fec: '3/4', category: 'ترفيه', encrypted: true },
-                { name: 'MTV Europe', freq: 11642, pol: 'H', sr: 27500, fec: '3/4', category: 'موسيقى', encrypted: true },
-                { name: 'VH1 Europe', freq: 11642, pol: 'H', sr: 27500, fec: '3/4', category: 'موسيقى', encrypted: true },
-                { name: 'Mezzo', freq: 11642, pol: 'H', sr: 27500, fec: '3/4', category: 'موسيقى', encrypted: true },
-                { name: 'Stingray iConcerts', freq: 11642, pol: 'H', sr: 27500, fec: '3/4', category: 'موسيقى', encrypted: true },
-                { name: 'Disney Channel', freq: 10719, pol: 'V', sr: 27500, fec: '5/6', category: 'أطفال', encrypted: true },
-                { name: 'Disney Junior', freq: 10719, pol: 'V', sr: 27500, fec: '5/6', category: 'أطفال', encrypted: true },
-                { name: 'Nickelodeon', freq: 10719, pol: 'V', sr: 27500, fec: '5/6', category: 'أطفال', encrypted: true },
-                { name: 'Nick Jr.', freq: 10719, pol: 'V', sr: 27500, fec: '5/6', category: 'أطفال', encrypted: true },
-                { name: 'Cartoon Network', freq: 10719, pol: 'V', sr: 27500, fec: '5/6', category: 'أطفال', encrypted: true },
-                { name: 'Boomerang', freq: 10719, pol: 'V', sr: 27500, fec: '5/6', category: 'أطفال', encrypted: true },
-                { name: 'Baby TV', freq: 10719, pol: 'V', sr: 27500, fec: '5/6', category: 'أطفال', encrypted: true },
-                { name: 'Duck TV', freq: 10719, pol: 'V', sr: 27500, fec: '5/6', category: 'أطفال', encrypted: true },
-                { name: 'National Geographic', freq: 10719, pol: 'V', sr: 27500, fec: '5/6', category: 'وثائقي', encrypted: true },
-                { name: 'Nat Geo Wild', freq: 10719, pol: 'V', sr: 27500, fec: '5/6', category: 'وثائقي', encrypted: true },
-                { name: 'Discovery Channel', freq: 10719, pol: 'V', sr: 27500, fec: '5/6', category: 'وثائقي', encrypted: true },
-                { name: 'Animal Planet', freq: 10719, pol: 'V', sr: 27500, fec: '5/6', category: 'وثائقي', encrypted: true },
-                { name: 'History', freq: 10719, pol: 'V', sr: 27500, fec: '5/6', category: 'وثائقي', encrypted: true },
-                { name: 'Crime & Investigation', freq: 10719, pol: 'V', sr: 27500, fec: '5/6', category: 'وثائقي', encrypted: true },
-                { name: 'Eurosport 1', freq: 11278, pol: 'V', sr: 27500, fec: '3/4', category: 'رياضة', encrypted: true },
-                { name: 'Eurosport 2', freq: 11278, pol: 'V', sr: 27500, fec: '3/4', category: 'رياضة', encrypted: true },
-                { name: 'Extreme Sports', freq: 11278, pol: 'V', sr: 27500, fec: '3/4', category: 'رياضة', encrypted: true },
-                { name: 'Motorsport.tv', freq: 11278, pol: 'V', sr: 27500, fec: '3/4', category: 'رياضة', encrypted: true },
-                { name: 'Fight Network', freq: 11278, pol: 'V', sr: 27500, fec: '3/4', category: 'رياضة', encrypted: true },
-                { name: 'Ginx eSports TV', freq: 11278, pol: 'V', sr: 27500, fec: '3/4', category: 'رياضة', encrypted: true },
-                { name: 'Fox', freq: 11804, pol: 'V', sr: 27500, fec: '5/6', category: 'ترفيه', encrypted: true },
-                { name: 'Fox Life', freq: 11804, pol: 'V', sr: 27500, fec: '5/6', category: 'ترفيه', encrypted: true },
-                { name: 'Fox Crime', freq: 11804, pol: 'V', sr: 27500, fec: '5/6', category: 'جريمة', encrypted: true },
-                { name: 'Comedy Central', freq: 11804, pol: 'V', sr: 27500, fec: '5/6', category: 'كوميدي', encrypted: true },
-                { name: 'TLC', freq: 11804, pol: 'V', sr: 27500, fec: '5/6', category: 'واقعي', encrypted: true },
-                { name: 'ID', freq: 11804, pol: 'V', sr: 27500, fec: '5/6', category: 'جريمة', encrypted: true },
-                { name: 'BBC First', freq: 11804, pol: 'V', sr: 27500, fec: '5/6', category: 'دراما', encrypted: true },
-                { name: 'BBC Brit', freq: 11804, pol: 'V', sr: 27500, fec: '5/6', category: 'ترفيه', encrypted: true },
-                { name: 'BBC Earth', freq: 11804, pol: 'V', sr: 27500, fec: '5/6', category: 'وثائقي', encrypted: true },
-            ]
-        },
-        {
-            id: 'astra_19e',
-            name: 'أسترا 19.2',
-            nameEn: 'Astra 19.2E',
-            position: '19.2°E',
-            longitude: 19.2,
-            direction: 'E',
-            coverage: 'أوروبا',
-            operator: 'SES Astra',
-            launchYear: 1988,
-            satellites: ['Astra 1KR', 'Astra 1L', 'Astra 1M', 'Astra 1N'],
-            frequencies: [
-                { name: 'Sky Deutschland', freq: 11719, pol: 'H', sr: 27500, fec: '9/10', category: 'باقة', encrypted: true },
-                { name: 'HD+', freq: 10832, pol: 'H', sr: 22000, fec: '2/3', category: 'باقة', encrypted: true },
-                { name: 'Arte HD', freq: 11494, pol: 'H', sr: 22000, fec: '2/3', category: 'ثقافي', encrypted: false },
-                { name: 'Servus TV', freq: 11303, pol: 'H', sr: 22000, fec: '2/3', category: 'نمساوي', encrypted: false },
-                { name: 'ORF 1', freq: 11303, pol: 'H', sr: 22000, fec: '2/3', category: 'نمساوي', encrypted: true },
-                { name: 'ORF 2', freq: 11303, pol: 'H', sr: 22000, fec: '2/3', category: 'نمساوي', encrypted: true },
-                { name: 'Das Erste HD', freq: 11494, pol: 'H', sr: 22000, fec: '2/3', category: 'ألماني', encrypted: false },
-                { name: 'ZDF HD', freq: 11362, pol: 'H', sr: 22000, fec: '2/3', category: 'ألماني', encrypted: false },
-                { name: '3sat HD', freq: 11362, pol: 'H', sr: 22000, fec: '2/3', category: 'ألماني', encrypted: false },
-                { name: 'KiKA HD', freq: 11362, pol: 'H', sr: 22000, fec: '2/3', category: 'أطفال', encrypted: false },
-                { name: 'Phoenix HD', freq: 11494, pol: 'H', sr: 22000, fec: '2/3', category: 'وثائقي', encrypted: false },
-                { name: 'Arte', freq: 10743, pol: 'H', sr: 22000, fec: '5/6', category: 'ثقافي', encrypted: false },
-                { name: 'TV5 Monde', freq: 11538, pol: 'V', sr: 22000, fec: '5/6', category: 'فرنسي', encrypted: false },
-                { name: 'CNBC Europe', freq: 11538, pol: 'V', sr: 22000, fec: '5/6', category: 'اقتصاد', encrypted: false },
-                { name: 'Bloomberg', freq: 11538, pol: 'V', sr: 22000, fec: '5/6', category: 'اقتصاد', encrypted: false },
-                { name: 'QVC', freq: 12187, pol: 'H', sr: 27500, fec: '3/4', category: 'تسوق', encrypted: false },
-                { name: 'HSE24', freq: 12187, pol: 'H', sr: 27500, fec: '3/4', category: 'تسوق', encrypted: false },
-                { name: 'DMAX', freq: 12187, pol: 'H', sr: 27500, fec: '3/4', category: 'وثائقي', encrypted: false },
-                { name: 'Tele 5', freq: 12187, pol: 'H', sr: 27500, fec: '3/4', category: 'ترفيه', encrypted: false },
-                { name: 'Sport1', freq: 12187, pol: 'H', sr: 27500, fec: '3/4', category: 'رياضة', encrypted: false },
-                { name: 'Eurosport 1', freq: 12226, pol: 'H', sr: 27500, fec: '3/4', category: 'رياضة', encrypted: false },
-                { name: 'Nickelodeon', freq: 11973, pol: 'V', sr: 27500, fec: '3/4', category: 'أطفال', encrypted: false },
-                { name: 'Comedy Central', freq: 11973, pol: 'V', sr: 27500, fec: '3/4', category: 'كوميدي', encrypted: false },
-                { name: 'MTV', freq: 11973, pol: 'V', sr: 27500, fec: '3/4', category: 'موسيقى', encrypted: false },
-                { name: 'VIVA', freq: 11973, pol: 'V', sr: 27500, fec: '3/4', category: 'موسيقى', encrypted: false },
-                { name: 'Deluxe Music', freq: 10803, pol: 'H', sr: 22000, fec: '5/6', category: 'موسيقى', encrypted: false },
-                { name: 'Folx TV', freq: 10803, pol: 'H', sr: 22000, fec: '5/6', category: 'موسيقى', encrypted: false },
-                { name: 'Juwelo TV', freq: 12610, pol: 'V', sr: 22000, fec: '5/6', category: 'تسوق', encrypted: false },
-                { name: 'Sonnenklar TV', freq: 12610, pol: 'V', sr: 22000, fec: '5/6', category: 'تسوق', encrypted: false },
-                { name: 'Bibel TV', freq: 12574, pol: 'H', sr: 22000, fec: '5/6', category: 'دينية', encrypted: false },
-                { name: 'K-TV', freq: 12574, pol: 'H', sr: 22000, fec: '5/6', category: 'دينية', encrypted: false },
-                { name: 'EWTN', freq: 12574, pol: 'H', sr: 22000, fec: '5/6', category: 'دينية', encrypted: false },
-                { name: 'Hope TV', freq: 12574, pol: 'H', sr: 22000, fec: '5/6', category: 'دينية', encrypted: false },
-                { name: 'TRT Türk', freq: 11582, pol: 'H', sr: 22000, fec: '5/6', category: 'تركي', encrypted: false },
-                { name: 'TV8 Int', freq: 11582, pol: 'H', sr: 22000, fec: '5/6', category: 'تركي', encrypted: false },
-                { name: 'Show TV', freq: 11582, pol: 'H', sr: 22000, fec: '5/6', category: 'تركي', encrypted: false },
-                { name: 'Kanal D', freq: 11582, pol: 'H', sr: 22000, fec: '5/6', category: 'تركي', encrypted: false },
-                { name: 'ATV', freq: 11582, pol: 'H', sr: 22000, fec: '5/6', category: 'تركي', encrypted: false },
-                { name: 'Star TV', freq: 11582, pol: 'H', sr: 22000, fec: '5/6', category: 'تركي', encrypted: false },
-                { name: 'Fox Türkiye', freq: 11582, pol: 'H', sr: 22000, fec: '5/6', category: 'تركي', encrypted: false },
-                { name: 'TV5', freq: 11582, pol: 'H', sr: 22000, fec: '5/6', category: 'تركي', encrypted: false },
-                { name: '360', freq: 11582, pol: 'H', sr: 22000, fec: '5/6', category: 'تركي', encrypted: false },
-                { name: 'Beyaz TV', freq: 11582, pol: 'H', sr: 22000, fec: '5/6', category: 'تركي', encrypted: false },
-                { name: 'CNN Türk', freq: 11582, pol: 'H', sr: 22000, fec: '5/6', category: 'أخبار', encrypted: false },
-                { name: 'NTV', freq: 11582, pol: 'H', sr: 22000, fec: '5/6', category: 'أخبار', encrypted: false },
-                { name: 'Habertürk', freq: 11582, pol: 'H', sr: 22000, fec: '5/6', category: 'أخبار', encrypted: false },
-                { name: 'A Haber', freq: 11582, pol: 'H', sr: 22000, fec: '5/6', category: 'أخبار', encrypted: false },
-                { name: 'A Spor', freq: 11582, pol: 'H', sr: 22000, fec: '5/6', category: 'رياضة', encrypted: false },
-                { name: 'TRT Spor', freq: 11582, pol: 'H', sr: 22000, fec: '5/6', category: 'رياضة', encrypted: false },
-                { name: 'TLC Türkiye', freq: 11582, pol: 'H', sr: 22000, fec: '5/6', category: 'واقعي', encrypted: false },
-                { name: 'DMAX Türkiye', freq: 11582, pol: 'H', sr: 22000, fec: '5/6', category: 'وثائقي', encrypted: false },
-                { name: 'Ulusal Kanal', freq: 11582, pol: 'H', sr: 22000, fec: '5/6', category: 'تركي', encrypted: false },
-                { name: 'Tele 1', freq: 11582, pol: 'H', sr: 22000, fec: '5/6', category: 'تركي', encrypted: false },
-                { name: 'Flash TV', freq: 11582, pol: 'H', sr: 22000, fec: '5/6', category: 'تركي', encrypted: false },
-                { name: 'Ülke TV', freq: 11582, pol: 'H', sr: 22000, fec: '5/6', category: 'تركي', encrypted: false },
-                { name: 'TVNET', freq: 11582, pol: 'H', sr: 22000, fec: '5/6', category: 'تركي', encrypted: false },
-                { name: 'Semerkand TV', freq: 11582, pol: 'H', sr: 22000, fec: '5/6', category: 'دينية', encrypted: false },
-                { name: 'Diyanet TV', freq: 11582, pol: 'H', sr: 22000, fec: '5/6', category: 'دينية', encrypted: false },
-                { name: 'KRT TV', freq: 11582, pol: 'H', sr: 22000, fec: '5/6', category: 'تركي', encrypted: false },
-                { name: 'Halk TV', freq: 11582, pol: 'H', sr: 22000, fec: '5/6', category: 'تركي', encrypted: false },
-                { name: 'TELE 1', freq: 11582, pol: 'H', sr: 22000, fec: '5/6', category: 'تركي', encrypted: false },
-                { name: 'Ekol TV', freq: 11582, pol: 'H', sr: 22000, fec: '5/6', category: 'تركي', encrypted: false },
-                { name: 'Sözcü TV', freq: 11582, pol: 'H', sr: 22000, fec: '5/6', category: 'أخبار', encrypted: false },
-                { name: 'Bengü Türk', freq: 11582, pol: 'H', sr: 22000, fec: '5/6', category: 'تركي', encrypted: false },
-                { name: 'Cem TV', freq: 11582, pol: 'H', sr: 22000, fec: '5/6', category: 'دينية', encrypted: false },
-                { name: 'Meltem TV', freq: 11582, pol: 'H', sr: 22000, fec: '5/6', category: 'تركي', encrypted: false },
-                { name: 'Number One TV', freq: 11582, pol: 'H', sr: 22000, fec: '5/6', category: 'موسيقى', encrypted: false },
-                { name: 'Power TV', freq: 11582, pol: 'H', sr: 22000, fec: '5/6', category: 'موسيقى', encrypted: false },
-                { name: 'Dream TV', freq: 11582, pol: 'H', sr: 22000, fec: '5/6', category: 'موسيقى', encrypted: false },
-                { name: 'Dream Türk', freq: 11582, pol: 'H', sr: 22000, fec: '5/6', category: 'موسيقى', encrypted: false },
-            ]
-        },
-        {
-            id: 'astra_28e',
-            name: 'أسترا 28.2',
-            nameEn: 'Astra 28.2E',
-            position: '28.2°E',
-            longitude: 28.2,
-            direction: 'E',
-            coverage: 'المملكة المتحدة وأيرلندا',
-            operator: 'SES Astra',
-            satellites: ['Astra 2E', 'Astra 2F', 'Astra 2G'],
-            frequencies: [
-                { name: 'Sky UK', freq: 11739, pol: 'V', sr: 27500, fec: '2/3', category: 'باقة', encrypted: true },
-                { name: 'Freesat', freq: 11426, pol: 'H', sr: 27500, fec: '5/6', category: 'باقة', encrypted: false },
-                { name: 'BBC One HD', freq: 10847, pol: 'V', sr: 23000, fec: '3/4', category: 'بريطاني', encrypted: false },
-                { name: 'BBC Two HD', freq: 10847, pol: 'V', sr: 23000, fec: '3/4', category: 'بريطاني', encrypted: false },
-                { name: 'BBC Three HD', freq: 10847, pol: 'V', sr: 23000, fec: '3/4', category: 'بريطاني', encrypted: false },
-                { name: 'BBC Four HD', freq: 10847, pol: 'V', sr: 23000, fec: '3/4', category: 'بريطاني', encrypted: false },
-                { name: 'BBC News HD', freq: 10847, pol: 'V', sr: 23000, fec: '3/4', category: 'أخبار', encrypted: false },
-                { name: 'BBC Parliament', freq: 10847, pol: 'V', sr: 23000, fec: '3/4', category: 'سياسي', encrypted: false },
-                { name: 'CBBC', freq: 10847, pol: 'V', sr: 23000, fec: '3/4', category: 'أطفال', encrypted: false },
-                { name: 'CBeebies', freq: 10847, pol: 'V', sr: 23000, fec: '3/4', category: 'أطفال', encrypted: false },
-                { name: 'ITV HD', freq: 11053, pol: 'H', sr: 23000, fec: '3/4', category: 'بريطاني', encrypted: false },
-                { name: 'ITV2', freq: 11053, pol: 'H', sr: 23000, fec: '3/4', category: 'بريطاني', encrypted: false },
-                { name: 'ITV3', freq: 11053, pol: 'H', sr: 23000, fec: '3/4', category: 'بريطاني', encrypted: false },
-                { name: 'ITV4', freq: 11053, pol: 'H', sr: 23000, fec: '3/4', category: 'بريطاني', encrypted: false },
-                { name: 'ITVBe', freq: 11053, pol: 'H', sr: 23000, fec: '3/4', category: 'بريطاني', encrypted: false },
-                { name: 'Channel 4 HD', freq: 11126, pol: 'V', sr: 22000, fec: '5/6', category: 'بريطاني', encrypted: false },
-                { name: 'E4', freq: 11126, pol: 'V', sr: 22000, fec: '5/6', category: 'بريطاني', encrypted: false },
-                { name: 'More4', freq: 11126, pol: 'V', sr: 22000, fec: '5/6', category: 'بريطاني', encrypted: false },
-                { name: 'Film4', freq: 11126, pol: 'V', sr: 22000, fec: '5/6', category: 'أفلام', encrypted: false },
-                { name: '4Music', freq: 11126, pol: 'V', sr: 22000, fec: '5/6', category: 'موسيقى', encrypted: false },
-                { name: 'Channel 5 HD', freq: 10964, pol: 'H', sr: 22000, fec: '5/6', category: 'بريطاني', encrypted: false },
-                { name: '5USA', freq: 10964, pol: 'H', sr: 22000, fec: '5/6', category: 'بريطاني', encrypted: false },
-                { name: '5STAR', freq: 10964, pol: 'H', sr: 22000, fec: '5/6', category: 'بريطاني', encrypted: false },
-                { name: '5Action', freq: 10964, pol: 'H', sr: 22000, fec: '5/6', category: 'بريطاني', encrypted: false },
-                { name: 'Sky News', freq: 12207, pol: 'V', sr: 27500, fec: '5/6', category: 'أخبار', encrypted: false },
-                { name: 'Sky Sports', freq: 12207, pol: 'V', sr: 27500, fec: '5/6', category: 'رياضة', encrypted: true },
-                { name: 'BT Sport', freq: 12207, pol: 'V', sr: 27500, fec: '5/6', category: 'رياضة', encrypted: true },
-                { name: 'TNT Sports', freq: 12207, pol: 'V', sr: 27500, fec: '5/6', category: 'رياضة', encrypted: true },
-            ]
-        },
-        {
-            id: 'eutelsat_7e',
-            name: 'يوتل سات 7',
-            nameEn: 'Eutelsat 7E',
-            position: '7.0°E',
-            longitude: 7.0,
-            direction: 'E',
-            coverage: 'أوروبا والشرق الأوسط',
-            operator: 'يوتل سات',
-            frequencies: [
-                { name: 'TRT', freq: 10762, pol: 'V', sr: 30000, fec: '3/4', category: 'تركي', encrypted: false },
-                { name: 'Digiturk', freq: 10803, pol: 'V', sr: 30000, fec: '3/4', category: 'باقة', encrypted: true },
-            ]
-        },
-        {
-            id: 'eutelsat_9e',
-            name: 'يوتل سات 9',
-            nameEn: 'Eutelsat 9E',
-            position: '9.0°E',
-            longitude: 9.0,
-            direction: 'E',
-            coverage: 'أوروبا',
-            operator: 'يوتل سات',
-            frequencies: [
-                { name: 'KabelKiosk', freq: 11727, pol: 'V', sr: 27500, fec: '5/6', category: 'باقة', encrypted: true },
-            ]
-        },
-        {
-            id: 'eutelsat_10e',
-            name: 'يوتل سات 10',
-            nameEn: 'Eutelsat 10E',
-            position: '10.0°E',
-            longitude: 10.0,
-            direction: 'E',
-            coverage: 'أوروبا والشرق الأوسط',
-            operator: 'يوتل سات',
-            frequencies: []
-        },
-        {
-            id: 'eutelsat_16e',
-            name: 'يوتل سات 16',
-            nameEn: 'Eutelsat 16E',
-            position: '16.0°E',
-            longitude: 16.0,
-            direction: 'E',
-            coverage: 'أوروبا الوسطى والبلقان',
-            operator: 'يوتل سات',
-            frequencies: [
-                { name: 'Antik Sat', freq: 11637, pol: 'H', sr: 30000, fec: '5/6', category: 'باقة', encrypted: true },
-                { name: 'Total TV', freq: 11637, pol: 'H', sr: 30000, fec: '5/6', category: 'باقة', encrypted: true },
-                { name: 'Pink', freq: 11637, pol: 'H', sr: 30000, fec: '5/6', category: 'صربي', encrypted: true },
-            ]
-        },
-        {
-            id: 'eutelsat_21b',
-            name: 'يوتل سات 21',
-            nameEn: 'Eutelsat 21B',
-            position: '21.5°E',
-            longitude: 21.5,
-            direction: 'E',
-            coverage: 'أوروبا والشرق الأوسط',
-            operator: 'يوتل سات',
-            frequencies: []
-        },
-        {
-            id: 'eutelsat_25b',
-            name: 'يوتل سات 25',
-            nameEn: 'Eutelsat 25B',
-            position: '25.5°E',
-            longitude: 25.5,
-            direction: 'E',
-            coverage: 'الشرق الأوسط',
-            operator: 'يوتل سات',
-            frequencies: []
-        },
-        {
-            id: 'eutelsat_33e',
-            name: 'يوتل سات 33',
-            nameEn: 'Eutelsat 33E',
-            position: '33.0°E',
-            longitude: 33.0,
-            direction: 'E',
-            coverage: 'أوروبا',
-            operator: 'يوتل سات',
-            frequencies: []
-        },
-        {
-            id: 'eutelsat_36b',
-            name: 'يوتل سات 36',
-            nameEn: 'Eutelsat 36B',
-            position: '36.0°E',
-            longitude: 36.0,
-            direction: 'E',
-            coverage: 'أفريقيا وروسيا',
-            operator: 'يوتل سات',
-            frequencies: [
-                { name: 'Tricolor TV', freq: 11727, pol: 'L', sr: 27500, fec: '3/4', category: 'باقة', encrypted: true },
-                { name: 'NTV Plus', freq: 11727, pol: 'L', sr: 27500, fec: '3/4', category: 'باقة', encrypted: true },
-            ]
-        },
-        {
-            id: 'hispasat_30w',
-            name: 'هيسباسات',
-            nameEn: 'Hispasat',
-            position: '30.0°W',
-            longitude: 30.0,
-            direction: 'W',
-            coverage: 'أوروبا والأمريكتين وشمال أفريقيا',
-            operator: 'Hispasat',
-            launchYear: 1992,
-            satellites: ['Hispasat 30W-5', 'Hispasat 30W-6', 'Amazonas'],
-            frequencies: [
-                { name: 'TVE', freq: 12456, pol: 'H', sr: 30000, fec: '5/6', category: 'إسباني', encrypted: false },
-                { name: 'Movistar+', freq: 12456, pol: 'H', sr: 30000, fec: '5/6', category: 'باقة', encrypted: true },
-                { name: 'RTVE', freq: 12456, pol: 'H', sr: 30000, fec: '5/6', category: 'إسباني', encrypted: false },
-                { name: 'Canal Sur', freq: 12456, pol: 'H', sr: 30000, fec: '5/6', category: 'إسباني', encrypted: false },
-                { name: 'TV3', freq: 12456, pol: 'H', sr: 30000, fec: '5/6', category: 'كتالوني', encrypted: false },
-                { name: 'ETB', freq: 12456, pol: 'H', sr: 30000, fec: '5/6', category: 'باسكي', encrypted: false },
-                { name: 'TVG', freq: 12456, pol: 'H', sr: 30000, fec: '5/6', category: 'جاليشي', encrypted: false },
-                { name: 'Aragón TV', freq: 12456, pol: 'H', sr: 30000, fec: '5/6', category: 'إسباني', encrypted: false },
-                { name: 'RTP', freq: 12456, pol: 'H', sr: 30000, fec: '5/6', category: 'برتغالي', encrypted: false },
-                { name: 'SIC', freq: 12456, pol: 'H', sr: 30000, fec: '5/6', category: 'برتغالي', encrypted: true },
-                { name: 'TVI', freq: 12456, pol: 'H', sr: 30000, fec: '5/6', category: 'برتغالي', encrypted: true },
-            ]
-        },
-        {
-            id: 'thor_0.8w',
-            name: 'ثور',
-            nameEn: 'Thor',
-            position: '0.8°W',
-            longitude: 0.8,
-            direction: 'W',
-            coverage: 'أوروبا',
-            operator: 'Telenor',
-            frequencies: [
-                { name: 'Canal Digital', freq: 11229, pol: 'H', sr: 25000, fec: '3/4', category: 'باقة', encrypted: true },
-                { name: 'Viasat', freq: 11229, pol: 'H', sr: 25000, fec: '3/4', category: 'باقة', encrypted: true },
-                { name: 'NRK', freq: 11229, pol: 'H', sr: 25000, fec: '3/4', category: 'نرويجي', encrypted: false },
-                { name: 'SVT', freq: 11229, pol: 'H', sr: 25000, fec: '3/4', category: 'سويدي', encrypted: false },
-                { name: 'DR', freq: 11229, pol: 'H', sr: 25000, fec: '3/4', category: 'دنماركي', encrypted: false },
-                { name: 'YLE', freq: 11229, pol: 'H', sr: 25000, fec: '3/4', category: 'فنلندي', encrypted: false },
-            ]
-        },
-        {
-            id: 'intelsat_10-02',
-            name: 'إنتل سات 10-02',
-            nameEn: 'Intelsat 10-02',
-            position: '1.0°W',
-            longitude: 1.0,
-            direction: 'W',
-            coverage: 'أوروبا',
-            operator: 'إنتل سات',
-            frequencies: []
-        },
-        {
-            id: 'amos_4w',
-            name: 'عاموس',
-            nameEn: 'Amos',
-            position: '4.0°W',
-            longitude: 4.0,
-            direction: 'W',
-            coverage: 'أوروبا والشرق الأوسط',
-            operator: 'Spacecom',
-            frequencies: []
-        },
-        {
-            id: 'eutelsat_5w',
-            name: 'يوتل سات 5 غرب',
-            nameEn: 'Eutelsat 5 West',
-            position: '5.0°W',
-            longitude: 5.0,
-            direction: 'W',
-            coverage: 'أوروبا وشمال أفريقيا',
-            operator: 'يوتل سات',
-            frequencies: [
-                { name: 'Fransat', freq: 11591, pol: 'V', sr: 20000, fec: '2/3', category: 'باقة', encrypted: true },
-                { name: 'Bis TV', freq: 11591, pol: 'V', sr: 20000, fec: '2/3', category: 'باقة', encrypted: true },
-                { name: 'Mediaset', freq: 11591, pol: 'V', sr: 20000, fec: '2/3', category: 'إيطالي', encrypted: true },
-            ]
-        },
-        {
-            id: 'eutelsat_7w',
-            name: 'يوتل سات 7 غرب',
-            nameEn: 'Eutelsat 7 West',
-            position: '7.3°W',
-            longitude: 7.3,
-            direction: 'W',
-            coverage: 'الشرق الأوسط وشمال أفريقيا',
-            operator: 'يوتل سات',
-            frequencies: [
-                { name: 'beIN Sports', freq: 10727, pol: 'H', sr: 27500, fec: '2/3', category: 'رياضة', encrypted: true },
-                { name: 'beIN Movies', freq: 10727, pol: 'H', sr: 27500, fec: '2/3', category: 'أفلام', encrypted: true },
-                { name: 'beIN Series', freq: 10727, pol: 'H', sr: 27500, fec: '2/3', category: 'مسلسلات', encrypted: true },
-                { name: 'beIN Junior', freq: 10727, pol: 'H', sr: 27500, fec: '2/3', category: 'أطفال', encrypted: true },
-                { name: 'beIN Gourmet', freq: 10727, pol: 'H', sr: 27500, fec: '2/3', category: 'طبخ', encrypted: true },
-                { name: 'beIN Drama', freq: 10727, pol: 'H', sr: 27500, fec: '2/3', category: 'دراما', encrypted: true },
-                { name: 'beIN Boomerang', freq: 10727, pol: 'H', sr: 27500, fec: '2/3', category: 'أطفال', encrypted: true },
-                { name: 'beIN Cartoon Network', freq: 10727, pol: 'H', sr: 27500, fec: '2/3', category: 'أطفال', encrypted: true },
-                { name: 'beIN Disney', freq: 10727, pol: 'H', sr: 27500, fec: '2/3', category: 'أطفال', encrypted: true },
-                { name: 'beIN Nick', freq: 10727, pol: 'H', sr: 27500, fec: '2/3', category: 'أطفال', encrypted: true },
-                { name: 'beIN Discovery', freq: 10727, pol: 'H', sr: 27500, fec: '2/3', category: 'وثائقي', encrypted: true },
-                { name: 'beIN Nat Geo', freq: 10727, pol: 'H', sr: 27500, fec: '2/3', category: 'وثائقي', encrypted: true },
-                { name: 'beIN Animal Planet', freq: 10727, pol: 'H', sr: 27500, fec: '2/3', category: 'وثائقي', encrypted: true },
-                { name: 'beIN History', freq: 10727, pol: 'H', sr: 27500, fec: '2/3', category: 'وثائقي', encrypted: true },
-                { name: 'beIN Crime', freq: 10727, pol: 'H', sr: 27500, fec: '2/3', category: 'جريمة', encrypted: true },
-                { name: 'beIN ID', freq: 10727, pol: 'H', sr: 27500, fec: '2/3', category: 'جريمة', encrypted: true },
-                { name: 'beIN TLC', freq: 10727, pol: 'H', sr: 27500, fec: '2/3', category: 'واقعي', encrypted: true },
-                { name: 'beIN Food Network', freq: 10727, pol: 'H', sr: 27500, fec: '2/3', category: 'طبخ', encrypted: true },
-                { name: 'beIN Travel', freq: 10727, pol: 'H', sr: 27500, fec: '2/3', category: 'سفر', encrypted: true },
-                { name: 'beIN Fashion', freq: 10727, pol: 'H', sr: 27500, fec: '2/3', category: 'موضة', encrypted: true },
-                { name: 'beIN MTV', freq: 10727, pol: 'H', sr: 27500, fec: '2/3', category: 'موسيقى', encrypted: true },
-                { name: 'beIN Trace', freq: 10727, pol: 'H', sr: 27500, fec: '2/3', category: 'موسيقى', encrypted: true },
-                { name: 'beIN BBC Earth', freq: 10727, pol: 'H', sr: 27500, fec: '2/3', category: 'وثائقي', encrypted: true },
-                { name: 'beIN BBC First', freq: 10727, pol: 'H', sr: 27500, fec: '2/3', category: 'دراما', encrypted: true },
-                { name: 'beIN Fox', freq: 10727, pol: 'H', sr: 27500, fec: '2/3', category: 'ترفيه', encrypted: true },
-                { name: 'beIN Fox Life', freq: 10727, pol: 'H', sr: 27500, fec: '2/3', category: 'ترفيه', encrypted: true },
-                { name: 'beIN AMC', freq: 10727, pol: 'H', sr: 27500, fec: '2/3', category: 'أفلام', encrypted: true },
-                { name: 'beIN Star Movies', freq: 10727, pol: 'H', sr: 27500, fec: '2/3', category: 'أفلام', encrypted: true },
-                { name: 'beIN Star World', freq: 10727, pol: 'H', sr: 27500, fec: '2/3', category: 'ترفيه', encrypted: true },
-                { name: 'beIN Comedy Central', freq: 10727, pol: 'H', sr: 27500, fec: '2/3', category: 'كوميدي', encrypted: true },
-                { name: 'OSN', freq: 10727, pol: 'H', sr: 27500, fec: '2/3', category: 'باقة', encrypted: true },
-                { name: 'My-HD', freq: 10727, pol: 'H', sr: 27500, fec: '2/3', category: 'باقة', encrypted: true },
-                { name: 'Al Jazeera', freq: 10971, pol: 'H', sr: 27500, fec: '3/4', category: 'أخبار', encrypted: false },
-                { name: 'Al Jazeera English', freq: 10971, pol: 'H', sr: 27500, fec: '3/4', category: 'أخبار', encrypted: false },
-                { name: 'Al Jazeera Mubasher', freq: 10971, pol: 'H', sr: 27500, fec: '3/4', category: 'أخبار', encrypted: false },
-                { name: 'Al Jazeera Documentary', freq: 10971, pol: 'H', sr: 27500, fec: '3/4', category: 'وثائقي', encrypted: false },
-                { name: 'BBC Arabic', freq: 11977, pol: 'V', sr: 27500, fec: '5/6', category: 'أخبار', encrypted: false },
-                { name: 'BBC World News', freq: 11977, pol: 'V', sr: 27500, fec: '5/6', category: 'أخبار', encrypted: false },
-                { name: 'CNN', freq: 11977, pol: 'V', sr: 27500, fec: '5/6', category: 'أخبار', encrypted: false },
-                { name: 'France 24', freq: 11977, pol: 'V', sr: 27500, fec: '5/6', category: 'أخبار', encrypted: false },
-                { name: 'DW', freq: 11977, pol: 'V', sr: 27500, fec: '5/6', category: 'أخبار', encrypted: false },
-                { name: 'Sky News', freq: 11977, pol: 'V', sr: 27500, fec: '5/6', category: 'أخبار', encrypted: false },
-                { name: 'Euronews', freq: 11977, pol: 'V', sr: 27500, fec: '5/6', category: 'أخبار', encrypted: false },
-                { name: 'CNBC', freq: 11977, pol: 'V', sr: 27500, fec: '5/6', category: 'اقتصاد', encrypted: false },
-                { name: 'Bloomberg', freq: 11977, pol: 'V', sr: 27500, fec: '5/6', category: 'اقتصاد', encrypted: false },
-            ]
-        },
-        {
-            id: 'eutelsat_8w',
-            name: 'يوتل سات 8 غرب',
-            nameEn: 'Eutelsat 8 West',
-            position: '8.0°W',
-            longitude: 8.0,
-            direction: 'W',
-            coverage: 'الشرق الأوسط وشمال أفريقيا',
-            operator: 'يوتل سات',
-            frequencies: []
-        },
-        {
-            id: 'express_am6',
-            name: 'إكسبريس AM6',
-            nameEn: 'Express AM6',
-            position: '53.0°E',
-            longitude: 53.0,
-            direction: 'E',
-            coverage: 'روسيا والشرق الأوسط',
-            operator: 'RSCC',
-            frequencies: []
-        },
-        {
-            id: 'express_am7',
-            name: 'إكسبريس AM7',
-            nameEn: 'Express AM7',
-            position: '40.0°E',
-            longitude: 40.0,
-            direction: 'E',
-            coverage: 'روسيا وأفريقيا',
-            operator: 'RSCC',
-            frequencies: []
-        },
-        {
-            id: 'yamal_402',
-            name: 'يامال 402',
-            nameEn: 'Yamal 402',
-            position: '55.0°E',
-            longitude: 55.0,
-            direction: 'E',
-            coverage: 'روسيا وأوروبا',
-            operator: 'Gazprom Space Systems',
-            frequencies: []
-        },
-        {
-            id: 'yamal_401',
-            name: 'يامال 401',
-            nameEn: 'Yamal 401',
-            position: '90.0°E',
-            longitude: 90.0,
-            direction: 'E',
-            coverage: 'روسيا',
-            operator: 'Gazprom Space Systems',
-            frequencies: []
-        },
-        {
-            id: 'turkmenalem_52e',
-            name: 'تركمن عالم',
-            nameEn: 'TürkmenÄlem',
-            position: '52.0°E',
-            longitude: 52.0,
-            direction: 'E',
-            coverage: 'آسيا الوسطى والشرق الأوسط',
-            operator: 'تركمن سات',
-            frequencies: []
-        },
-        {
-            id: 'azerspace_46e',
-            name: 'أذر سبيس',
-            nameEn: 'Azerspace',
-            position: '46.0°E',
-            longitude: 46.0,
-            direction: 'E',
-            coverage: 'أذربيجان وأوروبا',
-            operator: 'Azercosmos',
-            frequencies: []
-        },
-        {
-            id: 'kazsat_58e',
-            name: 'كاز سات',
-            nameEn: 'KazSat',
-            position: '58.5°E',
-            longitude: 58.5,
-            direction: 'E',
-            coverage: 'كازاخستان',
-            operator: 'KazSat',
-            frequencies: []
         }
     ]
 };
 
 // ============================================================
-// قاعدة بيانات الأعطال والإصلاحات الشاملة
+// قاعدة بيانات الأعطال والإصلاحات - الإصدار النهائي الشامل
 // ============================================================
 
 const REPAIR_DATABASE = {
     // مشاكل الإشارة
     signal: {
         'no_signal': {
-            title: 'لا توجد إشارة',
+            title: '🚫 لا توجد إشارة',
+            severity: 'حرج',
             causes: [
                 'انقطاع الكيبل أو تلفه',
-                'تلف LNB',
+                'تلف وحدة LNB',
                 'اتجاه الطبق غير صحيح',
-                'عائق أمام الطبق (شجرة، مبنى)',
-                'عطل في الرسيفر',
+                'عائق أمام الطبق (شجرة، مبنى، جدار)',
+                'عطل في وحدة التغذية بالرسيفر',
                 'فصل التيار الكهربائي عن LNB',
-                'التردد غير صحيح',
-                'دخول ماء إلى الكيبل أو LNB'
+                'التردد المدخل غير صحيح',
+                'دخول ماء إلى الكيبل أو LNB',
+                'تلف في منفذ LNB بالرسيفر',
+                'عدم توافق LNB مع الرسيفر'
             ],
             solutions: [
                 'فحص الكيبل من الرسيفر إلى LNB واستبداله إذا كان تالفاً',
-                'فحص فيشة F-Type وتأكد من إحكام ربطها',
-                'إعادة توجيه الطبق باستخدام البوصلة',
-                'إزالة أي عوائق أمام الطبق',
-                'إعادة تشغيل الرسيفر',
+                'فحص فيشة F-Type وتأكد من إحكام ربطها وعدم وجود تماس',
+                'إعادة توجيه الطبق باستخدام البوصلة الذكية في التطبيق',
+                'إزالة أي عوائق أمام الطبق أو تغيير موقع التركيب',
+                'إعادة تشغيل الرسيفر (افصل الكهرباء 30 ثانية)',
                 'فحص إعدادات التردد والاستقطاب ومعدل الترميز',
-                'تجربة منفذ LNB آخر',
-                'استبدال LNB إذا كان تالفاً',
-                'فحص وحدة التغذية في الرسيفر'
+                'تجربة منفذ LNB آخر في الرسيفر',
+                'استبدال LNB إذا كان تالفاً (يفضل Inverto أو Star Gold)',
+                'فحص وحدة التغذية في الرسيفر (البور سبلاي)',
+                'قياس فولتية LNB (يجب أن تكون 13V أو 18V)'
             ],
-            tools: ['جهاز فحص الكيبل', 'جهاز قياس الإشارة', 'بوصلة', 'LNB جديد', 'كيبل RG6', 'فيش F-Type']
+            tools: ['جهاز فحص الكيبل', 'جهاز قياس الإشارة (Sat Finder)', 'بوصلة', 'LNB جديد', 'كيبل RG6', 'فيش F-Type', 'مفك', 'شريط عازل', 'جهاز قياس الفولت']
         },
         'weak_signal': {
-            title: 'ضعف الإشارة',
+            title: '📶 ضعف الإشارة',
+            severity: 'متوسط',
             causes: [
-                'اتجاه الطبق غير دقيق',
-                'حجم الطبق غير مناسب للمنطقة',
-                'LNB ضعيف أو تالف',
-                'كيبل طويل جداً أو رديء الجودة',
-                'عائق جزئي أمام الطبق',
-                'ظروف جوية سيئة (أمطار غزيرة، ثلوج)',
-                'عدم ضبط زاوية الاستقطاب (Skew)',
-                'تردد LNB غير مضبوط في الرسيفر',
-                'وجود ماء داخل الكيبل'
+                'اتجاه الطبق غير دقيق (خطأ بضع درجات)',
+                'حجم الطبق غير مناسب للمنطقة الجغرافية',
+                'LNB ضعيف أو تالف أو رديء الجودة',
+                'كيبل طويل جداً (أكثر من 50 متر)',
+                'كيبل رديء الجودة (RG59 بدل RG6)',
+                'عائق جزئي أمام الطبق (أغصان شجرة، حافة مبنى)',
+                'ظروف جوية سيئة (أمطار غزيرة، ثلوج، غيوم كثيفة)',
+                'عدم ضبط زاوية الاستقطاب (Skew/LNB Tilt)',
+                'تردد LNB غير مضبوط في إعدادات الرسيفر',
+                'وجود ماء أو رطوبة داخل الكيبل أو الفيش',
+                'تآكل في الفيش أو الموصلات',
+                'استخدام مقسم إشارة رديء'
             ],
             solutions: [
-                'إعادة ضبط زاوية السمت والارتفاع بدقة',
+                'إعادة ضبط زاوية السمت والارتفاع بدقة باستخدام التطبيق',
                 'استخدام طبق بحجم مناسب (يفضل 90 سم فأكثر للمناطق الحدودية)',
-                'استبدال LNB بنوع عالي الجودة (Inverto، Star Gold)',
-                'استخدام كيبل RG6 عالي الجودة وتقصير المسافة',
-                'إزالة العوائق أو تغيير موقع الطبق',
-                'انتظار تحسن الطقس',
-                'ضبط زاوية لف LNB حسب موقعك الجغرافي',
+                'استبدال LNB بنوع عالي الجودة (Inverto Black Ultra, Star Gold)',
+                'استخدام كيبل RG6 عالي الجودة وتقصير المسافة قدر الإمكان',
+                'تركيب مقوي إشارة (Line Amplifier) للمسافات الطويلة',
+                'إزالة العوائق أو تغيير موقع الطبق إلى مكان مفتوح',
+                'انتظار تحسن الطقس (تأثير مؤقت)',
+                'ضبط زاوية لف LNB حسب موقعك الجغرافي (موجود في التطبيق)',
                 'ضبط تردد LNB في الرسيفر (Universal: 9750/10600)',
-                'فحص وتجفيف أو استبدال الكيبل'
+                'فحص وتجفيف الكيبل والفيش أو استبدالها',
+                'تنظيف الموصلات بمنظف خاص',
+                'استخدام مقسم إشارة عالي الجودة'
             ],
-            tools: ['جهاز قياس الإشارة', 'بوصلة', 'LNB احترافي', 'كيبل RG6', 'منظف فيش']
+            tools: ['جهاز قياس الإشارة', 'بوصلة', 'LNB احترافي', 'كيبل RG6', 'مقوي إشارة', 'منظف موصلات', 'شريط عازل للماء']
         },
         'signal_drop': {
-            title: 'تقطع الإشارة',
+            title: '📉 تقطع الإشارة',
+            severity: 'متوسط',
             causes: [
-                'توصيلات غير محكمة',
-                'تداخل كهربائي',
-                'مشكلة في مصدر الطاقة',
-                'ارتفاع حرارة LNB',
-                'وجود ماء في الكيبل',
-                'تلف في وحدة LNB',
-                'مشكلة في الستالايت (Solar Outage)',
-                'تشويش من أجهزة أخرى'
+                'توصيلات غير محكمة (فيشة مرتخية)',
+                'تداخل كهربائي من أجهزة قريبة',
+                'مشكلة في مصدر الطاقة (البور سبلاي)',
+                'ارتفاع حرارة LNB بسبب أشعة الشمس المباشرة',
+                'وجود ماء أو رطوبة في الكيبل أو الفيش',
+                'تلف جزئي في وحدة LNB',
+                'تداخل شمسي (Solar Outage) - ظاهرة مؤقتة',
+                'تشويش من أجهزة إلكترونية (راوتر، ميكروويف)',
+                'تلف في الكيبل (قطع داخلي غير ظاهر)',
+                'مشكلة في منظم الجهد الكهربائي'
             ],
             solutions: [
-                'فحص جميع التوصيلات وإحكام ربطها',
-                'إبعاد الكيبل عن أسلاك الكهرباء',
-                'فحص مصدر طاقة الرسيفر',
-                'تظليل LNB من أشعة الشمس المباشرة',
+                'فحص جميع التوصيلات وإحكام ربطها يدوياً',
+                'إبعاد الكيبل عن أسلاك الكهرباء والأجهزة الإلكترونية',
+                'فحص مصدر طاقة الرسيفر واستبداله إذا كان تالفاً',
+                'تظليل LNB من أشعة الشمس المباشرة بغطاء واقي',
                 'فحص الكيبل واستبدال الأجزاء التالفة',
-                'استبدال LNB',
-                'انتظار انتهاء فترة التداخل الشمسي',
-                'استخدام كيبل مزدوج الدرع'
+                'استبدال LNB بآخر جديد',
+                'انتظار انتهاء فترة التداخل الشمسي (10-15 دقيقة)',
+                'استخدام كيبل مزدوج الدرع (Double Shield)',
+                'فحص الكيبل بجهاز فحص الاستمرارية',
+                'تركيب منظم جهد كهربائي (Stabilizer)'
             ],
-            tools: ['جهاز فحص الكيبل', 'LNB جديد', 'عازل شمسي للـ LNB', 'كيبل مزدوج الدرع']
+            tools: ['جهاز فحص الكيبل', 'LNB جديد', 'عازل شمسي للـ LNB', 'كيبل مزدوج الدرع', 'فيش F-Type', 'منظم جهد']
+        },
+        'interference': {
+            title: '📡 تداخل الإشارات',
+            severity: 'متوسط',
+            causes: [
+                'تداخل من قمر صناعي مجاور',
+                'إشارات 4G/5G قريبة من ترددات LNB',
+                'أجهزة إلكترونية قريبة تسبب تشويش',
+                'انعكاس الإشارة من أسطح معدنية',
+                'LNB رديء لا يعزل الإشارات المجاورة'
+            ],
+            solutions: [
+                'ضبط زاوية الطبق بدقة أكبر',
+                'تركيب فلتر 4G/5G على مدخل LNB',
+                'إبعاد الأجهزة الإلكترونية عن الكيبل',
+                'تغيير موقع الطبق قليلاً',
+                'استبدال LNB بنوع عالي الجودة مع PLL',
+                'استخدام طبق بعمق بؤري أكبر'
+            ],
+            tools: ['فلتر 4G/5G', 'LNB PLL', 'جهاز قياس الطيف', 'طبق أكبر']
         }
     },
     
     // مشاكل الصورة
     video: {
         'pixelation': {
-            title: 'تقطيع الصورة (تكسير)',
+            title: '🔲 تقطيع الصورة (تكسير/بكسلة)',
+            severity: 'متوسط',
             causes: [
-                'ضعف الإشارة',
-                'مشكلة في التردد أو الترميز',
-                'LNB تالف',
-                'كيبل رديء',
+                'ضعف الإشارة أقل من 50%',
+                'مشكلة في التردد أو الترميز (Symbol Rate)',
+                'LNB تالف أو حساسيته منخفضة',
+                'كيبل رديء يسبب فقد في الإشارة',
                 'مشكلة في معالج الرسيفر',
-                'ارتفاع حرارة الرسيفر'
+                'ارتفاع حرارة الرسيفر',
+                'تداخل كهرومغناطيسي',
+                'الطبق صغير جداً للمنطقة'
             ],
             solutions: [
-                'تحسين قوة الإشارة بضبط الطبق',
+                'تحسين قوة الإشارة بضبط الطبق (استهدف 70%+)',
                 'التأكد من صحة إعدادات التردد ومعدل الترميز',
-                'استبدال LNB',
-                'استبدال الكيبل بنوع RG6',
-                'إعادة تشغيل الرسيفر',
-                'تهوية الرسيفر جيداً'
+                'استبدال LNB بنوع عالي الحساسية',
+                'استبدال الكيبل بنوع RG6 عالي الجودة',
+                'إعادة تشغيل الرسيفر (Cold Reboot)',
+                'تهوية الرسيفر جيداً (لا تضعه فوق أجهزة أخرى)',
+                'إبعاد الكيبل عن مصادر التداخل',
+                'استخدام طبق بحجم أكبر'
             ],
-            tools: ['جهاز قياس الإشارة', 'LNB جديد', 'كيبل RG6']
+            tools: ['جهاز قياس الإشارة', 'LNB عالي الحساسية', 'كيبل RG6', 'مروحة تبريد']
         },
         'freezing': {
-            title: 'توقف الصورة (تعليق)',
+            title: '⏸️ توقف الصورة (تعليق/تجمد)',
+            severity: 'متوسط',
             causes: [
                 'ضعف الإشارة',
                 'مشكلة في البث من المصدر',
                 'ارتفاع حرارة الرسيفر',
-                'سعة تخزين ممتلئة',
-                'برنامج الرسيفر قديم',
-                'مشكلة في الهارد ديسك (لأجهزة التسجيل)'
+                'سعة تخزين الرسيفر ممتلئة',
+                'برنامج الرسيفر (سوفت وير) قديم',
+                'مشكلة في الهارد ديسك (لأجهزة التسجيل)',
+                'ذاكرة RAM ممتلئة',
+                'القناة مشفرة والإشارة ضعيفة'
             ],
             solutions: [
-                'تحسين الإشارة',
-                'التحقق من القنوات الأخرى',
-                'فصل الرسيفر وإعادة تشغيله',
-                'تهوية الجهاز',
-                'مسح الملفات المؤقتة',
-                'تحديث سوفت وير الرسيفر',
-                'فحص الهارد ديسك'
+                'تحسين الإشارة بضبط الطبق',
+                'التحقق من القنوات الأخرى (إذا الكل معلق فالمشكلة منك)',
+                'فصل الرسيفر 30 ثانية وإعادة تشغيله',
+                'تهوية الجهاز وتنظيفه من الغبار',
+                'مسح الملفات المؤقتة والغير ضرورية',
+                'تحديث سوفت وير الرسيفر من موقع الشركة',
+                'فحص الهارد ديسك واستبداله إذا كان تالفاً',
+                'إعادة ضبط المصنع (Factory Reset)'
             ],
-            tools: ['ريموت كنترول', 'فلاشة لتحديث السوفت وير']
+            tools: ['ريموت كنترول', 'فلاشة لتحديث السوفت وير', 'هارد ديسك جديد', 'منفاخ هواء للتنظيف']
         },
         'black_screen': {
-            title: 'شاشة سوداء',
+            title: '⬛ شاشة سوداء',
+            severity: 'حرج',
             causes: [
-                'القناة مشفرة',
+                'القناة مشفرة وتحتاج اشتراك',
                 'انتهاء صلاحية الاشتراك',
-                'مشكلة في HDMI',
-                'الرسيفر في وضع الاستعداد',
-                'تلف في مخرج الفيديو'
+                'مشكلة في كيبل HDMI',
+                'الرسيفر في وضع الاستعداد (Standby)',
+                'تلف في مخرج الفيديو بالرسيفر',
+                'إعدادات دقة العرض غير متوافقة مع التلفزيون',
+                'تفعيل HDCP والحماية تمنع العرض',
+                'تلف في مدخل HDMI بالتلفزيون'
             ],
             solutions: [
-                'التأكد من حالة الاشتراك',
-                'فحص كيبل HDMI واستبداله',
-                'تجربة منفذ HDMI آخر',
-                'الضغط على زر Power في الريموت',
-                'تجربة كيبل AV كبديل'
+                'التأكد من حالة الاشتراك وصلاحية الباقة',
+                'فحص كيبل HDMI واستبداله بآخر جديد',
+                'تجربة منفذ HDMI آخر في التلفزيون',
+                'الضغط على زر Power في الريموت (وليس Standby)',
+                'تجربة كيبل AV (ثلاثي الألوان) كبديل',
+                'تغيير دقة العرض في إعدادات الرسيفر إلى 1080i أو 720p',
+                'تعطيل HDCP في إعدادات الرسيفر إن أمكن',
+                'تجربة الرسيفر على تلفزيون آخر'
             ],
-            tools: ['كيبل HDMI جديد', 'كيبل AV']
+            tools: ['كيبل HDMI جديد', 'كيبل AV', 'ريموت كنترول']
         },
         'green_screen': {
-            title: 'شاشة خضراء',
+            title: '🟢 شاشة خضراء',
+            severity: 'متوسط',
             causes: [
-                'مشكلة في HDMI Handshake',
+                'مشكلة في HDMI Handshake (مصافحة)',
                 'إعدادات دقة العرض غير متوافقة',
                 'تلف في كيبل HDMI',
-                'مشكلة في التلفزيون'
+                'مشكلة في التلفزيون',
+                'HDCP غير متوافق'
             ],
             solutions: [
-                'فصل وإعادة توصيل كيبل HDMI',
+                'فصل وإعادة توصيل كيبل HDMI بقوة',
                 'تغيير دقة العرض في إعدادات الرسيفر',
-                'استبدال كيبل HDMI',
-                'إعادة تشغيل التلفزيون والرسيفر'
+                'استبدال كيبل HDMI بآخر عالي الجودة',
+                'إعادة تشغيل التلفزيون والرسيفر معاً',
+                'فصل الكهرباء عن الجهازين 5 دقائق'
             ],
-            tools: ['كيبل HDMI جديد']
+            tools: ['كيبل HDMI جديد عالي الجودة']
+        },
+        'no_hd_signal': {
+            title: '📺 القنوات HD لا تعمل',
+            severity: 'متوسط',
+            causes: [
+                'الرسيفر لا يدعم HD',
+                'كيبل HDMI رديء لا يدعم النطاق الترددي العالي',
+                'التلفزيون لا يدعم دقة HD',
+                'إعدادات الرسيفر على SD فقط',
+                'القناة HD تحتاج اشتراك خاص'
+            ],
+            solutions: [
+                'التأكد من أن الرسيفر يدعم HD (مكتوب عليه HD أو Full HD)',
+                'استخدام كيبل HDMI 1.4 أو 2.0',
+                'ضبط إعدادات الفيديو في الرسيفر على 1080i أو 1080p',
+                'التأكد من دعم التلفزيون لدقة HD',
+                'التحقق من الاشتراك في باقة HD'
+            ],
+            tools: ['كيبل HDMI 2.0', 'ريموت كنترول']
         }
     },
     
     // مشاكل الصوت
     audio: {
         'no_sound': {
-            title: 'لا يوجد صوت',
+            title: '🔇 لا يوجد صوت',
+            severity: 'متوسط',
             causes: [
-                'كتم الصوت (Mute)',
-                'مشكلة في كيبل الصوت',
-                'إعدادات الصوت في الرسيفر',
-                'القناة تبث بدون صوت',
-                'تلف في مخرج الصوت'
+                'كتم الصوت مفعل (Mute)',
+                'مشكلة في كيبل الصوت (بصري أو AUX)',
+                'إعدادات الصوت في الرسيفر خاطئة',
+                'القناة تبث بدون صوت (مؤقتاً)',
+                'تلف في مخرج الصوت بالرسيفر',
+                'مشكلة في نظام الصوت الخارجي'
             ],
             solutions: [
-                'التأكد من إلغاء كتم الصوت',
-                'رفع مستوى الصوت',
-                'فحص توصيلات الصوت',
-                'تجربة قناة أخرى',
-                'تغيير إعدادات الصوت (PCM/Bitstream)'
+                'التأكد من إلغاء كتم الصوت ورفع مستوى الصوت',
+                'فحص توصيلات الصوت (كيبل AUX أو بصري)',
+                'تجربة قناة أخرى للتأكد',
+                'تغيير إعدادات الصوت في الرسيفر (PCM/Bitstream)',
+                'تجربة مخرج صوت آخر إن وجد',
+                'فحص نظام الصوت الخارجي وإعداداته'
             ],
-            tools: ['ريموت كنترول', 'كيبل صوت']
+            tools: ['كيبل صوت', 'ريموت كنترول']
         },
         'audio_delay': {
-            title: 'تأخر الصوت عن الصورة',
+            title: '⏱️ تأخر الصوت عن الصورة',
+            severity: 'خفيف',
             causes: [
                 'مشكلة في معالجة الإشارة',
                 'إعدادات Audio Delay غير مضبوطة',
                 'مشكلة في البث',
-                'استخدام HDMI ARC'
+                'استخدام HDMI ARC',
+                'نظام صوت خارجي يسبب تأخير'
             ],
             solutions: [
-                'ضبط إعدادات Audio Delay في الرسيفر',
+                'ضبط إعدادات Audio Delay في الرسيفر (جرب قيماً من 50-200ms)',
                 'إعادة تشغيل الرسيفر',
                 'تغيير القناة والعودة',
-                'فصل وإعادة توصيل HDMI'
+                'فصل وإعادة توصيل HDMI',
+                'في نظام الصوت الخارجي: جرب وضع Direct أو Pure'
             ],
             tools: ['ريموت كنترول']
+        },
+        'audio_noise': {
+            title: '🔊 تشويش أو طنين في الصوت',
+            severity: 'متوسط',
+            causes: [
+                'تداخل كهربائي',
+                'تأريض غير صحيح',
+                'كيبل صوت تالف',
+                'مشكلة في LNB تسبب تداخل',
+                'قناة صوت مضبوطة على تردد خاطئ'
+            ],
+            solutions: [
+                'إبعاد كيبل الصوت عن كيابل الكهرباء',
+                'التأكد من التأريض الصحيح للرسيفر والتلفزيون',
+                'استبدال كيبل الصوت',
+                'فحص LNB والكيبل المحوري',
+                'تغيير إعدادات القناة الصوتية (Audio Track)'
+            ],
+            tools: ['كيبل صوت جديد', 'جهاز فحص التأريض']
         }
     },
     
     // مشاكل LNB
     lnb: {
         'lnb_failure': {
-            title: 'عطل كامل في LNB',
+            title: '📡 عطل كامل في LNB',
+            severity: 'حرج',
             causes: [
                 'تلف بسبب الصواعق',
-                'دخول ماء',
-                'انتهاء العمر الافتراضي',
+                'دخول ماء إلى داخل LNB',
+                'انتهاء العمر الافتراضي (3-5 سنوات)',
                 'تماس كهربائي',
-                'ارتفاع حرارة شديد'
+                'ارتفاع حرارة شديد',
+                'عيوب تصنيع'
             ],
             solutions: [
                 'استبدال LNB بآخر جديد',
-                'تركيب واقي صواعق',
-                'عزل الوصلات بشريط عازل للماء',
-                'استخدام LNB من ماركة موثوقة',
-                'تركيب غطاء واقي للـ LNB'
+                'تركيب واقي صواعق (Surge Protector)',
+                'عزل الوصلات بشريط عازل للماء (Self-amalgamating Tape)',
+                'استخدام LNB من ماركة موثوقة (Inverto, Star Gold, Technomate)',
+                'تركيب غطاء واقي للـ LNB من الشمس والمطر',
+                'فحص التوصيلات الأرضية'
             ],
-            tools: ['LNB جديد', 'شريط عازل', 'واقي صواعق', 'غطاء LNB']
+            tools: ['LNB جديد', 'شريط عازل', 'واقي صواعق', 'غطاء LNB', 'جهاز فحص LNB']
         },
         'lnb_short': {
-            title: 'تماس في LNB',
+            title: '⚡ تماس كهربائي في LNB',
+            severity: 'حرج',
             causes: [
-                'دخول ماء إلى الفيشة',
+                'دخول ماء إلى الفيشة أو الموصل',
                 'تلف العازل في الكيبل',
-                'تركيب خاطئ للفيشة',
-                'تآكل في الموصلات'
+                'تركيب خاطئ للفيشة (أسلاك متلامسة)',
+                'تآكل في الموصلات بسبب الرطوبة',
+                'تلف في وحدة التغذية بالرسيفر'
             ],
             solutions: [
-                'فصل الكيبل وتنظيف الفيشة',
-                'قص جزء من الكيبل وتركيب فيشة جديدة',
-                'استخدام شريط عازل للماء',
-                'استبدال الكيبل بالكامل إذا كان متآكلاً'
+                'فصل الكيبل وتنظيف الفيشة جيداً',
+                'قص جزء من الكيبل وتركيب فيشة F-Type جديدة',
+                'استخدام شريط عازل للماء على الوصلة',
+                'استبدال الكيبل بالكامل إذا كان متآكلاً',
+                'فحص فولتية الرسيفر (يجب أن لا تتجاوز 18V)'
             ],
-            tools: ['فيش F-Type', 'قاطع كيبل', 'شريط عازل', 'كيبل جديد']
+            tools: ['فيش F-Type', 'قاطع كيبل', 'شريط عازل', 'كيبل جديد', 'جهاز قياس الفولت']
         },
         'lnb_noise': {
-            title: 'تشويش وضوضاء في الإشارة',
+            title: '📳 تشويش وضوضاء في الإشارة من LNB',
+            severity: 'متوسط',
             causes: [
-                'LNB رديء الجودة',
+                'LNB رديء الجودة (صيني مقلد)',
                 'تداخل من أجهزة إلكترونية قريبة',
-                'عدم ثبات LNB في الحامل',
-                'انعكاسات من أسطح معدنية'
+                'عدم ثبات LNB في الحامل (اهتزاز)',
+                'انعكاسات من أسطح معدنية قريبة',
+                'تردد LNB غير مستقر (Local Oscillator Drift)'
             ],
             solutions: [
-                'استبدال LNB بنوع عالي الجودة',
-                'إبعاد الكيبل عن مصادر التداخل',
-                'تثبيت LNB بإحكام',
-                'تغيير موقع الطبق قليلاً'
+                'استبدال LNB بنوع عالي الجودة مع PLL (Phase-Locked Loop)',
+                'إبعاد الكيبل عن مصادر التداخل (راوتر، هواتف)',
+                'تثبيت LNB بإحكام باستخدام الرباطات',
+                'تغيير موقع الطبق قليلاً لتجنب الانعكاسات',
+                'استخدام LNB من نوع Universal PLL'
             ],
-            tools: ['LNB عالي الجودة', 'رباطات تثبيت']
+            tools: ['LNB PLL عالي الجودة', 'رباطات تثبيت', 'جهاز قياس الطيف']
+        },
+        'lnb_compatibility': {
+            title: '🔄 LNB غير متوافق',
+            severity: 'متوسط',
+            causes: [
+                'استخدام LNB Ku-Band مع قمر C-Band',
+                'تردد LNB غير متوافق مع الرسيفر',
+                'استخدام LNB Wideband مع رسيفر عادي',
+                'استخدام LNB Universal مع نظام Unicable'
+            ],
+            solutions: [
+                'التأكد من نوع القمر (Ku أو C) وشراء LNB المناسب',
+                'ضبط تردد LNB الصحيح في إعدادات الرسيفر',
+                'استخدام محول Wideband to Universal',
+                'استبدال LNB بالنوع المتوافق مع النظام'
+            ],
+            tools: ['LNB متوافق', 'محول Wideband', 'دليل الترددات']
         }
     },
     
     // مشاكل الرسيفر
     receiver: {
         'receiver_boot': {
-            title: 'الرسيفر لا يعمل / لا يقلع',
+            title: '🔌 الرسيفر لا يعمل / لا يقلع',
+            severity: 'حرج',
             causes: [
-                'عطل في البور سبلاي',
-                'تلف في الفلاشة الداخلية',
-                'مشكلة في زر الباور',
-                'ارتفاع كهربائي أتلف الجهاز'
+                'عطل في البور سبلاي (وحدة التغذية)',
+                'تلف في الفلاشة الداخلية (البرنامج الثابت)',
+                'مشكلة في زر الباور أو كيبل الكهرباء',
+                'ارتفاع كهربائي أتلف مكونات داخلية',
+                'تلف مكثفات البور سبلاي'
             ],
             solutions: [
-                'فحص كيبل الكهرباء والمحول',
+                'فحص كيبل الكهرباء والمحول (Adapter)',
                 'تجربة منفذ كهرباء آخر',
-                'فصل الجهاز 10 دقائق وإعادة توصيله',
-                'فحص البور سبلاي واستبداله إذا لزم',
-                'إرسال الجهاز للصيانة'
+                'فصل الجهاز 30 دقيقة وإعادة توصيله',
+                'فحص البور سبلاي واستبداله إذا لزم (سهل لمعظم الرسيفرات)',
+                'فحص المكثفات واستبدال المنتفخة منها',
+                'إرسال الجهاز للصيانة المتخصصة'
             ],
-            tools: ['محول كهرباء احتياطي', 'جهاز فحص الفولت']
+            tools: ['محول كهرباء احتياطي', 'جهاز فحص الفولت', 'مفك', 'مكثفات بديلة', 'كاوية لحام']
         },
         'receiver_hang': {
-            title: 'الرسيفر يعلق باستمرار',
+            title: '🔄 الرسيفر يعلق باستمرار',
+            severity: 'متوسط',
             causes: [
-                'ارتفاع حرارة الجهاز',
-                'ضعف الإشارة',
-                'سوفت وير قديم',
-                'ذاكرة ممتلئة',
-                'مشكلة في الهارد ديسك'
+                'ارتفاع حرارة الجهاز (سوء تهوية)',
+                'ضعف الإشارة يسبب معالجة زائدة',
+                'سوفت وير قديم أو غير مستقر',
+                'ذاكرة ممتلئة (Flash/RAM)',
+                'مشكلة في الهارد ديسك (قطاعات تالفة)',
+                'فيروس في ملفات القنوات'
             ],
             solutions: [
-                'تهوية الجهاز جيداً',
-                'تحسين الإشارة',
-                'تحديث السوفت وير',
-                'مسح القنوات غير المستخدمة',
-                'فحص الهارد ديسك'
+                'تهوية الجهاز جيداً (ارفعه عن السطح)',
+                'تحسين الإشارة لتقليل أخطاء المعالجة',
+                'تحديث السوفت وير من موقع الشركة الرسمي',
+                'مسح القنوات غير المستخدمة والملفات المؤقتة',
+                'فحص الهارد ديسك على الكمبيوتر أو استبداله',
+                'عمل فورمات كامل وإعادة تحميل القنوات'
             ],
-            tools: ['فلاشة لتحديث السوفت وير', 'ريموت كنترول']
+            tools: ['فلاشة لتحديث السوفت وير', 'ريموت كنترول', 'هارد ديسك جديد', 'مروحة تبريد USB']
         },
         'receiver_remote': {
-            title: 'الريموت لا يعمل',
+            title: '📱 الريموت كنترول لا يعمل',
+            severity: 'خفيف',
             causes: [
-                'بطاريات فارغة',
-                'تلف في حساس IR',
+                'بطاريات فارغة أو ضعيفة',
+                'تلف في حساس IR في الرسيفر',
                 'عائق بين الريموت والرسيفر',
-                'تلف في الريموت نفسه'
+                'تلف في الريموت نفسه (سقوط/رطوبة)',
+                'تردد الريموت تغير'
             ],
             solutions: [
-                'تغيير البطاريات',
-                'تنظيف حساس IR في الرسيفر',
-                'إزالة العوائق',
-                'تجربة ريموت بديل',
-                'استخدام تطبيق ريموت على الهاتف'
+                'تغيير البطاريات بأخرى جديدة',
+                'تنظيف حساس IR في الرسيفر بقطعة قماش ناعمة',
+                'إزالة العوائق (زجاج، أبواب)',
+                'تجربة ريموت بديل (Universal Remote)',
+                'استخدام تطبيق ريموت على الهاتف (إذا كان الرسيفر يدعم)',
+                'فحص الريموت بكاميرا الهاتف (يجب رؤية ضوء IR عند الضغط)'
             ],
-            tools: ['بطاريات AAA', 'قطعة قماش للتنظيف']
+            tools: ['بطاريات AAA', 'قطعة قماش للتنظيف', 'ريموت يونيفرسال', 'هاتف بكاميرا']
         },
         'receiver_update': {
-            title: 'مشكلة في تحديث السوفت وير',
+            title: '💾 مشكلة في تحديث السوفت وير',
+            severity: 'حرج',
             causes: [
-                'ملف التحديث غير متوافق',
+                'ملف التحديث غير متوافق مع موديل الرسيفر',
                 'انقطاع الكهرباء أثناء التحديث',
-                'فلاشة تالفة',
-                'نفاذ مساحة التخزين'
+                'فلاشة تالفة أو بها Bad Sectors',
+                'نفاذ مساحة التخزين المؤقتة',
+                'نسخة السوفت وير تالفة'
             ],
             solutions: [
-                'التأكد من تحميل الملف الصحيح لطراز الرسيفر',
-                'استخدام فلاشة مهيأة FAT32',
-                'عدم فصل الكهرباء أثناء التحديث',
-                'مسح ملفات غير ضرورية'
+                'التأكد من تحميل الملف الصحيح لطراز الرسيفر بالضبط',
+                'استخدام فلاشة مهيأة FAT32 (وليس NTFS)',
+                'عدم فصل الكهرباء أبداً أثناء التحديث',
+                'مسح ملفات غير ضرورية قبل التحديث',
+                'استخدام خاصية Recovery Mode إذا فشل التحديث',
+                'تحميل نسخة سابقة مستقرة (Stable Version)'
             ],
-            tools: ['فلاشة USB', 'كمبيوتر لتحميل الملف']
+            tools: ['فلاشة USB', 'كمبيوتر لتحميل الملف', 'برنامج تهيئة الفلاشات']
+        },
+        'receiver_channels': {
+            title: '📋 اختفاء القنوات',
+            severity: 'متوسط',
+            causes: [
+                'مسح غير مقصود للقنوات',
+                'تغيير ترددات القنوات من المصدر',
+                'عطل في ذاكرة الرسيفر',
+                'فصل الكهرباء المفاجئ',
+                'تحديث سوفت وير تلقائي'
+            ],
+            solutions: [
+                'عمل بحث تلقائي (Auto Scan) من جديد',
+                'إدخال الترددات الجديدة يدوياً',
+                'عمل فورمات للرسيفر وإعادة البحث',
+                'استخدام خاصية Backup للقنوات',
+                'تحديث قائمة القنوات من ملف خارجي'
+            ],
+            tools: ['فلاشة USB', 'ملف قنوات حديث', 'ريموت كنترول']
         }
     },
     
     // مشاكل التركيب
     installation: {
         'dish_alignment': {
-            title: 'صعوبة في توجيه الطبق',
+            title: '📐 صعوبة في توجيه الطبق',
+            severity: 'متوسط',
             causes: [
-                'عدم معرفة الزوايا الصحيحة',
-                'عدم استواء القاعدة',
-                'رياح قوية',
-                'عدم وجود رؤية واضحة للقمر'
+                'عدم معرفة الزوايا الصحيحة للموقع',
+                'عدم استواء القاعدة (غير عمودية)',
+                'رياح قوية تؤثر على الدقة',
+                'عدم وجود رؤية واضحة للقمر',
+                'استخدام بوصلة غير دقيقة',
+                'القطب (Pole) غير عمودي تماماً'
             ],
             solutions: [
-                'استخدام تطبيق حساب الزوايا',
+                'استخدام تطبيق Sat Finder Pro لحساب الزوايا بدقة',
                 'التأكد من استواء القاعدة باستخدام ميزان ماء',
                 'التركيب في يوم هادئ الرياح',
-                'استخدام جهاز قياس الإشارة',
-                'البدء بالاتجاه التقريبي ثم الضبط الدقيق'
+                'استخدام جهاز قياس الإشارة (Sat Finder)',
+                'البدء بالاتجاه التقريبي ثم الضبط الدقيق بالميليمتر',
+                'التأكد من عمودية القطب تماماً قبل تركيب الطبق'
             ],
-            tools: ['بوصلة', 'ميزان ماء', 'جهاز قياس إشارة', 'مفاتيح ربط']
+            tools: ['بوصلة رقمية', 'ميزان ماء', 'جهاز قياس إشارة', 'مفاتيح ربط', 'تطبيق Sat Finder Pro']
         },
         'cable_routing': {
-            title: 'مشاكل تمديد الكيبل',
+            title: '🔌 مشاكل تمديد الكيبل',
+            severity: 'متوسط',
             causes: [
-                'كيبل طويل جداً يضعف الإشارة',
-                'ثني الكيبل بزاوية حادة',
-                'مرور الكيبل قرب أسلاك كهرباء',
-                'عدم عزل الوصلات الخارجية'
+                'كيبل طويل جداً يضعف الإشارة (أكثر من 50 متر)',
+                'ثني الكيبل بزاوية حادة (أقل من 90 درجة)',
+                'مرور الكيبل قرب أسلاك كهرباء ذات جهد عالي',
+                'عدم عزل الوصلات الخارجية من الماء',
+                'استخدام كيبل رديء (نحاس مطلي وليس صلب)'
             ],
             solutions: [
-                'استخدام مقوي إشارة للمسافات الطويلة',
-                'تجنب الثني الحاد للكيبل',
-                'إبعاد الكيبل عن أسلاك الكهرباء',
-                'عزل الوصلات الخارجية بشريط عازل للماء'
+                'استخدام مقوي إشارة (Line Amplifier) للمسافات الطويلة',
+                'تجنب الثني الحاد للكيبل (اجعل الانحناءات دائرية)',
+                'إبعاد الكيبل عن أسلاك الكهرباء مسافة 30 سم على الأقل',
+                'عزل الوصلات الخارجية بشريط عازل للماء',
+                'استخدام كيبل نحاس صلب (Solid Copper) وليس CCS'
             ],
-            tools: ['مقوي إشارة', 'شريط عازل', 'مشابك تثبيت']
+            tools: ['مقوي إشارة', 'شريط عازل للماء', 'مشابك تثبيت', 'كيبل نحاس صلب', 'جهاز فحص الكيبل']
         },
         'multi_lnb': {
-            title: 'مشاكل تركيب عدة LNB',
+            title: '🛰️ مشاكل تركيب عدة LNB',
+            severity: 'متقدم',
             causes: [
                 'عدم ضبط المسافات بين LNB بدقة',
-                'استخدام حامل غير مناسب',
+                'استخدام حامل غير مناسب لحجم الطبق',
                 'تداخل بين LNB',
-                'استخدام DiSEqC غير متوافق'
+                'استخدام DiSEqC Switch رديء',
+                'عدم ضبط زوايا Skew لكل LNB على حدة'
             ],
             solutions: [
-                'استخدام حامل متعدد متوافق مع حجم الطبق',
-                'ضبط المسافات بدقة حسب الأقمار المستهدفة',
-                'استخدام DiSEqC عالي الجودة',
-                'ضبط إعدادات DiSEqC في الرسيفر'
+                'استخدام حامل متعدد متوافق مع حجم وشكل الطبق',
+                'ضبط المسافات بدقة حسب الأقمار المستهدفة (استخدم جدول المسافات)',
+                'استخدام DiSEqC Switch عالي الجودة',
+                'ضبط إعدادات DiSEqC في الرسيفر لكل قمر (Port 1,2,3,4)',
+                'ضبط Skew لكل LNB على حدة'
             ],
-            tools: ['حامل متعدد LNB', 'DiSEqC Switch', 'جهاز قياس إشارة']
+            tools: ['حامل متعدد LNB', 'DiSEqC Switch', 'جهاز قياس إشارة', 'جدول المسافات بين الأقمار']
+        },
+        'motor_dish': {
+            title: '⚙️ مشاكل الطبق المتحرك (Motor)',
+            severity: 'متقدم',
+            causes: [
+                'عدم ضبط زاوية Declination بشكل صحيح',
+                'المحرك لا يستجيب لأوامر DiSEqC',
+                'حدود المحرك الشرقية/الغربية مضبوطة خطأ',
+                'القطب غير عمودي',
+                'المحرك عالق بسبب الصدأ'
+            ],
+            solutions: [
+                'ضبط زاوية Declination حسب موقعك الجغرافي',
+                'فحص كيبل DiSEqC والتوصيلات',
+                'إعادة ضبط حدود المحرك (Software Limits)',
+                'التأكد من عمودية القطب بالميزان',
+                'تشحيم المحرك وتنظيفه من الصدأ',
+                'إعادة تعيين المحرك (Reset Motor)'
+            ],
+            tools: ['ميزان ماء', 'جهاز قياس زوايا', 'شحم', 'ريموت كنترول']
         }
     },
     
     // مشاكل الطقس
     weather: {
         'rain_fade': {
-            title: 'تأثير الأمطار على الإشارة',
+            title: '🌧️ تأثير الأمطار على الإشارة',
+            severity: 'موسمي',
             causes: [
-                'امتصاص قطرات الماء للإشارة',
-                'تجمع الماء على سطح الطبق',
-                'دخول ماء إلى LNB',
-                'غيوم كثيفة'
+                'امتصاص قطرات الماء لموجات Ku-Band',
+                'تجمع الماء على سطح الطبق (عدسة مائية)',
+                'دخول ماء إلى LNB أو الكيبل',
+                'غيوم كثيفة محملة بالمطر',
+                'حجم الطبق صغير لا يتحمل التوهين'
             ],
             solutions: [
-                'استخدام طبق بحجم أكبر',
-                'تركيب غطاء شفاف للـ LNB',
-                'عزل الوصلات جيداً',
-                'استخدام LNB عالي الحساسية',
-                'تنظيف سطح الطبق من الماء'
+                'استخدام طبق بحجم أكبر (120 سم للمناطق المطيرة)',
+                'تركيب غطاء شفاف للـ LNB (Rain Cover)',
+                'عزل الوصلات بشريط عازل للماء',
+                'استخدام LNB عالي الحساسية (High Gain)',
+                'تنظيف سطح الطبق من الماء بشكل دوري',
+                'تقبل أن الإشارة ستضعف مؤقتاً أثناء الأمطار الغزيرة'
             ],
-            tools: ['طبق أكبر', 'غطاء LNB', 'شريط عازل', 'LNB عالي الحساسية']
+            tools: ['طبق أكبر', 'غطاء LNB', 'شريط عازل', 'LNB High Gain', 'منشفة لتنظيف الطبق']
         },
         'snow_effect': {
-            title: 'تأثير الثلوج',
+            title: '❄️ تأثير الثلوج',
+            severity: 'موسمي',
             causes: [
-                'تراكم الثلج على الطبق',
-                'تغير شكل الطبق بسبب وزن الثلج',
-                'تغطية LNB بالثلج'
+                'تراكم الثلج على الطبق يغير شكله الهندسي',
+                'تغطية LNB بالثلج يمنع استقبال الإشارة',
+                'وزن الثلج يغير زاوية الطبق',
+                'تكون جليد على سطح الطبق'
             ],
             solutions: [
-                'تنظيف الطبق من الثلج بانتظام',
-                'استخدام غطاء واقي للطبق',
-                'تركيب سخان للطبق',
-                'استخدام طبق مقوى'
+                'تنظيف الطبق من الثلج بانتظام بفرشاة ناعمة',
+                'استخدام غطاء واقي للطبق (Dish Cover)',
+                'تركيب سخان للطبق (Dish Heater)',
+                'استخدام طبق مقوى (Heavy Duty)',
+                'رش سطح الطبق بمادة مانعة للتجمد'
             ],
-            tools: ['فرشاة تنظيف', 'غطاء طبق', 'سخان طبق']
+            tools: ['فرشاة تنظيف ناعمة', 'غطاء طبق', 'سخان طبق', 'مادة مانعة للتجمد']
         },
         'wind_effect': {
-            title: 'تأثير الرياح القوية',
+            title: '💨 تأثير الرياح القوية',
+            severity: 'موسمي',
             causes: [
                 'تحرك الطبق من مكانه',
-                'اهتزاز الطبق',
-                'سقوط الطبق'
+                'اهتزاز الطبق أثناء هبوب الرياح',
+                'سقوط الطبق بالكامل',
+                'الرياح تغير زاوية LNB'
             ],
             solutions: [
                 'تثبيت القاعدة بمسامير قوية في الجدار أو الأرض',
-                'استخدام حامل متين',
+                'استخدام حامل متين (Heavy Duty Mount)',
                 'تقوية البراغي والرباطات',
-                'تركيب الطبق في مكان محمي من الرياح'
+                'تركيب الطبق في مكان محمي من الرياح',
+                'استخدام قاعدة خرسانية ثقيلة'
             ],
-            tools: ['مسامير تثبيت', 'قاعدة خرسانية', 'رباطات معدنية']
+            tools: ['مسامير تثبيت كبيرة', 'قاعدة خرسانية', 'رباطات معدنية', 'مفاتيح ربط كبيرة']
+        },
+        'solar_outage': {
+            title: '☀️ التداخل الشمسي',
+            severity: 'مؤقت',
+            causes: [
+                'مرور الشمس خلف القمر الصناعي (الاعتدال الربيعي والخريفي)',
+                'توجيه الطبق مباشرة نحو الشمس',
+                'ضوضاء شمسية تغمر إشارة القمر'
+            ],
+            solutions: [
+                'انتظار انتهاء فترة التداخل (5-15 دقيقة يومياً)',
+                'تستمر الظاهرة 3-7 أيام في مارس وسبتمبر',
+                'لا يمكن فعل شيء - ظاهرة فلكية طبيعية',
+                'استخدام طبق أكبر يقلل مدة الانقطاع'
+            ],
+            tools: ['لا توجد أدوات - انتظار فقط']
+        }
+    },
+    
+    // مشاكل متقدمة
+    advanced: {
+        'hdmi_hdcp': {
+            title: '🔒 مشاكل HDCP وحماية المحتوى',
+            severity: 'متقدم',
+            causes: [
+                'التلفزيون لا يدعم HDCP 2.2',
+                'كيبل HDMI قديم لا يدعم HDCP',
+                'استخدام مقسم HDMI يزيل HDCP',
+                'تعارض بين أجهزة متعددة'
+            ],
+            solutions: [
+                'التأكد من دعم التلفزيون لـ HDCP 2.2',
+                'استخدام كيبل HDMI 2.0 أو 2.1',
+                'إزالة مقسم HDMI وجرب توصيل مباشر',
+                'تعطيل HDCP في إعدادات الرسيفر إن أمكن',
+                'استخدام محول HDMI to Component'
+            ],
+            tools: ['كيبل HDMI 2.1', 'محول HDMI to Component']
+        },
+        'diseqc_issues': {
+            title: '🔄 مشاكل DiSEqC Switch',
+            severity: 'متقدم',
+            causes: [
+                'DiSEqC Switch تالف',
+                'توصيل خاطئ للمنافذ',
+                'عدم توافق DiSEqC مع الرسيفر',
+                'طول كيبل طويل يضعف إشارة DiSEqC',
+                'عدم تفعيل DiSEqC في إعدادات الرسيفر'
+            ],
+            solutions: [
+                'استبدال DiSEqC Switch بآخر جديد',
+                'التأكد من توصيل كل LNB في المنفذ الصحيح',
+                'استخدام DiSEqC متوافق (1.0 أو 1.1 أو 1.2)',
+                'تقصير طول الكيبل أو استخدام مقوي',
+                'تفعيل DiSEqC في إعدادات كل قمر في الرسيفر'
+            ],
+            tools: ['DiSEqC Switch جديد', 'جهاز فحص DiSEqC']
+        },
+        'iptv_buffering': {
+            title: '📡 تقطيع IPTV',
+            severity: 'متوسط',
+            causes: [
+                'سرعة إنترنت منخفضة',
+                'ازدحام الشبكة',
+                'خادم IPTV بعيد أو ضعيف',
+                'ذاكرة الرسيفر ممتلئة',
+                'استخدام WiFi بدل كيبل'
+            ],
+            solutions: [
+                'زيادة سرعة الإنترنت (10 Mbps على الأقل للـ HD)',
+                'استخدام كيبل Ethernet بدل WiFi',
+                'تغيير مزود IPTV أو الخادم',
+                'مسح ذاكرة التخزين المؤقت',
+                'إغلاق التطبيقات الأخرى في الرسيفر',
+                'استخدام VPN لتحسين الاتصال'
+            ],
+            tools: ['كيبل Ethernet', 'راوتر قوي', 'VPN']
         }
     }
 };
@@ -1254,4 +925,5 @@ if (typeof module !== 'undefined' && module.exports) {
     module.exports = { SATELLITES_DATABASE, REPAIR_DATABASE };
 }
 EOF
-echo "✅ تم إنشاء قاعدة بيانات الأقمار والأعطال الكاملة"
+
+echo "✅ تم تحديث قاعدة بيانات الأعطال والإصلاحات الشاملة"
