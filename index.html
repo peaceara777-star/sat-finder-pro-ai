@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#00B4D8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <!-- أيقونات PWA -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    
+    <title>Sat Finder Pro AI - خبير الأقمار الصناعية</title>
+    
+    <!-- الخطوط -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome للأيقونات -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #0B090A 0%, #161A1D 100%);
+            color: white;
+            min-height: 100vh;
+            padding-bottom: 80px;
+        }
+
+        /* شريط الحالة */
+        .status-bar {
+            background: linear-gradient(135deg, #0077B6, #00B4D8);
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0, 180, 216, 0.3);
+        }
+
+        .status-bar h1 {
+            font-size: 20px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        /* شريط التنقل السفلي */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #161A1D;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 16px;
+            border-top: 1px solid #333;
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: #888;
+            cursor: pointer;
+            transition: all 0.3s;
+            padding: 8px 16px;
+            border-radius: 30px;
+        }
+
+        .nav-item.active {
+            color: #00B4D8;
+            background: rgba(0, 180, 216, 0.1);
+        }
+
+        .nav-item i {
+            font-size: 22px;
+        }
+
+        .nav-item span {
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* المحتوى الرئيسي */
+        .page {
+            display: none;
+            padding: 16px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* البطاقات */
+        .card {
+            background: #1a1a2e;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border: 1px solid #333;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #00B4D8;
+        }
+
+        /* البوصلة */
+        .compass-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .compass {
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            background: radial-gradient(circle at center, #1a1a2e, #0d0d1a);
+            border: 4px solid #00B4D8;
+            position: relative;
+            margin: 20px auto;
+            box-shadow: 0 0 40px rgba(0, 180, 216, 0.2);
+        }
+
+        .compass-arrow {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            width: 4px;
+            height: 90px;
+            background: linear-gradient(to bottom, #ff4444, #00B4D8);
+            transform-origin: bottom center;
+            margin-left: -2px;
+            border-radius: 4px;
+        }
+
+        .compass-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 16px;
+            height: 16px;
+            background: #00B4D8;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 20px #00B4D8;
+        }
+
+        .compass-labels {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .compass-label {
+            position: absolute;
+            color: #888;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .compass-label.north { top: 10px; left: 50%; transform: translateX(-50%); color: #ff4444; }
+        .compass-label.south { bottom: 10px; left: 50%; transform: translateX(-50%); }
+        .compass-label.east { right: 10px; top: 50%; transform: translateY(-50%); }
+        .compass-label.west { left: 10px; top: 50%; transform: translateY(-50%); }
+
+        /* قائمة الأقمار الأفقية */
+        .satellite-scroll {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding: 8px 4px;
+            scrollbar-width: none;
+        }
+
+        .satellite-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .satellite-item {
+            background: linear-gradient(135deg, #1a1a2e, #0d0d1a);
+            border: 2px solid #333;
+            border-radius: 16px;
+            padding: 16px 12px;
+            min-width: 100px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .satellite-item.active {
+            border-color: #00B4D8;
+            background: rgba(0, 180, 216, 0.1);
+            transform: scale(1.05);
+        }
+
+        .satellite-item i {
+            font-size: 32px;
+            color: #00B4D8;
+            margin-bottom: 8px;
+        }
+
+        .satellite-item .name {
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .satellite-item .position {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .satellite-item .favorite {
+            color: #FFD700;
+            margin-top: 8px;
+        }
+
+        /* مقياس الإشارة */
+        .signal-meter {
+            margin: 20px 0;
+        }
+
+        .signal-bar {
+            height: 24px;
+            background: #0d0d1a;
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 10px 0;
+            border: 1px solid #333;
+        }
+
+        .signal-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00B4D8, #06D6A0);
+            border-radius: 12px;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 12px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .signal-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 16px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 900;
+            color: #00B4D8;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #888;
+        }
+
+        /* الترددات */
+        .frequency-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .freq-item {
+            background: #0d0d1a;
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 8px;
+            border-right: 4px solid #00B4D8;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .freq-item:hover {
+            background: #1a1a2e;
+        }
+
+        .freq-name {
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .freq-details {
+            font-size: 13px;
+            color: #00B4D8;
+        }
+
+        .freq-encrypted {
+            color: #FFD700;
+            margin-right: 8px;
+        }
+
+        /* المحادثة */
+        .chat-container {
+            height: 400px;
+            overflow-y: auto;
+            padding: 8px;
+            margin-bottom: 16px;
+        }
+
+        .message {
+            margin-bottom: 16px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .message.user {
+            flex-direction: row-reverse;
+        }
+
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .message.ai .message-avatar {
+            background: linear-gradient(135deg, #00B4D8, #0077B6);
+        }
+
+        .message.user .message-avatar {
+            background: linear-gradient(135deg, #06D6A0, #00B4D8);
+        }
+
+        .message-content {
+            background: #1a1a2e;
+            padding: 12px 16px;
+            border-radius: 18px;
+            max-width: 75%;
+            border: 1px solid #333;
+        }
+
+        .message.user .message-content {
+            background: linear-gradient(135deg, #0077B6, #00B4D8);
+            border: none;
+        }
+
+        .message-time {
+            font-size: 10px;
+            color: #888;
+            margin-top: 4px;
+        }
+
+        /* حقل الإدخال */
+        .chat-input-container {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            background: #1a1a2e;
+            border-radius: 30px;
+            padding: 8px 8px 8px 20px;
+            border: 1px solid #333;
+        }
+
+        .chat-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 16px;
+            font-family: 'Cairo', sans-serif;
+            padding: 12px 0;
+        }
+
+        .chat-input:focus {
+            outline: none;
+        }
+
+        .chat-input::placeholder {
+            color: #666;
+        }
+
+        .send-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #00B4D8;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .send-btn:hover {
+            background: #0077B6;
+            transform: scale(1.05);
+        }
+
+        /* أزرار سريعة */
+        .quick-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 16px 0;
+        }
+
+        .quick-btn {
+            background: #0d0d1a;
+            border: 1px solid #333;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-family: 'Cairo', sans-serif;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .quick-btn:hover {
+            background: #00B4D8;
+            border-color: #00B4D8;
+        }
+
+        /* إرشادات التوجيه */
+        .guidance-box {
+            background: linear-gradient(135deg, #1a1a2e, #0d0d1a);
+            border-radius: 16px;
+            padding: 20px;
+            margin-top: 20px;
+            border: 1px solid #00B4D8;
+        }
+
+        .guidance-text {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .guidance-arrow {
+            font-size: 24px;
+            margin-left: 8px;
+        }
+
+        .lnb-skew {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #333;
+            color: #888;
+        }
+
+        /* أيقونة التحميل */
+        .typing-indicator {
+            display: flex;
+            gap: 4px;
+            padding: 12px 16px;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #00B4D8;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+            30% { transform: translateY(-8px); opacity: 1; }
+        }
+
+        /* شاشة البداية */
+        .splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #0B090A, #161A1D);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .splash-logo {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #0077B6, #00B4D8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            box-shadow: 0 0 50px rgba(0, 180, 216, 0.5);
+            animation: pulse 2s infinite;
+        }
+
+        .splash-logo i {
+            font-size: 80px;
+            color: white;
+        }
+
+        .splash-title {
+            font-size: 32px;
+            font-weight: 900;
+            color: #00B4D8;
+            margin-bottom: 8px;
+        }
+
+        .splash-subtitle {
+            font-size: 16px;
+            color: #888;
+            margin-bottom: 40px;
+        }
+
+        .progress-bar {
+            width: 200px;
+            height: 4px;
+            background: #1a1a2e;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #00B4D8;
+            border-radius: 2px;
+            animation: progress 2s ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes progress {
+            from { width: 0%; }
+            to { width: 100%; }
+        }
+
+        /* تنبيه */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1a1a2e;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            border: 1px solid #00B4D8;
+            z-index: 200;
+            animation: slideUp 0.3s ease;
+            white-space: nowrap;
+        }
+
+        @keyframes slideUp {
+            from { bottom: 50px; opacity: 0; }
+            to { bottom: 100px; opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- شاشة البداية -->
+    <div class="splash-screen" id="splashScreen">
+        <div class="splash-logo">
+            <i class="fas fa-satellite"></i>
+        </div>
+        <div class="splash-title">Sat Finder Pro</div>
+        <div class="splash-subtitle">خبير الأقمار الصناعية الذكي</div>
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+    </div>
+
+    <!-- شريط الحالة -->
+    <div class="status-bar">
+        <h1>
+            <i class="fas fa-satellite"></i>
+            Sat Finder Pro
+        </h1>
+        <span class="status-badge" id="connectionStatus">
+            <i class="fas fa-wifi"></i> متصل
+        </span>
+    </div>
+
+    <!-- الصفحة الرئيسية - توجيه الطبق -->
+    <div class="page active" id="pageAlignment">
+        <div class="card">
+            <div class="card-title">
+                <i class="fas fa-satellite"></i>
+                <span>اختر القمر الصناعي</span>
+            </div>
+            <div class="satellite-scroll" id="satelliteList"></div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">
+                <i class="fas fa-compass"></i>
+                <span>البوصلة الذكية</span>
+            </div>
+            <div class="compass-container">
+                <div class="compass" id="compass">
+                    <div class="compass-labels">
+                        <span class="compass-label north">شمال</span>
+                        <span class="compass-label south">جنوب</span>
+                        <span class="compass-label east">شرق</span>
+                        <span class="compass-label west">غرب</span>
+                    </div>
+                    <div class="compass-arrow" id="compassArrow"></div>
+                    <div class="compass-center"></div>
+                </div>
+                <div style="text-align: center; margin-top: 10px;">
+                    <span style="font-size: 24px; font-weight: bold;" id="headingValue">0°</span>
+                    <span style="color: #888; margin: 0 10px;">|</span>
+                    <span style="color: #00B4D8;" id="targetValue">الهدف: 237°</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">
+                <i class="fas fa-chart-line"></i>
+                <span>قوة الإشارة</span>
+            </div>
+            <div class="signal-meter">
+                <div class="signal-bar">
+                    <div class="signal-fill" id="signalFill" style="width: 78%;">78%</div>
+                </div>
+                <div class="signal-stats">
+                    <div class="stat-item">
+                        <div class="stat-value" id="signalStrength">78%</div>
+                        <div class="stat-label">القوة</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="signalQuality">72%</div>
+                        <div class="stat-label">الجودة</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" style="color: #06D6A0;" id="lockStatus">✓</div>
+                        <div class="stat-label">مقفول</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="guidance-box" id="guidanceBox">
+            <div class="guidance-text">
+                <i class="fas fa-arrow-right guidance-arrow" id="horizontalArrow"></i>
+                <span id="horizontalGuidance">حرك الطبق لليمين قليلاً</span>
+            </div>
+            <div class="guidance-text">
+                <i class="fas fa-arrow-up guidance-arrow" id="verticalArrow"></i>
+                <span id="verticalGuidance">ارفع الطبق للأعلى</span>
+            </div>
+            <div class="lnb-skew" id="lnbGuidance">
+                <i class="fas fa-rotate-right"></i>
+                لف LNB: 12.5° مع عقارب الساعة
+            </div>
+        </div>
+    </div>
+
+    <!-- صفحة تحليل الإشارة -->
+    <div class="page" id="pageSignal">
+        <div class="card">
+            <div class="card-title">
+                <i class="fas fa-chart-bar"></i>
+                <span>محلل الإشارة المتقدم</span>
+            </div>
+            <div class="signal-meter">
+                <div class="signal-bar">
+                    <div class="signal-fill" style="width: 85%;">85%</div>
+                </div>
+                <div class="signal-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">85%</div>
+                        <div class="stat-label">القوة</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">80%</div>
+                        <div class="stat-label">الجودة</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">12.4</div>
+                        <div class="stat-label">C/N (dB)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">
+                <i class="fas fa-list"></i>
+                <span>الترددات المكتشفة</span>
+                <button class="quick-btn" onclick="scanFrequencies()" style="margin-right: auto;">
+                    <i class="fas fa-search"></i> مسح
+                </button>
+            </div>
+            <div class="frequency-list" id="frequencyList"></div>
+        </div>
+    </div>
+
+    <!-- صفحة المساعد الذكي -->
+    <div class="page" id="pageAI">
+        <div class="card">
+            <div class="card-title">
+                <i class="fas fa-robot"></i>
+                <span>سامي - خبير الأقمار</span>
+                <span style="margin-right: auto; font-size: 12px; color: #06D6A0;">
+                    <i class="fas fa-circle"></i> متصل
+                </span>
+            </div>
+            
+            <div class="chat-container" id="chatContainer">
+                <div class="message ai">
+                    <div class="message-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="message-content">
+                        👋 أهلاً بك! أنا سامي، خبير الأقمار الصناعية.
+                        اسألني عن الترددات، الأعطال، أو توجيه الأطباق.
+                        <div class="message-time">الآن</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quick-actions" id="quickActions"></div>
+
+            <div class="chat-input-container">
+                <input type="text" class="chat-input" id="chatInput" placeholder="اكتب سؤالك هنا..." />
+                <button class="send-btn" onclick="sendMessage()">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- صفحة الإعدادات -->
+    <div class="page" id="pageSettings">
+        <div class="card">
+            <div class="card-title">
+                <i class="fas fa-cog"></i>
+                <span>الإعدادات</span>
+            </div>
+            
+            <div style="padding: 10px 0;">
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 0;">
+                    <span><i class="fas fa-moon"></i> الوضع الليلي</span>
+                    <label class="switch">
+                        <input type="checkbox" checked> 
+                    </label>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 0;">
+                    <span><i class="fas fa-bell"></i> الإشعارات</span>
+                    <label class="switch">
+                        <input type="checkbox" checked>
+                    </label>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 0;">
+                    <span><i class="fas fa-vibrate"></i> الاهتزاز</span>
+                    <label class="switch">
+                        <input type="checkbox" checked>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">
+                <i class="fas fa-key"></i>
+                <span>Gemini API</span>
+            </div>
+            <input type="password" id="apiKeyInput" placeholder="أدخل مفتاح API" style="width: 100%; padding: 12px; background: #0d0d1a; border: 1px solid #333; border-radius: 12px; color: white; font-family: 'Cairo'; margin-bottom: 10px;" />
+            <button class="quick-btn" onclick="saveApiKey()" style="width: 100%;">حفظ المفتاح</button>
+        </div>
+
+        <div class="card">
+            <div class="card-title">
+                <i class="fas fa-info-circle"></i>
+                <span>حول التطبيق</span>
+            </div>
+            <p style="color: #888;">Sat Finder Pro AI v2.0.0</p>
+            <p style="color: #888; margin-top: 8px;">خبير الأقمار الصناعية المحترف مع دعم Gemini 1.5 Pro</p>
+        </div>
+    </div>
+
+    <!-- شريط التنقل السفلي -->
+    <div class="bottom-nav">
+        <div class="nav-item active" data-page="pageAlignment">
+            <i class="fas fa-satellite"></i>
+            <span>توجيه</span>
+        </div>
+        <div class="nav-item" data-page="pageSignal">
+            <i class="fas fa-chart-line"></i>
+            <span>إشارة</span>
+        </div>
+        <div class="nav-item" data-page="pageAI">
+            <i class="fas fa-robot"></i>
+            <span>المساعد</span>
+        </div>
+        <div class="nav-item" data-page="pageSettings">
+            <i class="fas fa-cog"></i>
+            <span>إعدادات</span>
+        </div>
+    </div>
+
+    <script>
+        // بيانات التطبيق
+        const satellites = [
+            { id: 'nilesat', name: 'نايل سات', lon: 7, dir: 'W', azimuth: 237, elevation: 37, favorite: true },
+            { id: 'arabsat', name: 'عرب سات', lon: 26, dir: 'E', azimuth: 180, elevation: 45, favorite: false },
+            { id: 'hotbird', name: 'هوت بيرد', lon: 13, dir: 'E', azimuth: 210, elevation: 33, favorite: false },
+            { id: 'astra', name: 'أسترا 19', lon: 19.2, dir: 'E', azimuth: 195, elevation: 38, favorite: false },
+            { id: 'turksat', name: 'تركسات', lon: 42, dir: 'E', azimuth: 160, elevation: 42, favorite: false }
+        ];
+
+        const frequencies = [
+            { name: 'الجزيرة', freq: 10971, pol: 'H', sr: 27500, encrypted: false },
+            { name: 'MBC', freq: 11470, pol: 'V', sr: 27500, encrypted: false },
+            { name: 'العربية', freq: 11470, pol: 'V', sr: 27500, encrypted: false },
+            { name: 'بي إن سبورت', freq: 12604, pol: 'H', sr: 27500, encrypted: true },
+            { name: 'سكاي نيوز', freq: 11977, pol: 'V', sr: 27500, encrypted: false },
+            { name: 'روتانا', freq: 11746, pol: 'V', sr: 27500, encrypted: true }
+        ];
+
+        const knowledgeBase = {
+            'تردد الجزيرة': '📡 تردد الجزيرة على نايل سات: 10971 أفقي (H) - معدل الترميز: 27500 - FEC: 3/4',
+            'تردد mbc': '📡 تردد MBC على نايل سات: 11470 عمودي (V) - معدل الترميز: 27500',
+            'ضعف الإشارة': '🔧 أسباب ضعف الإشارة:\n1. اتجاه الطبق غير مضبوط → أعد توجيه الطبق\n2. LNB تالف → استبدل القطعة\n3. كيبل متآكل → فحص وتغيير الكيبل\n4. عائق أمام الطبق → إزالة العائق',
+            'توجيه الطبق': '📐 خطوات توجيه الطبق:\n1. حدد موقعك الجغرافي\n2. احسب زاوية السمت والارتفاع\n3. اضبط الزاوية الأفقية أولاً\n4. اضبط الزاوية الرأسية\n5. لف الـ LNB للحصول على أفضل إشارة',
+            'انواع lnb': '📡 أنواع LNB:\n• Single - مخرج واحد\n• Twin - مخرجان\n• Quad - 4 مخارج\n• Octo - 8 مخارج\n• Monoblock - لاستقبال قمرين',
+            'تركيب طبق': '🔧 خطوات تركيب طبق جديد:\n1. اختر موقعاً مفتوحاً باتجاه القمر\n2. ثبت القاعدة بشكل عمودي تماماً\n3. ركب الطبق ووجهه تقريبياً\n4. وصل الكيبل والرسيفر\n5. اضبط الزوايا بدقة'
+        };
+
+        let currentSatellite = satellites[0];
+        let currentHeading = 0;
+        let compassPermission = false;
+
+        // تهيئة التطبيق
+        function init() {
+            setTimeout(() => {
+                document.getElementById('splashScreen').style.display = 'none';
+            }, 2000);
+            
+            renderSatelliteList();
+            renderFrequencyList();
+            renderQuickActions();
+            setupNavigation();
+            requestCompassPermission();
+            
+            setInterval(updateCompass, 100);
+        }
+
+        // طلب صلاحية البوصلة
+        function requestCompassPermission() {
+            if (window.DeviceOrientationEvent) {
+                window.addEventListener('deviceorientation', (event) => {
+                    if (event.webkitCompassHeading) {
+                        currentHeading = event.webkitCompassHeading;
+                    } else if (event.alpha) {
+                        currentHeading = 360 - event.alpha;
+                    }
+                    compassPermission = true;
+                });
+            }
+        }
+
+        // تحديث البوصلة
+        function updateCompass() {
+            const arrow = document.getElementById('compassArrow');
+            const headingEl = document.getElementById('headingValue');
+            
+            if (arrow) {
+                const rotation = currentHeading;
+                arrow.style.transform = `rotate(${rotation}deg)`;
+                headingEl.textContent = Math.round(rotation) + '°';
+            }
+            
+            updateGuidance();
+        }
+
+        // تحديث إرشادات التوجيه
+        function updateGuidance() {
+            const diff = Math.abs(currentHeading - currentSatellite.azimuth);
+            const normalizedDiff = diff > 180 ? 360 - diff : diff;
+            
+            let horizontalText, horizontalArrow;
+            if (normalizedDiff < 5) {
+                horizontalText = '✅ أفقي: ممتاز';
+                horizontalArrow = 'fa-check-circle';
+            } else if ((currentHeading < currentSatellite.azimuth && diff < 180) || 
+                       (currentHeading > currentSatellite.azimuth && diff > 180)) {
+                horizontalText = '↪️ حرك الطبق لليمين';
+                horizontalArrow = 'fa-arrow-right';
+            } else {
+                horizontalText = '↩️ حرك الطبق لليسار';
+                horizontalArrow = 'fa-arrow-left';
+            }
+            
+            document.getElementById('horizontalGuidance').textContent = horizontalText;
+            document.getElementById('horizontalArrow').className = `fas ${horizontalArrow} guidance-arrow`;
+            
+            // تحديث قوة الإشارة
+            let strength = 100 - (normalizedDiff * 3);
+            strength = Math.max(0, Math.min(100, strength));
+            
+            document.getElementById('signalFill').style.width = strength + '%';
+            document.getElementById('signalFill').textContent = Math.round(strength) + '%';
+            document.getElementById('signalStrength').textContent = Math.round(strength) + '%';
+            document.getElementById('signalQuality').textContent = Math.round(strength * 0.9) + '%';
+            
+            if (strength > 85) {
+                document.getElementById('lockStatus').innerHTML = '✓';
+                document.getElementById('lockStatus').style.color = '#06D6A0';
+            } else {
+                document.getElementById('lockStatus').innerHTML = '○';
+                document.getElementById('lockStatus').style.color = '#888';
+            }
+        }
+
+        // عرض قائمة الأقمار
+        function renderSatelliteList() {
+            const container = document.getElementById('satelliteList');
+            container.innerHTML = satellites.map(sat => `
+                <div class="satellite-item ${sat.id === currentSatellite.id ? 'active' : ''}" onclick="selectSatellite('${sat.id}')">
+                    <i class="fas fa-satellite"></i>
+                    <div class="name">${sat.name}</div>
+                    <div class="position">${sat.lon}° ${sat.dir}</div>
+                    ${sat.favorite ? '<div class="favorite"><i class="fas fa-star"></i></div>' : ''}
+                </div>
+            `).join('');
+        }
+
+        // اختيار قمر
+        function selectSatellite(id) {
+            currentSatellite = satellites.find(s => s.id === id);
+            renderSatelliteList();
+            document.getElementById('targetValue').textContent = `الهدف: ${currentSatellite.azimuth}°`;
+            document.getElementById('lnbGuidance').innerHTML = `
+                <i class="fas fa-rotate-right"></i>
+                لف LNB: ${Math.abs(currentSatellite.elevation - 30).toFixed(1)}° 
+                ${currentSatellite.elevation > 30 ? 'مع' : 'عكس'} عقارب الساعة
+            `;
+            updateGuidance();
+        }
+
+        // عرض قائمة الترددات
+        function renderFrequencyList() {
+            const container = document.getElementById('frequencyList');
+            container.innerHTML = frequencies.map(f => `
+                <div class="freq-item" onclick="copyFrequency('${f.freq} ${f.pol} ${f.sr}')">
+                    <div class="freq-name">
+                        ${f.encrypted ? '<i class="fas fa-lock freq-encrypted"></i>' : ''}
+                        ${f.name}
+                    </div>
+                    <div class="freq-details">${f.freq} MHz ${f.pol} | SR: ${f.sr}</div>
+                </div>
+            `).join('');
+        }
+
+        // نسخ التردد
+        function copyFrequency(text) {
+            navigator.clipboard?.writeText(text);
+            showToast('تم نسخ التردد: ' + text);
+        }
+
+        // مسح الترددات
+        function scanFrequencies() {
+            showToast('🔍 جاري مسح الترددات...');
+            setTimeout(() => {
+                renderFrequencyList();
+                showToast('✅ تم العثور على ' + frequencies.length + ' تردد');
+            }, 2000);
+        }
+
+        // عرض الأزرار السريعة
+        function renderQuickActions() {
+            const questions = ['تردد الجزيرة', 'ضعف الإشارة', 'توجيه الطبق', 'انواع lnb', 'تركيب طبق'];
+            const container = document.getElementById('quickActions');
+            container.innerHTML = questions.map(q => 
+                `<button class="quick-btn" onclick="quickAsk('${q}')">${q}</button>`
+            ).join('');
+        }
+
+        // سؤال سريع
+        function quickAsk(question) {
+            document.getElementById('chatInput').value = question;
+            sendMessage();
+        }
+
+        // إرسال رسالة
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            if (!message) return;
+            
+            addMessage(message, true);
+            input.value = '';
+            
+            showTyping();
+            
+            setTimeout(() => {
+                removeTyping();
+                const response = getAIResponse(message);
+                addMessage(response, false);
+            }, 1500);
+        }
+
+        // الحصول على رد الذكاء الاصطناعي
+        function getAIResponse(query) {
+            const lowerQuery = query.toLowerCase();
+            for (const [key, value] of Object.entries(knowledgeBase)) {
+                if (lowerQuery.includes(key.toLowerCase())) {
+                    return value;
+                }
+            }
+            return '🔍 لم أجد معلومات محددة عن "' + query + '". جرب السؤال عن: الترددات، ضعف الإشارة، توجيه الطبق، أنواع LNB، أو تركيب طبق جديد.';
+        }
+
+        // إضافة رسالة
+        function addMessage(text, isUser) {
+            const container = document.getElementById('chatContainer');
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `message ${isUser ? 'user' : 'ai'}`;
+            msgDiv.innerHTML = `
+                <div class="message-avatar">
+                    <i class="fas fa-${isUser ? 'user' : 'robot'}"></i>
+                </div>
+                <div class="message-content">
+                    ${text.replace(/\n/g, '<br>')}
+                    <div class="message-time">${new Date().toLocaleTimeString('ar-SA', {hour: '2-digit', minute: '2-digit'})}</div>
+                </div>
+            `;
+            container.appendChild(msgDiv);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        // إظهار مؤشر الكتابة
+        function showTyping() {
+            const container = document.getElementById('chatContainer');
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'message ai';
+            typingDiv.id = 'typingIndicator';
+            typingDiv.innerHTML = `
+                <div class="message-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="message-content">
+                    <div class="typing-indicator">
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                    </div>
+                </div>
+            `;
+            container.appendChild(typingDiv);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        // إزالة مؤشر الكتابة
+        function removeTyping() {
+            const indicator = document.getElementById('typingIndicator');
+            if (indicator) indicator.remove();
+        }
+
+        // إظهار تنبيه
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+
+        // إعداد التنقل
+        function setupNavigation() {
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    const pageId = item.dataset.page;
+                    
+                    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+                    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+                    
+                    item.classList.add('active');
+                    document.getElementById(pageId).classList.add('active');
+                });
+            });
+        }
+
+        // حفظ مفتاح API
+        function saveApiKey() {
+            const key = document.getElementById('apiKeyInput').value;
+            if (key) {
+                localStorage.setItem('geminiApiKey', key);
+                showToast('✅ تم حفظ مفتاح API');
+            }
+        }
+
+        // إرسال بالضغط على Enter
+        document.addEventListener('DOMContentLoaded', () => {
+            init();
+            document.getElementById('chatInput').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') sendMessage();
+            });
+        });
+    </script>
+</body>
+</html>
+
+<!-- تضمين قاعدة البيانات -->
+<script src="satellites_full_database.js"></script>
+
+<script>
+    // تحديث البيانات مع القاعدة الجديدة
+    function loadFullDatabase() {
+        // دمج جميع الأقمار من القاعدة
+        const allSatellites = [];
+        
+        // إضافة الأقمار العربية
+        if (SATELLITES_DATABASE.arabic) {
+            allSatellites.push(...SATELLITES_DATABASE.arabic);
+        }
+        
+        // إضافة الأقمار الأوروبية
+        if (SATELLITES_DATABASE.european) {
+            allSatellites.push(...SATELLITES_DATABASE.european);
+        }
+        
+        window.allSatellitesData = allSatellites;
+        window.repairDatabase = REPAIR_DATABASE;
+        
+        // تحديث قائمة الأقمار
+        renderFullSatelliteList();
+        renderRepairCategories();
+        
+        console.log('✅ تم تحميل', allSatellites.length, 'قمر صناعي');
+        console.log('✅ تم تحميل قاعدة بيانات الأعطال');
+    }
+    
+    // عرض قائمة الأقمار الكاملة
+    function renderFullSatelliteList() {
+        const container = document.getElementById('satelliteList');
+        if (!container) return;
+        
+        const satellites = window.allSatellitesData || [];
+        
+        container.innerHTML = satellites.slice(0, 20).map(sat => `
+            <div class="satellite-item" onclick="selectSatelliteById('${sat.id}')">
+                <i class="fas fa-satellite"></i>
+                <div class="name">${sat.name}</div>
+                <div class="position">${sat.position}</div>
+                <div style="font-size: 10px; color: #888;">${sat.coverage || ''}</div>
+            </div>
+        `).join('');
+    }
+    
+    // اختيار قمر بالـ ID
+    function selectSatelliteById(id) {
+        const sat = window.allSatellitesData?.find(s => s.id === id);
+        if (sat) {
+            currentSatellite = {
+                id: sat.id,
+                name: sat.name,
+                azimuth: 237, // افتراضي
+                elevation: 37,
+                frequencies: sat.frequencies || []
+            };
+            
+            renderSatelliteList();
+            renderFrequenciesForSatellite(sat);
+            
+            showToast('✅ تم اختيار ' + sat.name);
+        }
+    }
+    
+    // عرض ترددات القمر المختار
+    function renderFrequenciesForSatellite(satellite) {
+        const container = document.getElementById('frequencyList');
+        if (!container) return;
+        
+        const freqs = satellite.frequencies || [];
+        
+        if (freqs.length === 0) {
+            container.innerHTML = '<div style="padding: 20px; text-align: center; color: #888;">لا توجد ترددات مضافة لهذا القمر</div>';
+            return;
+        }
+        
+        container.innerHTML = freqs.slice(0, 30).map(f => `
+            <div class="freq-item" onclick="copyFrequency('${f.freq} ${f.pol} ${f.sr}')">
+                <div class="freq-name">
+                    ${f.encrypted ? '<i class="fas fa-lock freq-encrypted"></i>' : ''}
+                    ${f.name}
+                    ${f.category ? '<span style="background: #333; padding: 2px 8px; border-radius: 20px; font-size: 10px; margin-right: 8px;">' + f.category + '</span>' : ''}
+                </div>
+                <div class="freq-details">
+                    ${f.freq} MHz ${f.pol} | SR: ${f.sr} ${f.fec ? '| FEC: ' + f.fec : ''}
+                </div>
+            </div>
+        `).join('');
+    }
+    
+    // عرض فئات الأعطال
+    function renderRepairCategories() {
+        // يمكن إضافتها في صفحة منفصلة
+        console.log('🔧 قاعدة بيانات الأعطال جاهزة');
+    }
+    
+    // البحث عن حل لمشكلة
+    function findRepairSolution(problem) {
+        const query = problem.toLowerCase();
+        
+        // البحث في جميع فئات الأعطال
+        for (const category in REPAIR_DATABASE) {
+            for (const key in REPAIR_DATABASE[category]) {
+                const item = REPAIR_DATABASE[category][key];
+                if (item.title && query.includes(item.title.toLowerCase())) {
+                    return formatRepairResponse(item);
+                }
+                // البحث في الأسباب
+                if (item.causes) {
+                    for (const cause of item.causes) {
+                        if (query.includes(cause.toLowerCase())) {
+                            return formatRepairResponse(item);
+                        }
+                    }
+                }
+            }
+        }
+        
+        return null;
+    }
+    
+    // تنسيق رد الإصلاح
+    function formatRepairResponse(item) {
+        let response = `🔧 **${item.title}**\n\n`;
+        response += `📋 **الأسباب المحتملة:**\n`;
+        item.causes.forEach((cause, i) => {
+            response += `${i + 1}. ${cause}\n`;
+        });
+        response += `\n✅ **الحلول:**\n`;
+        item.solutions.forEach((sol, i) => {
+            response += `${i + 1}. ${sol}\n`;
+        });
+        if (item.tools) {
+            response += `\n🛠️ **الأدوات المطلوبة:**\n`;
+            item.tools.forEach(tool => {
+                response += `• ${tool}\n`;
+            });
+        }
+        return response;
+    }
+    
+    // تحديث دالة الرد الذكي
+    const originalGetAIResponse = getAIResponse;
+    getAIResponse = function(query) {
+        // البحث في قاعدة الأعطال أولاً
+        const repairSolution = findRepairSolution(query);
+        if (repairSolution) {
+            return repairSolution;
+        }
+        
+        // البحث في الترددات
+        const lowerQuery = query.toLowerCase();
+        for (const sat of (window.allSatellitesData || [])) {
+            if (sat.frequencies) {
+                for (const freq of sat.frequencies) {
+                    if (lowerQuery.includes(freq.name.toLowerCase())) {
+                        return `📡 **${freq.name}**\nالقمر: ${sat.name} (${sat.position})\nالتردد: ${freq.freq} MHz\nالاستقطاب: ${freq.pol}\nمعدل الترميز: ${freq.sr}\nFEC: ${freq.fec || 'Auto'}\n${freq.encrypted ? '🔒 مشفرة' : '🔓 مفتوحة'}`;
+                    }
+                }
+            }
+        }
+        
+        // استخدام الرد الأصلي
+        return originalGetAIResponse(query);
+    };
+    
+    // تهيئة التطبيق مع القاعدة الكاملة
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(() => {
+            loadFullDatabase();
+        }, 100);
+    });
+    
+    // إضافة زر الأعطال في الواجهة
+    function addRepairButton() {
+        const quickActions = document.getElementById('quickActions');
+        if (quickActions) {
+            const repairBtn = document.createElement('button');
+            repairBtn.className = 'quick-btn';
+            repairBtn.innerHTML = '<i class="fas fa-tools"></i> أعطال وإصلاحات';
+            repairBtn.onclick = showRepairCategories;
+            quickActions.appendChild(repairBtn);
+        }
+    }
+    
+    // عرض قائمة فئات الأعطال
+    function showRepairCategories() {
+        let message = '🔧 **دليل الأعطال والإصلاحات**\n\n';
+        
+        for (const category in REPAIR_DATABASE) {
+            message += `**${getCategoryName(category)}**\n`;
+            for (const key in REPAIR_DATABASE[category]) {
+                message += `• ${REPAIR_DATABASE[category][key].title}\n`;
+            }
+            message += '\n';
+        }
+        
+        message += '\n📝 اكتب وصف المشكلة وسأساعدك في تشخيصها وإصلاحها.';
+        
+        addMessage(message, false);
+    }
+    
+    function getCategoryName(cat) {
+        const names = {
+            'signal': '📶 مشاكل الإشارة',
+            'video': '📺 مشاكل الصورة',
+            'audio': '🔊 مشاكل الصوت',
+            'lnb': '📡 مشاكل LNB',
+            'receiver': '🖥️ مشاكل الرسيفر',
+            'installation': '🔧 مشاكل التركيب',
+            'weather': '🌦️ مشاكل الطقس'
+        };
+        return names[cat] || cat;
+    }
+    
+    // استدعاء إضافة الأزرار
+    setTimeout(addRepairButton, 500);
+</script>
