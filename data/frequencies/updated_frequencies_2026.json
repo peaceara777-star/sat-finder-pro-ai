@@ -1,0 +1,44 @@
+{
+  "version": "4.1.0",
+  "update_date": "2026-04-12",
+  "satellites": [
+    {
+      "name": "نايل سات",
+      "position": "7.0W",
+      "frequencies": [
+        {"channel": "الجزيرة", "freq": 10971, "pol": "V", "sr": 27500, "encrypted": false, "hd": false},
+        {"channel": "الجزيرة HD", "freq": 11013, "pol": "H", "sr": 27500, "encrypted": false, "hd": true},
+        {"channel": "MBC 1", "freq": 11470, "pol": "V", "sr": 27500, "encrypted": false, "hd": false},
+        {"channel": "MBC 1 HD", "freq": 11559, "pol": "V", "sr": 27500, "encrypted": false, "hd": true},
+        {"channel": "العربية", "freq": 11747, "pol": "V", "sr": 27500, "encrypted": false, "hd": false},
+        {"channel": "الحدث", "freq": 11747, "pol": "V", "sr": 27500, "encrypted": false, "hd": false},
+        {"channel": "Sky News عربية", "freq": 11977, "pol": "V", "sr": 27500, "encrypted": false, "hd": false},
+        {"channel": "BBC Arabic", "freq": 12207, "pol": "V", "sr": 27500, "encrypted": false, "hd": false},
+        {"channel": "France 24 Arabic", "freq": 12207, "pol": "V", "sr": 27500, "encrypted": false, "hd": false},
+        {"channel": "BeIN Sports News HD", "freq": 11013, "pol": "H", "sr": 27500, "encrypted": true, "hd": true}
+      ]
+    },
+    {
+      "name": "عرب سات",
+      "position": "26.0E",
+      "frequencies": [
+        {"channel": "Rotana Cinema", "freq": 11766, "pol": "H", "sr": 27500, "encrypted": true, "hd": true},
+        {"channel": "Rotana Classic", "freq": 11766, "pol": "H", "sr": 27500, "encrypted": true, "hd": false},
+        {"channel": "Rotana Music", "freq": 11766, "pol": "H", "sr": 27500, "encrypted": true, "hd": false},
+        {"channel": "SSC Sports 1", "freq": 12418, "pol": "H", "sr": 27500, "encrypted": true, "hd": true},
+        {"channel": "SSC Sports 2", "freq": 12418, "pol": "H", "sr": 27500, "encrypted": true, "hd": true}
+      ]
+    },
+    {
+      "name": "هوت بيرد",
+      "position": "13.0E",
+      "frequencies": [
+        {"channel": "Euronews", "freq": 12539, "pol": "H", "sr": 27500, "encrypted": false, "hd": false},
+        {"channel": "BBC World News", "freq": 12539, "pol": "H", "sr": 27500, "encrypted": false, "hd": false},
+        {"channel": "France 24", "freq": 12539, "pol": "H", "sr": 27500, "encrypted": false, "hd": false},
+        {"channel": "DW", "freq": 12539, "pol": "H", "sr": 27500, "encrypted": false, "hd": false}
+      ]
+    }
+  ],
+  "total_channels": 500
+}
