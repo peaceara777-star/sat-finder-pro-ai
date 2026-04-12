@@ -1,0 +1,104 @@
+{
+  "version": "4.1.0",
+  "total_chipsets": 30,
+  "manufacturers": {
+    "ali": {
+      "name": "Ali Corporation",
+      "chipsets": [
+        {"model": "M3511", "cores": 2, "freq": "800MHz", "gpu": "Mali-400", "resolution": "1080p", "hevc": false, "year": 2015},
+        {"model": "M3516", "cores": 4, "freq": "1.2GHz", "gpu": "Mali-450", "resolution": "1080p", "hevc": true, "year": 2017},
+        {"model": "M3521", "cores": 4, "freq": "1.5GHz", "gpu": "Mali-G31", "resolution": "4K", "hevc": true, "year": 2020},
+        {"model": "M3526", "cores": 4, "freq": "2.0GHz", "gpu": "Mali-G52", "resolution": "4K", "hevc": true, "year": 2023},
+        {"model": "M3531", "cores": 4, "freq": "2.2GHz", "gpu": "Mali-G57", "resolution": "8K", "hevc": true, "year": 2024},
+        {"model": "M3501", "cores": 1, "freq": "550MHz", "gpu": "None", "resolution": "576p", "hevc": false, "year": 2012}
+      ],
+      "flash_tool": "AliFlash Tool",
+      "bootloader_commands": ["help", "printenv", "update", "bootm"]
+    },
+    "gx": {
+      "name": "GX Semiconductor",
+      "chipsets": [
+        {"model": "GX6605", "cores": 1, "freq": "550MHz", "gpu": "None", "resolution": "1080p", "hevc": false, "year": 2014},
+        {"model": "GX6621", "cores": 2, "freq": "800MHz", "gpu": "Mali-400", "resolution": "1080p", "hevc": false, "year": 2016},
+        {"model": "GX6628", "cores": 4, "freq": "1.2GHz", "gpu": "Mali-450", "resolution": "1080p", "hevc": true, "year": 2018},
+        {"model": "GX6638", "cores": 4, "freq": "1.5GHz", "gpu": "Mali-G31", "resolution": "4K", "hevc": true, "year": 2021}
+      ],
+      "flash_tool": "GXLoader",
+      "bootloader_commands": ["fl info", "fl erase", "fl write", "go"]
+    },
+    "novatek": {
+      "name": "Novatek",
+      "chipsets": [
+        {"model": "NT78326", "cores": 2, "freq": "800MHz", "gpu": "None", "resolution": "1080p", "hevc": false, "year": 2015},
+        {"model": "NT78336", "cores": 4, "freq": "1.2GHz", "gpu": "Mali-450", "resolution": "1080p", "hevc": true, "year": 2017}
+      ],
+      "flash_tool": "Novatek Flash Tool",
+      "bootloader_commands": ["boot", "update", "erase"]
+    },
+    "amlogic": {
+      "name": "Amlogic",
+      "chipsets": [
+        {"model": "S905X", "cores": 4, "freq": "1.5GHz", "gpu": "Mali-450", "resolution": "4K", "hevc": true, "year": 2016},
+        {"model": "S905X2", "cores": 4, "freq": "1.8GHz", "gpu": "Mali-G31", "resolution": "4K", "hevc": true, "year": 2018},
+        {"model": "S905X3", "cores": 4, "freq": "1.9GHz", "gpu": "Mali-G31", "resolution": "4K", "hevc": true, "year": 2019},
+        {"model": "S905X4", "cores": 4, "freq": "2.0GHz", "gpu": "Mali-G31", "resolution": "4K", "hevc": true, "av1": true, "year": 2021},
+        {"model": "S928X", "cores": 4, "freq": "2.0GHz", "gpu": "Mali-G57", "resolution": "8K", "hevc": true, "av1": true, "year": 2023},
+        {"model": "S922X", "cores": 6, "freq": "1.8GHz", "gpu": "Mali-G52", "resolution": "4K", "hevc": true, "year": 2019}
+      ],
+      "flash_tool": "USB Burning Tool",
+      "bootloader_commands": ["update", "usb_burn"]
+    },
+    "hisilicon": {
+      "name": "Hisilicon",
+      "chipsets": [
+        {"model": "Hi3798MV200", "cores": 4, "freq": "1.6GHz", "gpu": "Mali-450", "resolution": "4K", "hevc": true, "year": 2018},
+        {"model": "Hi3798MV300", "cores": 4, "freq": "2.0GHz", "gpu": "Mali-T720", "resolution": "4K", "hevc": true, "year": 2020},
+        {"model": "Hi3798MV310", "cores": 4, "freq": "2.0GHz", "gpu": "Mali-G51", "resolution": "4K", "hevc": true, "year": 2021}
+      ],
+      "flash_tool": "HiTool / USB",
+      "bootloader_commands": ["boot", "update", "fastboot"]
+    },
+    "mediatek": {
+      "name": "MediaTek",
+      "chipsets": [
+        {"model": "MT8695", "cores": 4, "freq": "1.8GHz", "gpu": "PowerVR", "resolution": "1080p", "hevc": false, "year": 2017},
+        {"model": "MT8696", "cores": 4, "freq": "2.0GHz", "gpu": "PowerVR", "resolution": "4K", "hevc": true, "year": 2021},
+        {"model": "MT9638", "cores": 4, "freq": "1.5GHz", "gpu": "Mali-G52", "resolution": "4K", "hevc": true, "year": 2022}
+      ],
+      "flash_tool": "MTK Flash Tool",
+      "bootloader_commands": ["fastboot", "download"]
+    },
+    "broadcom": {
+      "name": "Broadcom",
+      "chipsets": [
+        {"model": "BCM7405", "cores": 1, "freq": "400MHz", "gpu": "None", "resolution": "1080p", "hevc": false, "year": 2010},
+        {"model": "BCM7413", "cores": 1, "freq": "405MHz", "gpu": "None", "resolution": "1080p", "hevc": false, "year": 2012},
+        {"model": "BCM7425", "cores": 2, "freq": "1.3GHz", "gpu": "Mali-400", "resolution": "1080p", "hevc": false, "year": 2015},
+        {"model": "BCM7251", "cores": 2, "freq": "1.7GHz", "gpu": "Mali-450", "resolution": "4K", "hevc": true, "year": 2017},
+        {"model": "BCM7268", "cores": 4, "freq": "1.5GHz", "gpu": "Mali-G31", "resolution": "4K", "hevc": true, "year": 2020}
+      ],
+      "flash_tool": "USB / DreamUp / WebIF",
+      "bootloader_commands": ["boot", "update", "cfgmgr"]
+    },
+    "realtek": {
+      "name": "Realtek",
+      "chipsets": [
+        {"model": "RTD1619", "cores": 4, "freq": "1.3GHz", "gpu": "Mali-G51", "resolution": "4K", "hevc": true, "year": 2019},
+        {"model": "RTD1319", "cores": 4, "freq": "1.4GHz", "gpu": "Mali-G31", "resolution": "4K", "hevc": true, "year": 2021}
+      ],
+      "flash_tool": "Realtek Flash Tool",
+      "bootloader_commands": ["boot", "update"]
+    },
+    "rockchip": {
+      "name": "Rockchip",
+      "chipsets": [
+        {"model": "RK3328", "cores": 4, "freq": "1.5GHz", "gpu": "Mali-450", "resolution": "4K", "hevc": true, "year": 2017},
+        {"model": "RK3399", "cores": 6, "freq": "1.8GHz", "gpu": "Mali-T860", "resolution": "4K", "hevc": true, "year": 2018},
+        {"model": "RK3566", "cores": 4, "freq": "1.8GHz", "gpu": "Mali-G52", "resolution": "4K", "hevc": true, "year": 2021},
+        {"model": "RK3588", "cores": 8, "freq": "2.4GHz", "gpu": "Mali-G610", "resolution": "8K", "hevc": true, "av1": true, "year": 2022}
+      ],
+      "flash_tool": "RKDevTool / FactoryTool",
+      "bootloader_commands": ["rockusb", "upgrade"]
+    }
+  }
+}

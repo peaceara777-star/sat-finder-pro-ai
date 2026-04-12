@@ -1,0 +1,52 @@
+{
+  "chipset_repairs": {
+    "ali_m3511": {
+      "common_issues": [
+        {"issue": "تعليق على BOOT", "solution": "إعادة تحميل bootloader عن طريق AliFlash"},
+        {"issue": "ضعف الإشارة", "solution": "استبدال مكثفات التيونر 1000µF"},
+        {"issue": "HDMI لا يعمل", "solution": "فحص IC IT66121"}
+      ],
+      "bootloader_file": "bootloader_m3511.bin",
+      "uart_pins": {"TX": 23, "RX": 24, "GND": 2}
+    },
+    "ali_m3516": {
+      "common_issues": [
+        {"issue": "تقطع في الصورة", "solution": "فحص RAM وتبريد المعالج"},
+        {"issue": "لا يقرأ USB", "solution": "فحص فيوز USB 5V"}
+      ],
+      "bootloader_file": "bootloader_m3516.bin",
+      "uart_pins": {"TX": 23, "RX": 24, "GND": 2}
+    },
+    "ali_m3521": {
+      "common_issues": [
+        {"issue": "مشاكل 4K", "solution": "تحديث السوفتوير"},
+        {"issue": "واي فاي ضعيف", "solution": "استبدال شريحة RTL8822"}
+      ],
+      "bootloader_file": "bootloader_m3521.bin",
+      "uart_pins": {"TX": 45, "RX": 46, "GND": 2}
+    },
+    "gx6605": {
+      "common_issues": [
+        {"issue": "لا يعمل", "solution": "فحص فيوز الباور ومكثفات 1000µF"},
+        {"issue": "تعليق", "solution": "إعادة تحميل عن طريق GXLoader"}
+      ],
+      "bootloader_file": "bootloader_gx6605.bin",
+      "uart_pins": {"TX": 12, "RX": 13, "GND": 1}
+    },
+    "gx6621": {
+      "common_issues": [
+        {"issue": "إشارة ضعيفة", "solution": "فحص IC التيونر RDA5815"}
+      ],
+      "bootloader_file": "bootloader_gx6621.bin",
+      "uart_pins": {"TX": 12, "RX": 13, "GND": 1}
+    },
+    "gx6628": {
+      "common_issues": [
+        {"issue": "حرارة زائدة", "solution": "إضافة مشتت حراري"},
+        {"issue": "صوت مشوش", "solution": "فحص مكثفات الصوت"}
+      ],
+      "bootloader_file": "bootloader_gx6628.bin",
+      "uart_pins": {"TX": 18, "RX": 19, "GND": 1}
+    }
+  }
+}

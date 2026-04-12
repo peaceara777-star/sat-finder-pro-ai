@@ -1,0 +1,137 @@
+{
+  "version": "4.1.0",
+  "total_tools": 25,
+  "categories": {
+    "flash_tools": {
+      "name": "أدوات الفلاش",
+      "tools": [
+        {
+          "name": "AliFlash Tool",
+          "version": "2.0.8",
+          "platform": "Windows",
+          "chipsets": ["Ali M3511", "Ali M3516", "Ali M3521", "Ali M3526"],
+          "functions": ["تحميل بوت لودر", "تحميل سوفتوير", "قراءة الفلاشة", "مسح الفلاشة"],
+          "connection": "RS232",
+          "baud_rates": [9600, 19200, 38400, 57600, 115200, 230400]
+        },
+        {
+          "name": "GXLoader",
+          "version": "3.1.2",
+          "platform": "Windows",
+          "chipsets": ["GX6605", "GX6621", "GX6628", "GX6638"],
+          "functions": ["تحميل بوت لودر", "تحميل مين كود", "تحميل لوجو", "تحميل قاعدة بيانات"],
+          "connection": "RS232",
+          "baud_rates": [115200]
+        },
+        {
+          "name": "Novatek Flash Tool",
+          "version": "1.5.0",
+          "platform": "Windows",
+          "chipsets": ["NT78326", "NT78336"],
+          "functions": ["تحميل سوفتوير", "قراءة", "مسح"],
+          "connection": "RS232"
+        },
+        {
+          "name": "USB Burning Tool",
+          "version": "2.2.0",
+          "platform": "Windows",
+          "chipsets": ["Amlogic S905", "S905X", "S922X", "S928X"],
+          "functions": ["حرق صورة كاملة", "مسح", "فحص"],
+          "connection": "USB"
+        },
+        {
+          "name": "MTK Flash Tool",
+          "version": "5.1.6",
+          "platform": "Windows/Linux",
+          "chipsets": ["MediaTek MT8695", "MT8696", "MT9638"],
+          "functions": ["تحميل سوفتوير", "قراءة", "تهيئة"],
+          "connection": "USB"
+        },
+        {
+          "name": "Phoenix Suit",
+          "version": "1.1.0",
+          "platform": "Windows/Linux",
+          "chipsets": ["Allwinner H3", "H6", "H616", "H618"],
+          "functions": ["حرق صورة", "تحديث"],
+          "connection": "USB"
+        },
+        {
+          "name": "DreamUp",
+          "version": "1.3.3",
+          "platform": "Windows",
+          "chipsets": ["Broadcom (Dreambox)"],
+          "functions": ["تحميل صورة", "استعادة"],
+          "connection": "RS232 / Network"
+        },
+        {
+          "name": "Vu+ Util",
+          "version": "2.1.0",
+          "platform": "Windows/Mac",
+          "chipsets": ["Broadcom (Vu+)"],
+          "functions": ["تحديث", "نسخ احتياطي"],
+          "connection": "USB / Network"
+        },
+        {
+          "name": "HiTool",
+          "version": "5.0.8",
+          "platform": "Windows",
+          "chipsets": ["Hisilicon Hi3798"],
+          "functions": ["حرق", "قراءة", "تقسيم"],
+          "connection": "USB / Serial"
+        },
+        {
+          "name": "RKDevTool",
+          "version": "2.86",
+          "platform": "Windows",
+          "chipsets": ["Rockchip RK3328", "RK3399", "RK3566", "RK3588"],
+          "functions": ["حرق", "ترقية", "مسح"],
+          "connection": "USB"
+        },
+        {
+          "name": "Realtek Flash Tool",
+          "version": "1.2.0",
+          "platform": "Windows",
+          "chipsets": ["Realtek RTD1619", "RTD1319"],
+          "functions": ["حرق", "تحديث"],
+          "connection": "USB"
+        }
+      ]
+    },
+    "channel_editors": {
+      "name": "محررات القنوات",
+      "tools": [
+        {"name": "Channel Editor Pro", "version": "3.5", "brands": ["Starsat", "Tiger", "Truman"], "functions": ["تحرير", "ترتيب", "استيراد", "تصدير"]},
+        {"name": "E2 Channel Editor", "version": "2.1", "brands": ["Enigma2"], "functions": ["تحرير", "بوك مارك", "تصدير"]},
+        {"name": "Dreambox Edit", "version": "7.0", "brands": ["Dreambox", "Vu+"], "functions": ["تحرير", "FTP", "نسخ احتياطي"]},
+        {"name": "XML2BIN Converter", "version": "1.8", "brands": ["جميع الأجهزة"], "functions": ["تحويل XML إلى BIN"]}
+      ]
+    },
+    "oscam_tools": {
+      "name": "أدوات Oscam",
+      "tools": [
+        {"name": "Oscam WebIF", "version": "مدمج", "functions": ["مراقبة", "إعدادات", "سجلات"]},
+        {"name": "Oscam Manager", "version": "2.5", "functions": ["إدارة", "تحديث", "نسخ احتياطي"]},
+        {"name": "CCcam Info", "version": "1.8", "functions": ["عرض السيرفرات", "فحص الاتصال"]}
+      ]
+    },
+    "backup_tools": {
+      "name": "أدوات النسخ الاحتياطي",
+      "tools": [
+        {"name": "Full Backup Tool", "version": "1.2", "brands": ["Starsat", "Tiger"], "functions": ["نسخ كامل", "استعادة"]},
+        {"name": "Settings Backup", "version": "2.0", "brands": ["Enigma2"], "functions": ["نسخ الإعدادات", "استعادة"]}
+      ]
+    },
+    "utility_tools": {
+      "name": "أدوات مساعدة",
+      "tools": [
+        {"name": "BoxKey Calculator", "version": "1.5", "functions": ["حساب BoxKey", "تحويل"]},
+        {"name": "RSA Key Extractor", "version": "1.0", "functions": ["استخراج RSA Key"]},
+        {"name": "Firmware Mod Kit", "version": "3.0", "functions": ["فك", "تعديل", "بناء"]},
+        {"name": "Binwalk", "version": "2.3", "platform": "Linux/Windows", "functions": ["تحليل", "استخراج"]},
+        {"name": "Logo Creator", "version": "1.2", "functions": ["إنشاء شعارات", "تحويل"]},
+        {"name": "PVR Converter", "version": "2.0", "functions": ["تحويل التسجيلات", "تعديل"]},
+        {"name": "Satellite Finder", "version": "4.0", "functions": ["حساب الزوايا", "توجيه"]}
+      ]
+    }
+  }
+}

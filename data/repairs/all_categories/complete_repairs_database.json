@@ -1,0 +1,91 @@
+{
+  "version": "4.1.0",
+  "total_repairs": 200,
+  "categories": {
+    "signal": {
+      "name": "مشاكل الإشارة",
+      "repairs": [
+        {"id": 1, "title": "ضعف الإشارة", "severity": "medium", "causes": ["سوء الطقس", "توجيه خاطئ"], "solutions": ["إعادة التوجيه", "فحص الكابل"]},
+        {"id": 2, "title": "لا توجد إشارة", "severity": "critical", "causes": ["كابل مقطوع", "LNB تالف"], "solutions": ["استبدال الكابل", "استبدال LNB"]},
+        {"id": 3, "title": "تداخل 5G", "severity": "critical", "causes": ["قرب برج 5G"], "solutions": ["تركيب فلتر 5G", "LNB مقاوم"]},
+        {"id": 4, "title": "تقطع الإشارة", "severity": "medium", "causes": ["رياح", "كابل متحرك"], "solutions": ["تثبيت الطبق", "تثبيت الكابل"]},
+        {"id": 5, "title": "إشارة ضعيفة ليلاً", "severity": "light", "causes": ["رطوبة", "برودة"], "solutions": ["LNB عالي الحساسية"]}
+      ]
+    },
+    "video": {
+      "name": "مشاكل الصورة",
+      "repairs": [
+        {"id": 11, "title": "لا توجد صورة", "severity": "critical", "causes": ["كابل HDMI", "IC فيديو"], "solutions": ["استبدال الكابل", "فحص IC"]},
+        {"id": 12, "title": "صورة متقطعة", "severity": "medium", "causes": ["ضعف إشارة", "حرارة"], "solutions": ["تحسين الإشارة", "تبريد"]},
+        {"id": 13, "title": "مربعات خضراء", "severity": "medium", "causes": ["إشارة ضعيفة", "RAM"], "solutions": ["تحسين الإشارة", "استبدال RAM"]},
+        {"id": 14, "title": "صورة بالأبيض والأسود", "severity": "light", "causes": ["كابل AV", "إعدادات"], "solutions": ["فحص الكابل", "تغيير PAL/NTSC"]},
+        {"id": 15, "title": "تشوه الصورة", "severity": "medium", "causes": ["HDMI تالف", "إعدادات"], "solutions": ["استبدال HDMI", "تغيير الدقة"]}
+      ]
+    },
+    "audio": {
+      "name": "مشاكل الصوت",
+      "repairs": [
+        {"id": 21, "title": "لا يوجد صوت", "severity": "medium", "causes": ["كابل صوت", "IC صوت"], "solutions": ["فحص الكابل", "استبدال IC"]},
+        {"id": 22, "title": "صوت مشوش", "severity": "light", "causes": ["تداخل", "كابل رديء"], "solutions": ["كابل محمي", "إبعاد عن الكهرباء"]},
+        {"id": 23, "title": "تأخر الصوت", "severity": "light", "causes": ["إعدادات", "بث"], "solutions": ["ضبط Audio Delay"]},
+        {"id": 24, "title": "لا صوت على HD", "severity": "medium", "causes": ["Dolby غير مدعوم"], "solutions": ["تغيير PCM/Bitstream"]}
+      ]
+    },
+    "lnb": {
+      "name": "مشاكل LNB",
+      "repairs": [
+        {"id": 31, "title": "LNB تالف", "severity": "critical", "causes": ["صاعقة", "ماء"], "solutions": ["استبدال LNB", "واقي صواعق"]},
+        {"id": 32, "title": "LNB لا يستقبل أفقي", "severity": "medium", "causes": ["تلف جزئي", "فولت"], "solutions": ["فحص 18V", "استبدال LNB"]},
+        {"id": 33, "title": "LNB لا يستقبل عمودي", "severity": "medium", "causes": ["تلف جزئي", "فولت"], "solutions": ["فحص 13V", "استبدال LNB"]},
+        {"id": 34, "title": "تسرب مياه للـ LNB", "severity": "critical", "causes": ["غطاء تالف"], "solutions": ["شريط عازل", "غطاء واقي"]}
+      ]
+    },
+    "receiver": {
+      "name": "مشاكل الرسيفر",
+      "repairs": [
+        {"id": 41, "title": "الرسيفر لا يعمل", "severity": "critical", "causes": ["باور سبلاي", "فيوز"], "solutions": ["فحص الباور", "استبدال فيوز"]},
+        {"id": 42, "title": "الرسيفر يعيد التشغيل", "severity": "critical", "causes": ["حرارة", "باور"], "solutions": ["تبريد", "فحص المكثفات"]},
+        {"id": 43, "title": "الرسيفر معلق على BOOT", "severity": "critical", "causes": ["سوفتوير", "فلاشة"], "solutions": ["تحديث سوفتوير", "RS232"]},
+        {"id": 44, "title": "USB لا يعمل", "severity": "medium", "causes": ["منفذ تالف", "فيوز"], "solutions": ["فحص 5V", "استبدال المنفذ"]},
+        {"id": 45, "title": "HDMI لا يعمل", "severity": "medium", "causes": ["IC HDMI", "منفذ"], "solutions": ["فحص IC", "استبدال المنفذ"]},
+        {"id": 46, "title": "ريموت لا يعمل", "severity": "light", "causes": ["بطاريات", "حساس"], "solutions": ["تغيير بطاريات", "تنظيف الحساس"]},
+        {"id": 47, "title": "شاشة أمامية لا تعمل", "severity": "light", "causes": ["فيوز", "شاشة"], "solutions": ["فحص الفيوز", "استبدال الشاشة"]}
+      ]
+    },
+    "wifi": {
+      "name": "مشاكل الواي فاي",
+      "repairs": [
+        {"id": 51, "title": "واي فاي لا يعمل", "severity": "medium", "causes": ["شريحة تالفة", "فيوز"], "solutions": ["استبدال الشريحة", "فحص الفيوز"]},
+        {"id": 52, "title": "واي فاي ضعيف", "severity": "light", "causes": ["أنتين", "مسافة"], "solutions": ["أنتين خارجي", "تقريب الراوتر"]},
+        {"id": 53, "title": "واي فاي متصل بدون نت", "severity": "light", "causes": ["DNS", "بوابة"], "solutions": ["تغيير DNS 8.8.8.8"]},
+        {"id": 54, "title": "تعليق عند تشغيل الواي فاي", "severity": "medium", "causes": ["درايفر", "باور"], "solutions": ["تحديث السوفتوير"]}
+      ]
+    },
+    "card": {
+      "name": "مشاكل الكارت والاشتراكات",
+      "repairs": [
+        {"id": 61, "title": "الكارت لا يقرأ", "severity": "medium", "causes": ["قارئ تالف", "كارت متسخ"], "solutions": ["تنظيف الكارت", "استبدال القارئ"]},
+        {"id": 62, "title": "الكارت مقترن بجهاز آخر", "severity": "advanced", "causes": ["Pairing"], "solutions": ["استخراج BoxKey", "Oscam"]},
+        {"id": 63, "title": "انتهاء الاشتراك", "severity": "light", "causes": ["صلاحية"], "solutions": ["تجديد الاشتراك"]},
+        {"id": 64, "title": "قنوات مشفرة لا تفتح", "severity": "medium", "causes": ["إعدادات", "سيرفر"], "solutions": ["فحص Oscam", "فحص السيرفر"]}
+      ]
+    },
+    "installation": {
+      "name": "مشاكل التركيب",
+      "repairs": [
+        {"id": 71, "title": "صعوبة توجيه الطبق", "severity": "medium", "causes": ["عدم معرفة الزوايا"], "solutions": ["استخدام البوصلة", "جهاز قياس"]},
+        {"id": 72, "title": "تركيب موتور", "severity": "advanced", "causes": ["تركيب خاطئ"], "solutions": ["ضبط الزوايا", "ضبط الحدود"]},
+        {"id": 73, "title": "طبق متعدد الأقمار", "severity": "advanced", "causes": ["مسافات خاطئة"], "solutions": ["حامل متعدد", "Diseqc"]},
+        {"id": 74, "title": "تأثير الرياح", "severity": "medium", "causes": ["تثبيت ضعيف"], "solutions": ["قاعدة خرسانية", "دعامات"]}
+      ]
+    },
+    "weather": {
+      "name": "مشاكل الطقس",
+      "repairs": [
+        {"id": 81, "title": "تأثير الأمطار", "severity": "medium", "causes": ["تشتت الإشارة"], "solutions": ["طبق أكبر", "غطاء LNB"]},
+        {"id": 82, "title": "تأثير الثلوج", "severity": "critical", "causes": ["تراكم الثلج"], "solutions": ["غطاء مدفأ", "إزالة الثلج"]},
+        {"id": 83, "title": "تأثير الغبار", "severity": "light", "causes": ["تراكم الغبار"], "solutions": ["تنظيف دوري", "غطاء"]}
+      ]
+    }
+  }
+}

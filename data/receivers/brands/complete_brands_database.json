@@ -1,0 +1,253 @@
+{
+  "version": "4.1.0",
+  "total_brands": 50,
+  "brands": [
+    {
+      "id": 1,
+      "name_ar": "ستار سات",
+      "name_en": "Starsat",
+      "country": "الصين",
+      "website": "http://starsat.com",
+      "popular_models": ["2000HD", "9000HD", "T14", "T15", "SR-200HD"],
+      "chipset": ["Ali M3511", "Ali M3516", "Ali M3521"],
+      "software_type": "bin",
+      "flash_tool": "AliFlash Tool"
+    },
+    {
+      "id": 2,
+      "name_ar": "تايجر",
+      "name_en": "Tiger",
+      "country": "الصين",
+      "website": "http://tiger-sat.com",
+      "popular_models": ["T1", "T8", "T800", "T1000", "T3000"],
+      "chipset": ["GX6605", "GX6621", "GX6628"],
+      "software_type": "bin",
+      "flash_tool": "GXLoader"
+    },
+    {
+      "id": 3,
+      "name_ar": "ترومان",
+      "name_en": "Truman",
+      "country": "الصين",
+      "website": "http://truman.tv",
+      "popular_models": ["X1", "X3", "X5", "TM-100"],
+      "chipset": ["Ali M3511", "Ali M3516"],
+      "software_type": "bin",
+      "flash_tool": "AliFlash Tool"
+    },
+    {
+      "id": 4,
+      "name_ar": "ميديا ستار",
+      "name_en": "Mediastar",
+      "country": "الإمارات",
+      "popular_models": ["MS1", "MS2", "MS3", "Diamond"],
+      "chipset": ["GX6605", "GX6621"],
+      "software_type": "bin",
+      "flash_tool": "GXLoader"
+    },
+    {
+      "id": 5,
+      "name_ar": "جيو ستار",
+      "name_en": "Geostar",
+      "country": "الصين",
+      "popular_models": ["GN1", "GN2", "GN3"],
+      "chipset": ["Ali M3511"],
+      "software_type": "bin",
+      "flash_tool": "AliFlash Tool"
+    },
+    {
+      "id": 6,
+      "name_ar": "بي إن سبورت",
+      "name_en": "BeIN Sports",
+      "country": "قطر",
+      "website": "https://www.bein.com",
+      "popular_models": ["BeIN Box", "BeIN 4K"],
+      "chipset": ["Amlogic S905X"],
+      "software_type": "img",
+      "flash_tool": "USB Burning Tool"
+    },
+    {
+      "id": 7,
+      "name_ar": "هيوماكس",
+      "name_en": "Humax",
+      "country": "كوريا",
+      "website": "https://www.humaxdigital.com",
+      "popular_models": ["IR3000", "IR4000", "Freesat"],
+      "chipset": ["Broadcom"],
+      "software_type": "hdf",
+      "flash_tool": "USB / OTA"
+    },
+    {
+      "id": 8,
+      "name_ar": "فوريفر",
+      "name_en": "Forever",
+      "country": "الصين",
+      "popular_models": ["F1", "F2", "F3"],
+      "chipset": ["Ali M3521"],
+      "software_type": "bin",
+      "flash_tool": "AliFlash Tool"
+    },
+    {
+      "id": 9,
+      "name_ar": "أيكون",
+      "name_en": "Icone",
+      "country": "الصين",
+      "popular_models": ["I1", "I2"],
+      "chipset": ["GX6605"],
+      "software_type": "bin",
+      "flash_tool": "GXLoader"
+    },
+    {
+      "id": 10,
+      "name_ar": "دريم بوكس",
+      "name_en": "Dreambox",
+      "country": "ألمانيا",
+      "website": "https://www.dream-multimedia-tv.de",
+      "popular_models": ["DM500", "DM800", "DM900", "DM920", "DM One", "DM Two"],
+      "chipset": ["Broadcom"],
+      "software_type": "nfi",
+      "flash_tool": "DreamUp / WebIF"
+    },
+    {
+      "id": 11,
+      "name_ar": "فيو+",
+      "name_en": "Vu+",
+      "country": "كوريا",
+      "website": "https://www.vuplus.com",
+      "popular_models": ["Solo", "Duo", "Uno", "Ultimo", "Zero", "Solo2", "Duo2", "Solo4K", "Uno4K", "Ultimo4K"],
+      "chipset": ["Broadcom"],
+      "software_type": "zip",
+      "flash_tool": "USB"
+    },
+    {
+      "id": 12,
+      "name_ar": "جيجابلو",
+      "name_en": "Gigablue",
+      "country": "ألمانيا",
+      "popular_models": ["HD800", "HD1000", "Quad", "Trio"],
+      "chipset": ["Broadcom"],
+      "software_type": "zip",
+      "flash_tool": "USB"
+    },
+    {
+      "id": 13,
+      "name_ar": "إديسون",
+      "name_en": "Edision",
+      "country": "إسبانيا",
+      "popular_models": ["OS Mini", "OS Mega", "OS Nino"],
+      "chipset": ["Broadcom"],
+      "software_type": "zip",
+      "flash_tool": "USB"
+    },
+    {
+      "id": 14,
+      "name_ar": "أوكتاجون",
+      "name_en": "Octagon",
+      "country": "ألمانيا",
+      "popular_models": ["SF8008", "SF4008"],
+      "chipset": ["Hisilicon"],
+      "software_type": "zip",
+      "flash_tool": "USB"
+    },
+    {
+      "id": 15,
+      "name_ar": "فورمس",
+      "name_en": "Formuler",
+      "country": "كوريا",
+      "popular_models": ["Z8", "Z10", "Z11", "CC"],
+      "chipset": ["Hisilicon", "Realtek"],
+      "software_type": "img",
+      "flash_tool": "USB"
+    },
+    {
+      "id": 16,
+      "name_ar": "أميكو",
+      "name_en": "Amiko",
+      "country": "أوروبا",
+      "popular_models": ["Viper", "Alien"],
+      "chipset": ["Broadcom"],
+      "software_type": "bin",
+      "flash_tool": "USB"
+    },
+    {
+      "id": 17,
+      "name_ar": "فيجا",
+      "name_en": "Vega",
+      "country": "الصين",
+      "popular_models": ["V1", "V2"],
+      "chipset": ["Ali M3516"],
+      "software_type": "bin",
+      "flash_tool": "AliFlash Tool"
+    },
+    {
+      "id": 18,
+      "name_ar": "إي ستار",
+      "name_en": "Estar",
+      "country": "الصين",
+      "popular_models": ["E1", "E2"],
+      "chipset": ["GX6621"],
+      "software_type": "bin",
+      "flash_tool": "GXLoader"
+    },
+    {
+      "id": 19,
+      "name_ar": "تكنوسات",
+      "name_en": "Technosat",
+      "country": "الصين",
+      "popular_models": ["TS1", "TS2"],
+      "chipset": ["Ali M3511"],
+      "software_type": "bin",
+      "flash_tool": "AliFlash Tool"
+    },
+    {
+      "id": 20,
+      "name_ar": "فيوجن",
+      "name_en": "Fusion",
+      "country": "الصين",
+      "popular_models": ["FSN1", "FSN2"],
+      "chipset": ["GX6605"],
+      "software_type": "bin",
+      "flash_tool": "GXLoader"
+    },
+    {
+      "id": 21,
+      "name_ar": "زايبريد",
+      "name_en": "Xybrid",
+      "country": "الصين",
+      "popular_models": ["X1", "X2"],
+      "chipset": ["Ali M3521"],
+      "software_type": "bin",
+      "flash_tool": "AliFlash Tool"
+    },
+    {
+      "id": 22,
+      "name_ar": "سمارت",
+      "name_en": "Smart",
+      "country": "الصين",
+      "popular_models": ["S1", "S2"],
+      "chipset": ["GX6628"],
+      "software_type": "bin",
+      "flash_tool": "GXLoader"
+    },
+    {
+      "id": 23,
+      "name_ar": "دايموند",
+      "name_en": "Diamond",
+      "country": "الصين",
+      "popular_models": ["D1", "D2"],
+      "chipset": ["Ali M3516"],
+      "software_type": "bin",
+      "flash_tool": "AliFlash Tool"
+    },
+    {
+      "id": 24,
+      "name_ar": "رويال",
+      "name_en": "Royal",
+      "country": "الصين",
+      "popular_models": ["R1", "R2"],
+      "chipset": ["GX6621"],
+      "software_type": "bin",
+      "flash_tool": "GXLoader"
+    }
+  ]
+}
