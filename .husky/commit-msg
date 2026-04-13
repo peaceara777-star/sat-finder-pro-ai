@@ -1,0 +1,26 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+commit_msg=$(cat "$1")
+
+# التحقق من نمط commit message
+if ! echo "$commit_msg" | grep -qE "^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\(.+\))?: .{1,}"; then
+    echo "❌ خطأ: commit message لا يتبع Conventional Commits"
+    echo ""
+    echo "الصيغة المطلوبة:"
+    echo "  feat: إضافة ميزة جديدة"
+    echo "  fix: إصلاح خطأ"
+    echo "  docs: تحديث التوثيق"
+    echo "  style: تنسيق الكود"
+    echo "  refactor: إعادة هيكلة"
+    echo "  perf: تحسين الأداء"
+    echo "  test: إضافة اختبارات"
+    echo "  build: تغييرات في البناء"
+    echo "  ci: تغييرات CI/CD"
+    echo "  chore: مهام روتينية"
+    echo "  revert: تراجع عن تغيير"
+    echo ""
+    exit 1
+fi
+
+echo "✅ Commit message صحيح!"

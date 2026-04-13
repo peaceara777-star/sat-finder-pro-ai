@@ -1,0 +1,23 @@
+[
+  {"name": "bug", "color": "d73a4a", "description": "خطأ يحتاج إصلاح"},
+  {"name": "feature", "color": "0075ca", "description": "ميزة جديدة"},
+  {"name": "enhancement", "color": "a2eeef", "description": "تحسين لميزة موجودة"},
+  {"name": "documentation", "color": "0075ca", "description": "تحديث التوثيق"},
+  {"name": "help wanted", "color": "008672", "description": "نحتاج مساعدة"},
+  {"name": "good first issue", "color": "7057ff", "description": "جيد للمبتدئين"},
+  {"name": "priority: critical", "color": "b60205", "description": "أولوية قصوى"},
+  {"name": "priority: high", "color": "d93f0b", "description": "أولوية عالية"},
+  {"name": "priority: medium", "color": "fbca04", "description": "أولوية متوسطة"},
+  {"name": "priority: low", "color": "0e8a16", "description": "أولوية منخفضة"},
+  {"name": "status: blocked", "color": "000000", "description": "محظور"},
+  {"name": "status: in progress", "color": "cccccc", "description": "قيد العمل"},
+  {"name": "status: review needed", "color": "fbca04", "description": "يحتاج مراجعة"},
+  {"name": "status: ready", "color": "0e8a16", "description": "جاهز"},
+  {"name": "type: question", "color": "d876e3", "description": "سؤال"},
+  {"name": "type: security", "color": "b60205", "description": "مشكلة أمنية"},
+  {"name": "type: performance", "color": "c5def5", "description": "تحسين أداء"},
+  {"name": "type: refactor", "color": "f9d0c4", "description": "إعادة هيكلة"},
+  {"name": "wontfix", "color": "ffffff", "description": "لن يتم إصلاحه"},
+  {"name": "duplicate", "color": "cfd3d7", "description": "مكرر"},
+  {"name": "invalid", "color": "e4e669", "description": "غير صالح"}
+]

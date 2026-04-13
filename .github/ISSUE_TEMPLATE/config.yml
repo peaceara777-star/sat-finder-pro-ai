@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 💬 المناقشات
+    url: https://github.com/peaceara777-star/sat-finder-pro-ai/discussions
+    about: اطرح أسئلتك واستفساراتك هنا
+  - name: 📖 التوثيق
+    url: https://github.com/peaceara777-star/sat-finder-pro-ai/tree/main/docs
+    about: اقرأ التوثيق أولاً
+  - name: 🔒 تقرير أمني
+    url: https://github.com/peaceara777-star/sat-finder-pro-ai/security/advisories/new
+    about: للإبلاغ عن ثغرة أمنية بشكل خاص

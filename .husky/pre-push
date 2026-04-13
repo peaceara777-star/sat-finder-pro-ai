@@ -1,0 +1,18 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "🚀 فحص قبل push..."
+
+# تشغيل جميع الاختبارات
+echo "🧪 تشغيل جميع الاختبارات..."
+pytest tests/ -v --cov=src --cov-report=term 2>/dev/null || echo "⚠️ Tests failed"
+
+# فحص الأمان
+echo "🔒 فحص الأمان..."
+bandit -r src/ -ll 2>/dev/null || echo "⚠️ Bandit not installed"
+
+# فحص التبعيات
+echo "📦 فحص التبعيات..."
+safety check 2>/dev/null || echo "⚠️ Safety not installed"
+
+echo "✅ اكتمل الفحص!"

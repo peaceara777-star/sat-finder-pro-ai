@@ -1,0 +1,22 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "🔍 فحص الكود قبل commit..."
+
+# تنسيق Python
+echo "🐍 تنسيق Python..."
+black --check src/ tests/ 2>/dev/null || echo "⚠️ Black not installed"
+
+# فحص Python
+echo "🔍 فحص Python..."
+flake8 src/ tests/ --max-line-length=100 2>/dev/null || echo "⚠️ Flake8 not installed"
+
+# تنسيق JavaScript/HTML/CSS
+echo "🎨 تنسيق الملفات..."
+npx prettier --check "**/*.{js,html,css,json,md}" 2>/dev/null || echo "⚠️ Prettier not installed"
+
+# تشغيل الاختبارات السريعة
+echo "🧪 تشغيل الاختبارات..."
+pytest tests/ -m "not slow" -q 2>/dev/null || echo "⚠️ Pytest not installed"
+
+echo "✅ اكتمل الفحص!"

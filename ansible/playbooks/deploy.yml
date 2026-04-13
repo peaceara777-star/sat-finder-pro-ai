@@ -1,0 +1,90 @@
+---
+- name: Deploy Sat Finder Pro AI
+  hosts: webservers
+  become: yes
+  vars:
+    app_name: sat-finder-pro-ai
+    app_version: "4.1.0"
+    deploy_dir: "/var/www/{{ app_name }}"
+  
+  tasks:
+    - name: Ensure deploy directory exists
+      file:
+        path: "{{ deploy_dir }}"
+        state: directory
+        owner: www-data
+        group: www-data
+        mode: '0755'
+    
+    - name: Clone repository
+      git:
+        repo: https://github.com/peaceara777-star/sat-finder-pro-ai.git
+        dest: "{{ deploy_dir }}"
+        version: main
+        force: yes
+      notify: restart nginx
+    
+    - name: Install Python dependencies
+      pip:
+        requirements: "{{ deploy_dir }}/requirements.txt"
+        virtualenv: "{{ deploy_dir }}/venv"
+        virtualenv_command: python3 -m venv
+      notify: restart app
+    
+    - name: Copy environment file
+      template:
+        src: templates/env.j2
+        dest: "{{ deploy_dir }}/.env"
+        owner: www-data
+        group: www-data
+        mode: '0600'
+      notify: restart app
+    
+    - name: Initialize database
+      command: "{{ deploy_dir }}/venv/bin/python -c 'from app import init_db; init_db()'"
+      args:
+        chdir: "{{ deploy_dir }}"
+      become_user: www-data
+    
+    - name: Copy systemd service file
+      template:
+        src: templates/satfinder.service.j2
+        dest: /etc/systemd/system/satfinder.service
+        mode: '0644'
+      notify: reload systemd
+    
+    - name: Enable and start service
+      systemd:
+        name: satfinder
+        enabled: yes
+        state: started
+        daemon_reload: yes
+    
+    - name: Copy nginx configuration
+      template:
+        src: templates/nginx.conf.j2
+        dest: /etc/nginx/sites-available/satfinder
+        mode: '0644'
+      notify: restart nginx
+    
+    - name: Enable nginx site
+      file:
+        src: /etc/nginx/sites-available/satfinder
+        dest: /etc/nginx/sites-enabled/satfinder
+        state: link
+      notify: restart nginx
+  
+  handlers:
+    - name: restart app
+      systemd:
+        name: satfinder
+        state: restarted
+    
+    - name: restart nginx
+      systemd:
+        name: nginx
+        state: restarted
+    
+    - name: reload systemd
+      systemd:
+        daemon_reload: yes

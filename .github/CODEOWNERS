@@ -1,0 +1,39 @@
+# Code Owners for Sat Finder Pro AI
+# الترتيب مهم - آخر مطابقة هي التي تطبق
+
+# المالك الرئيسي للمشروع
+* @peaceara777-star
+
+# التوثيق
+/docs/ @peaceara777-star
+/*.md @peaceara777-star
+
+# GitHub Actions
+/.github/workflows/ @peaceara777-star
+/.github/actions/ @peaceara777-star
+
+# الكود الأساسي
+/app.py @peaceara777-star
+/index.html @peaceara777-star
+/src/ @peaceara777-star
+/server/ @peaceara777-star
+
+# قاعدة البيانات
+/database/ @peaceara777-star
+
+# Docker
+/Dockerfile @peaceara777-star
+/docker-compose.yml @peaceara777-star
+/docker/ @peaceara777-star
+
+# Kubernetes
+/kubernetes/ @peaceara777-star
+
+# Terraform
+/terraform/ @peaceara777-star
+
+# Ansible
+/ansible/ @peaceara777-star
+
+# CI/CD
+/.github/ @peaceara777-star
