@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  satfinder:
+    build:
+      target: development
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - FLASK_ENV=development
+      - DEBUG=true
+    command: python app.py --debug
+
+  nginx:
+    volumes:
+      - ./config/nginx/nginx.dev.conf:/etc/nginx/nginx.conf:ro
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: satfinder-postgres
+    environment:
+      POSTGRES_DB: satfinder
+      POSTGRES_USER: satfinder
+      POSTGRES_PASSWORD: satfinder123
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:7-alpine
+    container_name: satfinder-redis
+    command: redis-server --appendonly yes --requirepass redis123
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+
+  adminer:
+    image: adminer:latest
+    container_name: satfinder-adminer
+    ports:
+      - "8081:8080"
+
+volumes:
+  postgres_data:
+  redis_data:
