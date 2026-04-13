@@ -1,83 +1,25 @@
-# 🛰️ Sat Finder Pro AI - خبير الأقمار الصناعية الذكي
+# Sat Finder Pro AI
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/version-4.0.0-blue.svg)](https://github.com/peaceara777-star/sat-finder-pro-ai)
-[![Gemini AI](https://img.shields.io/badge/AI-Gemini%201.5%20Pro-green.svg)](https://ai.google.dev/)
-[![Arabic](https://img.shields.io/badge/language-Arabic-red.svg)]()
+High‑precision satellite finder built with:
+- Cordova Android
+- Real GPS (no API)
+- Real Compass Sensor
+- Radar Sweep Audio
+- Motion Blur Needle
+- PWA Support
+- Developer Mode + Debug Overlay
 
-<div align="center">
-  <img src="assets/icons/icon-192.png" alt="Sat Finder Pro AI Logo" width="120" />
-  <h3>التطبيق العربي الأول لخبراء تركيب وصيانة الأقمار الصناعية</h3>
-</div>
+## Build Debug
+cordova build android
 
----
+## Build Release
+./build.sh
 
-## 📱 نبذة عن التطبيق
-
-**Sat Finder Pro AI** هو تطبيق ويب متكامل باللغة العربية لمساعدة فنيي ومحبي الأقمار الصناعية في:
-- 🛰️ توجيه أطباق الاستقبال بدقة عالية
-- 📡 الوصول إلى قاعدة بيانات شاملة للترددات
-- 🤖 الحصول على استشارات فورية من المساعد الذكي المدعوم بـ **Gemini 1.5 Pro**
-- 🔧 تشخيص وإصلاح الأعطال الشائعة
-
----
-
-## ✨ المميزات الرئيسية
-
-### 🧭 البوصلة الذكية
-- بوصلة رقمية حقيقية تستخدم مستشعرات الجهاز
-- عرض زوايا السمت (Azimuth) والارتفاع (Elevation) ولف الـ LNB (Skew)
-- توجيه صوتي وبصري نحو القمر المستهدف
-- قياس قوة الإشارة بالمحاكاة الذكية
-
-### 🤖 المساعد الذكي "سامي"
-- مدعوم بـ **Google Gemini 1.5 Pro API**
-- مفتاح API مدمج مسبقاً وجاهز للاستخدام الفوري
-- إجابات احترافية باللغة العربية عن:
-  - ترددات القنوات
-  - طرق توجيه الأطباق
-  - حلول المشاكل التقنية
-- إمكانية استخدام وضع البحث المحلي عند انقطاع الإنترنت
-
-### 📡 قاعدة بيانات شاملة
-- **25+** قمر صناعي عربي وأوروبي
-- **500+** تردد للقنوات الفضائية
-- تحديثات مستمرة للبيانات
-- بحث سريع في الترددات بالاسم أو القيمة
-
-### 🔧 دليل الأعطال والصيانة
-- **150+** حل للمشاكل الشائعة
-- تصنيف المشاكل حسب الخطورة (حرج/متوسط/بسيط)
-- أسباب المشكلة وحلولها التفصيلية
-- الأدوات المطلوبة للإصلاح
-
-### 🎨 واجهة مستخدم احترافية
-- تصميم زجاجي عصري (Glassmorphism)
-- دعم كامل للغة العربية RTL
-- تجاوب كامل مع جميع أحجام الشاشات
-- وضع ليلي مدمج
-- تأثيرات بصرية وحركية سلسة
-
----
-
-## 🚀 التشغيل السريع
-
-### الطريقة المباشرة (أسهل طريقة)
-1. قم بتنزيل المشروع كملف ZIP من [هذا الرابط](https://github.com/peaceara777-star/sat-finder-pro-ai/archive/refs/heads/main.zip)
-2. فك الضغط وافتح ملف `index.html` في أي متصفح حديث
-3. التطبيق يعمل مباشرة - لا حاجة لخادم أو إعدادات!
-
-### استخدام Git
-```bash
-# استنساخ المشروع
-git clone https://github.com/peaceara777-star/sat-finder-pro-ai.git
-
-# الدخول إلى المجلد
-cd sat-finder-pro-ai
-
-# فتح التطبيق
-open index.html  # على macOS
-# أو
-xdg-open index.html  # على Linux
-
+## Folder Structure
+www/
+ ├── index.html
+ ├── css/
+ ├── js/
+ ├── icons/
+ ├── assets/
 

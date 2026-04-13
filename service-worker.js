@@ -1,0 +1,16 @@
+self.addEventListener("install",e=>{
+  e.waitUntil(
+    caches.open("satfinder-cache").then(c=>c.addAll([
+      "/",
+      "/index.html",
+      "/css/style.css",
+      "/js/app.js",
+      "/manifest.json",
+      "/icons/logo.svg",
+      "/assets/sounds/sweep.mp3"
+    ]))
+  );
+});
+self.addEventListener("fetch",e=>{
+  e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)));
+});

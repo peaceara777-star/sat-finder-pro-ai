@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Settings – Sat Finder Pro AI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/settings.css">
+</head>
+<body>
+
+<h2 class="title">Settings</h2>
+
+<div class="section">
+    <label>Theme Color</label>
+    <select id="themeSelect">
+        <option value="cyan">Cyan Neon</option>
+        <option value="green">Green Radar</option>
+        <option value="red">Red Alert</option>
+        <option value="purple">Purple Glow</option>
+        <option value="neon">Neon Mix</option>
+    </select>
+</div>
+
+<div class="section">
+    <label>Radar Sound</label>
+    <select id="soundSelect">
+        <option value="radar">Radar</option>
+        <option value="ping">Ping</option>
+        <option value="click">Click</option>
+    </select>
+</div>
+
+<div class="section">
+    <label>Sound Volume</label>
+    <input type="range" id="volumeSlider" min="0" max="1" step="0.05">
+</div>
+
+<div class="section">
+    <label>Vibration</label>
+    <input type="checkbox" id="vibrationToggle" checked>
+</div>
+
+<div class="section">
+    <label>Use Real GPS</label>
+    <input type="checkbox" id="gpsToggle">
+</div>
+
+<button id="saveBtn">Save Settings</button>
+
+<script src="js/settings.js"></script>
+</body>
+</html>

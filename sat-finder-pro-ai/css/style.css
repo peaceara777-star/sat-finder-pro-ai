@@ -1,0 +1,277 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+body {
+    background: radial-gradient(circle at top, #050816 0%, #02030a 45%, #000 100%);
+    color: #e9f3ff;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#app {
+    text-align: center;
+}
+
+.title {
+    margin-bottom: 20px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    color: #8fd5ff;
+}
+
+/* حاوية البوصلة */
+#compassContainer {
+    position: relative;
+    width: 260px;
+    height: 260px;
+    margin: 0 auto 20px auto;
+}
+
+/* الحلقة الأساسية */
+#compassRing {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle, #1b2735 0%, #050816 60%, #000 100%);
+    box-shadow:
+        0 0 25px rgba(0, 0, 0, 0.9),
+        0 0 40px rgba(0, 255, 255, 0.25);
+}
+
+/* Glow Sweep حول البوصلة */
+#glowSweep {
+    position: absolute;
+    top: -25px;
+    left: -25px;
+    width: calc(100% + 50px);
+    height: calc(100% + 50px);
+    border-radius: 50%;
+    pointer-events: none;
+    background: conic-gradient(
+        from 0deg,
+        rgba(0, 255, 200, 0) 0deg,
+        rgba(0, 255, 200, 0.6) 40deg,
+        rgba(0, 255, 200, 0) 80deg
+    );
+    filter: blur(12px);
+    opacity: 0.8;
+    animation: sweepRotate 4s linear infinite;
+}
+
+@keyframes sweepRotate {
+    0%   { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Fog داخل البوصلة */
+#fogLayer {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    pointer-events: none;
+    background: radial-gradient(
+        circle at 50% 30%,
+        rgba(255,255,255,0.15) 0%,
+        rgba(255,255,255,0.05) 40%,
+        rgba(255,255,255,0) 70%
+    );
+    animation: fogMove 8s ease-in-out infinite alternate;
+    mix-blend-mode: screen;
+    opacity: 0.5;
+}
+
+@keyframes fogMove {
+    0% {
+        transform: translateY(-6px) scale(1);
+        opacity: 0.4;
+    }
+    50% {
+        transform: translateY(6px) scale(1.05);
+        opacity: 0.6;
+    }
+    100% {
+        transform: translateY(-6px) scale(1);
+        opacity: 0.45;
+    }
+}
+
+/* Inner Sweep داخل البوصلة */
+#innerSweep {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: calc(100% - 40px);
+    height: calc(100% - 40px);
+    border-radius: 50%;
+    pointer-events: none;
+    background: conic-gradient(
+        from 0deg,
+        rgba(255,255,255,0) 0deg,
+        rgba(255,255,255,0.25) 40deg,
+        rgba(255,255,255,0) 80deg
+    );
+    filter: blur(8px);
+    opacity: 0.4;
+    animation: innerSweepRotate 6s linear infinite;
+}
+
+@keyframes innerSweepRotate {
+    0%   { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* توهج Cyan Neon عند الاقتراب */
+#compassGlow {
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    width: calc(100% + 40px);
+    height: calc(100% + 40px);
+    border-radius: 50%;
+    pointer-events: none;
+    background: radial-gradient(
+        circle,
+        rgba(0, 255, 255, 0.75) 0%,
+        rgba(0, 220, 255, 0.45) 35%,
+        rgba(0, 180, 255, 0.25) 55%,
+        rgba(0, 150, 255, 0.05) 75%,
+        rgba(0, 150, 255, 0) 100%
+    );
+    filter: blur(22px);
+    opacity: 0;
+    transition: opacity 0.25s ease-out;
+}
+
+/* طبقة زجاجية متحركة */
+#glassEffect {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    pointer-events: none;
+    background: linear-gradient(
+        135deg,
+        rgba(255,255,255,0.18) 0%,
+        rgba(255,255,255,0.05) 40%,
+        rgba(255,255,255,0) 60%
+    );
+    animation: glassMove 4s linear infinite;
+    mix-blend-mode: screen;
+}
+
+@keyframes glassMove {
+    0% {
+        transform: rotate(0deg) translateX(-10px);
+        opacity: 0.4;
+    }
+    50% {
+        transform: rotate(180deg) translateX(10px);
+        opacity: 0.7;
+    }
+    100% {
+        transform: rotate(360deg) translateX(-10px);
+        opacity: 0.4;
+    }
+}
+
+/* Pulse عند الاقتراب من القمر */
+#pulseEffect {
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: calc(100% + 20px);
+    height: calc(100% + 20px);
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0;
+    transform: scale(1);
+    background: radial-gradient(
+        circle,
+        rgba(255, 220, 0, 0.4) 0%,
+        rgba(255, 180, 0, 0.15) 40%,
+        rgba(255, 150, 0, 0) 70%
+    );
+    transition: opacity 0.3s ease-out;
+}
+
+.pulse-active {
+    animation: pulseAnim 1.4s ease-in-out infinite;
+}
+
+@keyframes pulseAnim {
+    0%   { transform: scale(1); opacity: 0.4; }
+    50%  { transform: scale(1.12); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 0.4; }
+}
+
+/* انعكاس ضوئي على الإبرة */
+#needleReflection {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    width: 6px;
+    height: 160px;
+    transform: translateX(-50%);
+    border-radius: 3px;
+    pointer-events: none;
+    background: linear-gradient(
+        90deg,
+        rgba(255,255,255,0) 0%,
+        rgba(255,255,255,0.7) 50%,
+        rgba(255,255,255,0) 100%
+    );
+    opacity: 0.4;
+    mix-blend-mode: screen;
+    animation: reflectionMove 2.2s linear infinite;
+}
+
+@keyframes reflectionMove {
+    0%   { transform: translateX(-50%) translateY(-20px); opacity: 0.2; }
+    50%  { transform: translateX(-50%) translateY(20px); opacity: 0.6; }
+    100% { transform: translateX(-50%) translateY(-20px); opacity: 0.2; }
+}
+
+/* الإبرة */
+#compassNeedle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 6px;
+    height: 140px;
+    background: linear-gradient(to top, #ff4444, #ffdddd);
+    border-radius: 3px;
+    transform-origin: 50% 85%;
+    transform: translate(-50%, -85%) rotate(0deg);
+    box-shadow: 0 0 12px rgba(255, 80, 80, 0.7);
+}
+
+/* مركز البوصلة */
+#compassCenter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, #ffffff 0%, #c0c0c0 40%, #555 100%);
+    box-shadow:
+        0 0 10px rgba(0,0,0,0.8),
+        0 0 18px rgba(0,255,255,0.5);
+}
+
+/* معلومات */
+#infoPanel {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #9fb7ff;
+}
+#infoPanel div {
+    margin: 3px 0;
+}

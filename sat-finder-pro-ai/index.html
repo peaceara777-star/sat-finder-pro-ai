@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sat Finder Pro AI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- ملف التنسيقات -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div id="app">
+        <h1 class="title">Sat Finder Pro AI</h1>
+
+        <div id="compassContainer">
+            <!-- الحلقة الأساسية -->
+            <div id="compassRing"></div>
+
+            <!-- Glow Sweep حول البوصلة -->
+            <div id="glowSweep"></div>
+
+            <!-- Fog داخل البوصلة -->
+            <div id="fogLayer"></div>
+
+            <!-- Inner Sweep داخل البوصلة -->
+            <div id="innerSweep"></div>
+
+            <!-- توهج Cyan Neon عند الاقتراب -->
+            <div id="compassGlow"></div>
+
+            <!-- طبقة الزجاج -->
+            <div id="glassEffect"></div>
+
+            <!-- Pulse عند الاقتراب من القمر -->
+            <div id="pulseEffect"></div>
+
+            <!-- انعكاس ضوئي على الإبرة -->
+            <div id="needleReflection"></div>
+
+            <!-- الإبرة -->
+            <div id="compassNeedle"></div>
+
+            <!-- مركز البوصلة -->
+            <div id="compassCenter"></div>
+        </div>
+
+        <div id="infoPanel">
+            <div>Heading: <span id="headingValue">0°</span></div>
+            <div>Moon Azimuth: <span id="moonAzimuth">0°</span></div>
+            <div>Diff: <span id="diffValue">0°</span></div>
+        </div>
+    </div>
+
+    <!-- صوت الرادار -->
+    <audio id="soundRadar" src="assets/sounds/radar.mp3" preload="auto"></audio>
+
+    <!-- ملف الجافاسكربت -->
+    <script src="js/app.js"></script>
+</body>
+</html>

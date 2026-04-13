@@ -1,0 +1,42 @@
+body{background:#050816;color:#e9f3ff;min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:sans-serif}
+#app{text-align:center}.title{margin-bottom:20px;letter-spacing:.08em;text-transform:uppercase;font-size:1.1rem;color:#8fd5ff}
+
+/* Splash */
+#splash{position:fixed;inset:0;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;color:#0ff}
+.loader{width:60px;height:60px;border:6px solid #0ff;border-top-color:transparent;border-radius:50%;animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Debug */
+#debugOverlay{position:fixed;bottom:10px;left:10px;background:rgba(0,0,0,.7);padding:8px 10px;border-radius:6px;font-size:.8rem;color:#0ff;z-index:2000;display:none}
+#debugOverlay.show{display:block}
+.debug-btn{position:fixed;bottom:10px;right:10px;background:#111;color:#0ff;border:1px solid #0ff;padding:6px 10px;border-radius:6px;font-size:.75rem;z-index:2001}
+
+/* Settings */
+.settings-btn{position:fixed;top:15px;right:15px;background:#111;color:#fff;border:none;padding:8px 10px;border-radius:8px;z-index:1000}
+.settings-panel{position:fixed;top:50%;left:50%;width:260px;transform:translate(-50%,-50%);background:#111;color:#fff;padding:16px;border-radius:12px;display:none;z-index:1001}
+.settings-panel.show{display:block}
+.settings-panel label{display:block;margin-top:8px;font-size:.85rem}
+.settings-panel input,.settings-panel select{width:100%;margin-top:4px}
+.reset-btn{background:#ff4444;color:#fff;border:none;padding:6px;margin-top:8px;width:100%}
+
+/* Compass */
+#compassContainer{position:relative;width:260px;height:260px;margin:0 auto 20px auto}
+#compassRing{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,#1b2735 0%,#050816 60%,#000 100%);box-shadow:0 0 25px rgba(0,0,0,.9),0 0 40px rgba(0,255,255,.25)}
+#glowSweep{position:absolute;top:-25px;left:-25px;width:calc(100% + 50px);height:calc(100% + 50px);border-radius:50%;pointer-events:none;background:conic-gradient(from 0deg,rgba(0,255,200,0) 0deg,rgba(0,255,200,.6) 40deg,rgba(0,255,200,0) 80deg);filter:blur(12px);opacity:.8;animation:sweepRotate 4s linear infinite}
+@keyframes sweepRotate{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+#fogLayer{position:absolute;inset:0;border-radius:50%;pointer-events:none;background:radial-gradient(circle at 50% 30%,rgba(255,255,255,.15),rgba(255,255,255,.05) 40%,transparent 70%);animation:fogMove 8s ease-in-out infinite alternate;mix-blend-mode:screen;opacity:.5}
+@keyframes fogMove{0%{transform:translateY(-6px);opacity:.4}50%{transform:translateY(6px) scale(1.05);opacity:.6}100%{transform:translateY(-6px);opacity:.45}}
+#innerSweep{position:absolute;top:20px;left:20px;width:calc(100% - 40px);height:calc(100% - 40px);border-radius:50%;pointer-events:none;background:conic-gradient(from 0deg,transparent 0deg,rgba(255,255,255,.25) 40deg,transparent 80deg);filter:blur(8px);opacity:.4;animation:innerSweepRotate 6s linear infinite}
+@keyframes innerSweepRotate{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+#compassGlow{position:absolute;top:-20px;left:-20px;width:calc(100% + 40px);height:calc(100% + 40px);border-radius:50%;pointer-events:none;background:radial-gradient(circle,rgba(0,255,255,.75) 0%,rgba(0,220,255,.45) 35%,rgba(0,180,255,.25) 55%,transparent 100%);filter:blur(22px);opacity:0;transition:opacity .25s ease-out}
+#glassEffect{position:absolute;inset:0;border-radius:50%;pointer-events:none;background:linear-gradient(135deg,rgba(255,255,255,.18),rgba(255,255,255,.05) 40%,transparent 60%);animation:glassMove 4s linear infinite;mix-blend-mode:screen}
+@keyframes glassMove{0%{transform:rotate(0deg) translateX(-10px);opacity:.4}50%{transform:rotate(180deg) translateX(10px);opacity:.7}100%{transform:rotate(360deg) translateX(-10px);opacity:.4}}
+#pulseEffect{position:absolute;top:-10px;left:-10px;width:calc(100% + 20px);height:calc(100% + 20px);border-radius:50%;pointer-events:none;opacity:0;transform:scale(1);background:radial-gradient(circle,rgba(255,220,0,.4),rgba(255,180,0,.15) 40%,transparent 70%);transition:opacity .3s ease-out}
+.pulse-active{animation:pulseAnim 1.4s ease-in-out infinite}
+@keyframes pulseAnim{0%{transform:scale(1);opacity:.4}50%{transform:scale(1.12);opacity:.7}100%{transform:scale(1);opacity:.4}}
+#needleReflection{position:absolute;top:-20px;left:50%;width:6px;height:160px;transform:translateX(-50%);border-radius:3px;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(255,255,255,.7),transparent);opacity:.4;mix-blend-mode:screen}
+#compassNeedle{position:absolute;top:50%;left:50%;width:6px;height:140px;background:linear-gradient(to top,#ff4444,#ffdddd);border-radius:3px;transform-origin:50% 85%;transform:translate(-50%,-85%) rotate(0deg);box-shadow:0 0 12px rgba(255,80,80,.7)}
+#compassNeedle.motion-blur{filter:blur(3px)}
+#compassCenter{position:absolute;top:50%;left:50%;width:26px;height:26px;border-radius:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,#fff,#c0c0c0 40%,#555 100%);box-shadow:0 0 10px rgba(0,0,0,.8),0 0 18px rgba(0,255,255,.5)}
+#infoPanel{margin-top:10px;font-size:.9rem;color:#9fb7ff}
+#infoPanel div{margin:3px 0}
