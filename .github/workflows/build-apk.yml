@@ -1,0 +1,36 @@
+name: Build Android APK
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup Node
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    - name: Install Cordova
+      run: npm install -g cordova
+
+    - name: Install Android SDK
+      uses: android-actions/setup-android@v3
+
+    - name: Build APK
+      run: |
+        cordova platform add android
+        cordova build android --release
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: SatFinder-APK
+        path: platforms/android/app/build/outputs/apk/release/app-release.apk
