@@ -1,0 +1,42 @@
+{
+  "title": "Sat Finder Pro AI Dashboard",
+  "uid": "satfinder",
+  "panels": [
+    {
+      "title": "API Requests",
+      "type": "graph",
+      "targets": [
+        {
+          "expr": "rate(http_requests_total[5m])"
+        }
+      ]
+    },
+    {
+      "title": "Response Time",
+      "type": "graph",
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m]))"
+        }
+      ]
+    },
+    {
+      "title": "Active Users",
+      "type": "stat",
+      "targets": [
+        {
+          "expr": "active_users"
+        }
+      ]
+    },
+    {
+      "title": "Database Size",
+      "type": "gauge",
+      "targets": [
+        {
+          "expr": "database_size_bytes"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sat-finder-pro-ai
+  labels:
+    app: sat-finder
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: sat-finder
+  template:
+    metadata:
+      labels:
+        app: sat-finder
+    spec:
+      containers:
+      - name: sat-finder
+        image: peaceara777/sat-finder-pro-ai:latest
+        ports:
+        - containerPort: 5000
+        env:
+        - name: FLASK_ENV
+          value: "production"
+        - name: DATABASE_PATH
+          value: "/data/satfinder.db"
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /api/status
+            port: 5000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /api/status
+            port: 5000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        volumeMounts:
+        - name: data
+          mountPath: /data
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: sat-finder-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sat-finder-service
+spec:
+  selector:
+    app: sat-finder
+  ports:
+  - port: 80
+    targetPort: 5000
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: sat-finder-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
