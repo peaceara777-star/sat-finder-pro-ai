@@ -1,0 +1,206 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: satfinder-nginx
+  labels:
+    app: satfinder
+    component: nginx
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: satfinder
+      component: nginx
+  template:
+    metadata:
+      labels:
+        app: satfinder
+        component: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:alpine
+        ports:
+        - containerPort: 80
+        - containerPort: 443
+        volumeMounts:
+        - name: nginx-config
+          mountPath: /etc/nginx/nginx.conf
+          subPath: nginx.conf
+        - name: static-files
+          mountPath: /var/www/sat-finder-pro-ai
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 80
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 5
+      volumes:
+      - name: nginx-config
+        configMap:
+          name: nginx-config
+      - name: static-files
+        persistentVolumeClaim:
+          claimName: satfinder-static-pvc
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: satfinder-flask
+  labels:
+    app: satfinder
+    component: flask
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: satfinder
+      component: flask
+  template:
+    metadata:
+      labels:
+        app: satfinder
+        component: flask
+    spec:
+      containers:
+      - name: flask
+        image: peaceara777/sat-finder-pro-ai:latest
+        ports:
+        - containerPort: 5000
+        env:
+        - name: FLASK_ENV
+          value: "production"
+        - name: GEMINI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: satfinder-secrets
+              key: gemini-api-key
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /api/status
+            port: 5000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /api/status
+            port: 5000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: satfinder-nodejs
+  labels:
+    app: satfinder
+    component: nodejs
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: satfinder
+      component: nodejs
+  template:
+    metadata:
+      labels:
+        app: satfinder
+        component: nodejs
+    spec:
+      containers:
+      - name: nodejs
+        image: peaceara777/sat-finder-pro-ai:node-latest
+        ports:
+        - containerPort: 3000
+        env:
+        - name: NODE_ENV
+          value: "production"
+        - name: GEMINI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: satfinder-secrets
+              key: gemini-api-key
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 3000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: satfinder-nginx
+spec:
+  selector:
+    app: satfinder
+    component: nginx
+  ports:
+  - port: 80
+    targetPort: 80
+    name: http
+  - port: 443
+    targetPort: 443
+    name: https
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: satfinder-flask
+spec:
+  selector:
+    app: satfinder
+    component: flask
+  ports:
+  - port: 5000
+    targetPort: 5000
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: satfinder-nodejs
+spec:
+  selector:
+    app: satfinder
+    component: nodejs
+  ports:
+  - port: 3000
+    targetPort: 3000
+  type: ClusterIP
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+data:
+  nginx.conf: |
+    # Nginx configuration from servers/nginx/nginx.conf
