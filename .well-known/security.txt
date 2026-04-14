@@ -1,0 +1,9 @@
+# Security Policy for Sat Finder Pro AI
+Contact: mailto:security@satfinder-pro.ai
+Contact: https://github.com/peaceara777-star/sat-finder-pro-ai/security/advisories
+Expires: 2027-12-31T23:59:59.000Z
+Encryption: https://github.com/peaceara777-star/sat-finder-pro-ai/security/pgp-key.asc
+Acknowledgments: https://github.com/peaceara777-star/sat-finder-pro-ai/security/hall-of-fame
+Policy: https://github.com/peaceara777-star/sat-finder-pro-ai/security/policy
+Preferred-Languages: ar, en
+Canonical: https://github.com/peaceara777-star/sat-finder-pro-ai/.well-known/security.txt

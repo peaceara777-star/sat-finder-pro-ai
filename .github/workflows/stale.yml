@@ -1,0 +1,23 @@
+name: 'إغلاق issues القديمة'
+on:
+  schedule:
+    - cron: '0 0 * * *'
+
+permissions:
+  issues: write
+  pull-requests: write
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/stale@v9
+        with:
+          days-before-stale: 60
+          days-before-close: 7
+          stale-issue-message: '⚠️ هذا الـ issue لم يشهد أي نشاط لمدة 60 يوماً. سيتم إغلاقه خلال 7 أيام إذا لم يتم تحديثه.'
+          close-issue-message: '🔒 تم إغلاق هذا الـ issue بسبب عدم النشاط.'
+          stale-pr-message: '⚠️ هذا الـ PR لم يشهد أي نشاط لمدة 60 يوماً.'
+          close-pr-message: '🔒 تم إغلاق هذا الـ PR بسبب عدم النشاط.'
+          exempt-issue-labels: 'pinned,security,priority: critical'
+          exempt-pr-labels: 'pinned,security,priority: critical'
