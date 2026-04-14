@@ -1,0 +1,225 @@
+version: '3.8'
+
+services:
+  # Nginx Reverse Proxy
+  nginx:
+    image: nginx:alpine
+    container_name: satfinder-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ../nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ../../:/var/www/sat-finder-pro-ai:ro
+      - ./ssl:/etc/letsencrypt:ro
+      - nginx_logs:/var/log/nginx
+    networks:
+      - satfinder_net
+    depends_on:
+      - flask
+      - nodejs
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Apache (Alternative)
+  apache:
+    image: httpd:alpine
+    container_name: satfinder-apache
+    ports:
+      - "8080:80"
+      - "8443:443"
+    volumes:
+      - ../apache/apache.conf:/usr/local/apache2/conf/httpd.conf:ro
+      - ../../:/usr/local/apache2/htdocs/:ro
+      - apache_logs:/usr/local/apache2/logs
+    networks:
+      - satfinder_net
+    restart: unless-stopped
+
+  # Python Flask with Gunicorn
+  flask:
+    build:
+      context: ../..
+      dockerfile: servers/gunicorn/Dockerfile
+    container_name: satfinder-flask
+    expose:
+      - "5000"
+    volumes:
+      - ../../:/app
+      - flask_logs:/var/log/satfinder
+    environment:
+      - FLASK_ENV=production
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+    networks:
+      - satfinder_net
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/api/status"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    deploy:
+      replicas: 3
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.1'
+          memory: 128M
+
+  # Python Flask with uWSGI
+  flask-uwsgi:
+    build:
+      context: ../..
+      dockerfile: servers/uwsgi/Dockerfile
+    container_name: satfinder-uwsgi
+    expose:
+      - "5001"
+    volumes:
+      - ../../:/app
+      - uwsgi_logs:/var/log/satfinder
+    environment:
+      - FLASK_ENV=production
+    networks:
+      - satfinder_net
+    restart: unless-stopped
+    profiles:
+      - uwsgi
+
+  # Node.js Server
+  nodejs:
+    build:
+      context: ../..
+      dockerfile: servers/nodejs/Dockerfile
+    container_name: satfinder-nodejs
+    expose:
+      - "3000"
+    volumes:
+      - ../../:/app
+      - node_logs:/app/logs
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+    networks:
+      - satfinder_net
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    deploy:
+      replicas: 2
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+
+  # Redis for Caching
+  redis:
+    image: redis:7-alpine
+    container_name: satfinder-redis
+    expose:
+      - "6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-redis123}
+    networks:
+      - satfinder_net
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: satfinder-postgres
+    expose:
+      - "5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=satfinder
+      - POSTGRES_USER=satfinder
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-satfinder123}
+    networks:
+      - satfinder_net
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U satfinder"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Prometheus Monitoring
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: satfinder-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ../../monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+    networks:
+      - satfinder_net
+    restart: unless-stopped
+
+  # Grafana Dashboards
+  grafana:
+    image: grafana/grafana:latest
+    container_name: satfinder-grafana
+    ports:
+      - "3001:3000"
+    volumes:
+      - ../../monitoring/grafana/dashboards:/var/lib/grafana/dashboards:ro
+      - grafana_data:/var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_USER=${GRAFANA_USER:-admin}
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD:-admin123}
+      - GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource
+    networks:
+      - satfinder_net
+    restart: unless-stopped
+    depends_on:
+      - prometheus
+
+  # Adminer for Database Management
+  adminer:
+    image: adminer:latest
+    container_name: satfinder-adminer
+    ports:
+      - "8081:8080"
+    environment:
+      - ADMINER_DEFAULT_SERVER=postgres
+    networks:
+      - satfinder_net
+    restart: unless-stopped
+
+networks:
+  satfinder_net:
+    driver: bridge
+
+volumes:
+  nginx_logs:
+  apache_logs:
+  flask_logs:
+  uwsgi_logs:
+  node_logs:
+  redis_data:
+  postgres_data:
+  prometheus_data:
+  grafana_data:
